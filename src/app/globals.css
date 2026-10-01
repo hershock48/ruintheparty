@@ -321,72 +321,41 @@ html.js [data-reveal][data-shown] .stamp {
 }
 
 /*
-  THE HASH IS PAINTED IN. The words are static; only the hash moves, in
-  four strokes, each the hash artwork clipped to a quad around one stroke
-  (coordinates in hash.png's 567x766 space, read off a grid) and revealed
-  by a soft-edged mask gradient that sweeps along the stroke's direction.
-  The mask is three times the element along the sweep axis, with a 10%
-  feather, and mask-position moves it from fully clear to fully opaque:
-  for a downward sweep, from `0 100%` to `0 0` (with the mask taller than
-  the element, 100% parks the clear end over it). The verticals sweep
-  down, the bars sweep right. The last layer is the whole hash, unclipped,
-  so stray spatter arrives with the final stroke and the resting frame is
-  the complete mark.
+  THE HASH IS WRITTEN ON. HeroMark.tsx puts an SVG mask over each of the
+  four stroke layers; the mask's content is a thick round-capped path
+  along that stroke's trajectory with pathLength="1". Offsetting the dash
+  by 1 hides the path (and so the layer); animating the offset to 0 draws
+  the path, revealing the stroke along the way the brush went. That is the
+  standard technique for hand-drawn lettering reveals, and it is why the
+  edge of the reveal is the brush's own edge rather than a line.
 
-  mask-position is a paint property, not a composited one: four small
-  layers, once, on load, which is the trade for an edge that looks like a
-  brush. Nothing overshoots; a stroke is quick at the start and settles,
-  so the curve is an ease-out. Everything is under html.js and keyed on
-  data-ready (HeroMark.tsx), so without JS, before the artwork has
-  loaded, or under reduced motion there is no mask at all and the mark is
-  simply there.
+  Order and timing: the left vertical, the right vertical, the upper bar,
+  the lower bar, each about 0.8s with a short overlap, 3.3s to the end
+  (Kevin asked for double the first cut's 1.6s). A brush is quick off the
+  mark and settles at the end, so the curve is an ease-out with no bounce.
 
-  Timing: about 3.3s to the last stroke. The first cut ran in 1.6s and
-  Kevin asked for double; every duration and gap is twice what it was.
+  Everything is under html.js and keyed on data-ready (all four layers
+  loaded), so without JS, before the artwork arrives, or under reduced
+  motion the offset is never applied and the mark is simply there.
 */
-html.js .rtp-s1 { clip-path: polygon(36% 0, 60% 0, 40% 100%, 8% 100%); }
-html.js .rtp-s2 { clip-path: polygon(64% 0, 92% 0, 56% 100%, 30% 100%); }
-html.js .rtp-s3 { clip-path: polygon(0 36%, 90% 22%, 90% 40%, 0 51%); }
-html.js .rtp-s1,
-html.js .rtp-s2 {
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 52%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 52%, transparent 100%);
-  -webkit-mask-size: 100% 300%;
-  mask-size: 100% 300%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: 0 100%;
-  mask-position: 0 100%;
+html.js .rtp-mark .rtp-p {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
-html.js .rtp-s3,
-html.js .rtp-s4 {
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 42%, transparent 52%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 0%, #000 42%, transparent 52%, transparent 100%);
-  -webkit-mask-size: 300% 100%;
-  mask-size: 300% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
-}
-html.js .rtp-mark[data-ready] .rtp-s1 { animation: rtp-sweep-down 0.84s cubic-bezier(0.2, 0.6, 0.3, 1) 0.2s both; }
-html.js .rtp-mark[data-ready] .rtp-s2 { animation: rtp-sweep-down 0.84s cubic-bezier(0.2, 0.6, 0.3, 1) 0.92s both; }
-html.js .rtp-mark[data-ready] .rtp-s3 { animation: rtp-sweep-right 0.8s cubic-bezier(0.2, 0.6, 0.3, 1) 1.68s both; }
-html.js .rtp-mark[data-ready] .rtp-s4 { animation: rtp-sweep-right 0.9s cubic-bezier(0.2, 0.6, 0.3, 1) 2.36s both; }
-@keyframes rtp-sweep-down {
-  from { -webkit-mask-position: 0 100%; mask-position: 0 100%; }
-  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
-}
-@keyframes rtp-sweep-right {
-  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
-  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+html.js .rtp-mark[data-ready] .rtp-p1 { animation: rtp-write 0.8s cubic-bezier(0.25, 0.1, 0.3, 1) 0.2s both; }
+html.js .rtp-mark[data-ready] .rtp-p2 { animation: rtp-write 0.8s cubic-bezier(0.25, 0.1, 0.3, 1) 0.95s both; }
+html.js .rtp-mark[data-ready] .rtp-p3 { animation: rtp-write 0.7s cubic-bezier(0.25, 0.1, 0.3, 1) 1.75s both; }
+html.js .rtp-mark[data-ready] .rtp-p4 { animation: rtp-write 0.8s cubic-bezier(0.25, 0.1, 0.3, 1) 2.45s both; }
+@keyframes rtp-write {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
 }
 /* The underline under the headline draws once the hash is complete. */
 html.js .rtp-stroke {
   transform: scaleX(0);
 }
 html.js body:has(.rtp-mark[data-ready]) .rtp-stroke {
-  animation: rtp-stroke 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 3.3s both;
+  animation: rtp-stroke 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 3.35s both;
 }
 
 /* The stroke under the hero line draws left to right once the mark has landed (keyed above). */
@@ -409,18 +378,13 @@ html.js .rtp-stroke {
     transform: rotate(-1.5deg);
     transition: none;
   }
-  html.js .rtp-s1,
-  html.js .rtp-s2,
-  html.js .rtp-s3,
-  html.js .rtp-s4,
-  html.js .rtp-mark[data-ready] .rtp-s1,
-  html.js .rtp-mark[data-ready] .rtp-s2,
-  html.js .rtp-mark[data-ready] .rtp-s3,
-  html.js .rtp-mark[data-ready] .rtp-s4 {
+  html.js .rtp-mark .rtp-p,
+  html.js .rtp-mark[data-ready] .rtp-p1,
+  html.js .rtp-mark[data-ready] .rtp-p2,
+  html.js .rtp-mark[data-ready] .rtp-p3,
+  html.js .rtp-mark[data-ready] .rtp-p4 {
     animation: none;
-    clip-path: none;
-    -webkit-mask-image: none;
-    mask-image: none;
+    stroke-dashoffset: 0;
   }
   html.js .rtp-stroke,
   html.js body:has(.rtp-mark[data-ready]) .rtp-stroke {

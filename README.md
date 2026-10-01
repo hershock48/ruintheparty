@@ -132,20 +132,24 @@ yet: order notification is the Stripe dashboard email until one is built
   trap that putting it underneath walked into.
 - **The mark is first on phones.** Streetwear leads with the mark. It costs
   about a quarter second of LCP on the throttled profile (audit state).
-- **Only the hash is painted in; the words are static.** Kevin, 2026-10-01,
-  on the first two versions (a rise and a bouncy pop; then every word wiped
-  in behind a hard edge): "rushed and cheap", then "a bad transition on
-  PowerPoint." The words now sit there from the first frame and the hash is
-  painted in four strokes in the order it was drawn, each the hash artwork
-  clipped to a quad around that stroke and revealed by a soft-edged mask
-  sweeping along the stroke's direction (`HeroMark.tsx`, `.rtp-s1` to
-  `.rtp-s4` in `globals.css`, quads in `hash.png`'s 567x766 space). The
-  fourth layer is the whole hash, swept last, so stray spatter arrives with
-  the final stroke, about 3.3s to the end (Kevin asked for double the
-  first cut's 1.6s). The sweeps wait for `hash.png` to load (`data-ready`).
-  Frames captured and looked at; reduced motion and no-JS show the finished
-  mark. The words being static from the first paint is also why home LCP
-  came back under the line.
+- **Only the hash is painted in, written on along its own strokes; the
+  words are static.** Three earlier versions were a rise-and-pop, a wipe
+  of every word, and a soft-edged wipe of the hash. Kevin: "rushed and
+  cheap", "a bad transition on PowerPoint", "something is lazy, research
+  the proper way." The proper way for hand-drawn lettering is an SVG mask
+  whose content is a thick round-capped path along the brush's trajectory,
+  animated with `stroke-dashoffset` (`pathLength="1"`), so the reveal
+  travels the way the brush went and its edge is the brush's own
+  (CSS-Tricks, "Animate Calligraphy with SVG"; "Handwriting Animation With
+  Irregular SVG Strokes"). `HeroMark.tsx` does that over four stroke
+  layers, `public/brand/hash-s1.webp` to `hash-s4.webp`, which
+  `tools/strokes.py` cuts from `hash.png` by nearest centerline (crossings
+  to the verticals, painted first); they recombine to the original exactly.
+  Order: left vertical, right vertical, upper bar, lower bar, about 3.3s.
+  The write-on waits for the four layers to be fetched (`data-ready`, set
+  from an effect: React does not deliver load events for SVG `<image>`,
+  and the first cut waited forever). Frames captured and looked at;
+  reduced motion and no-JS show the finished mark; home LCP 2.1s.
 - **The shop photos are crops from the client's boards.** Kevin, 2026-10-01:
   use his photos so the store looks legit. The two boards he sent are in
   `public/brand/`, the five square crops are cut by `tools/crops.sh` into
@@ -174,7 +178,7 @@ Against the production build, with the glazedweb harnesses:
 - `audit.mjs`, 13 routes at 390 and 1440: axe violations **0**, horizontal
   overflow **none**, console errors **none**, 4xx/5xx **none**.
 - `width-check.mjs`, 10 routes at 320 and 768: **0** violations, no overflow.
-- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` **2,200ms**
+- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` **2,068ms**
   with the words static from the first paint (it was 2,696 to 2,748 while
   the whole mark animated in and sat first on the phone screen; the LCP
   element is the words image).
