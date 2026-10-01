@@ -124,6 +124,14 @@ yet: order notification is the Stripe dashboard email until one is built
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.
+- **Grit without photographs.** The hero and the refrain carry a film
+  grain (`public/brand/grain.png`, 120px of white pixels at random alpha,
+  tiled at 9% opacity) and the hero has the hash from the mark itself,
+  huge and cropped off the corner at 11%. The grain sits above the content
+  on its own z-index; see the comment in `globals.css` for the `position`
+  trap that putting it underneath walked into.
+- **The mark is first on phones.** Streetwear leads with the mark. It costs
+  about a quarter second of LCP on the throttled profile (audit state).
 - **Statistics appear once**, on What it means, with the RAINN link, and
   nowhere else. The brief says not to build a seminar.
 - **Scenarios credit Green Dot's three Ds** (direct, delegate, distract) by
@@ -141,10 +149,16 @@ Against the production build, with the glazedweb harnesses:
 - `audit.mjs`, 13 routes at 390 and 1440: axe violations **0**, horizontal
   overflow **none**, console errors **none**, 4xx/5xx **none**.
 - `width-check.mjs`, 10 routes at 320 and 768: **0** violations, no overflow.
-- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` LCP 2,424ms,
-  `/be-the-guy` 2,448ms, `/know-the-line` 2,472ms, `/shop` **2,712ms, over
-  the 2,500 line** (five product tiles each loading the mark). CLS 0 to
-  0.043 everywhere. JS **141KB** compressed, under the 150KB bar.
+- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` **2,696 to
+  2,748ms, over the 2,500 line** since the mark became the first thing on
+  the phone screen (October 1 home pass): the LCP element is now the mark
+  image rather than the headline text, and it was 2,424ms with the text
+  first. Kevin's call whether brand-first is worth the quarter second.
+  `/be-the-guy` 2,500ms, `/know-the-line` 2,472ms, `/shop` **2,712ms, over
+  the line** (five product tiles each loading the mark). CLS 0 to 0.043
+  everywhere. JS **141KB** compressed, under the 150KB bar.
+- `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440
+  during the entrance; reduced motion animates nothing.
 - Plate verified: `.gw-plate` computed cream, drip inherits the footer black.
 - Both API routes exercised in every state (above).
 - `npm audit`: **0 vulnerabilities**, after moving to Next 16.3.8 (16.3.0
@@ -177,7 +191,8 @@ letter before Kevin sends it (backlog C01).
       `/teams` form asks for them
 - [ ] Photography, if and when it exists, with written permission from
       everyone in it
-- [ ] `/shop` LCP under 2,500ms on the throttled profile, or record why not
+- [ ] `/` and `/shop` LCP under 2,500ms on the throttled profile, or record
+      why not (home: the mark is first on phones by choice)
 - [ ] LocalBusiness structured data: not applicable, Organization is used
 - [ ] Studio credit: the client told it is there, and the wording confirmed
       with Kevin ("Baked by")
