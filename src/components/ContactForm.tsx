@@ -87,7 +87,7 @@ export default function ContactForm({ preset = "" }: { preset?: string }) {
         <label htmlFor="message" className="kicker block text-chalk">
           What do you need
         </label>
-        <textarea id="message" name="message" required rows={5} className="field mt-2" placeholder="A talk for my team. Stickers for the locker room. A question. Anything." />
+        <textarea id="message" name="message" required rows={5} className="field mt-2" placeholder="A talk for my team. Wristbands for the locker room. A question. Anything." />
       </div>
 
       {status === "error" ? (

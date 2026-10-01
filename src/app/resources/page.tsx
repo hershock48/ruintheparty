@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { lines, orgs } from "@/data/resources";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Resources and help lines",
   description:
     "The National Sexual Assault Hotline, 988, Crisis Text Line, love is respect, the National Domestic Violence Hotline, and the organizations already doing this work.",
-  alternates: { canonical: "/resources" },
-};
+  path: "/resources",
+});
 
 export default function ResourcesPage() {
   return (

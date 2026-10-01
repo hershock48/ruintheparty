@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import { bySlug, money, products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
+import { pageMeta } from "@/lib/meta";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -15,11 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = bySlug((await params).slug);
   if (!p) return {};
-  return {
-    title: `${p.name}, ${money(p.priceCents)}`,
-    description: `${p.line} ${p.print}`,
-    alternates: { canonical: `/shop/${p.slug}` },
-  };
+  return pageMeta({ title: `${p.name}, ${money(p.priceCents)}`, description: `${p.line} ${p.print}`, path: `/shop/${p.slug}` });
 }
 
 /**

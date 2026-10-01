@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "What does Ruin the Party mean?",
   description:
     "For generations the safety talk went to women. Ruin the Party talks to men, and to the good men who stay quiet when another man crosses the line.",
-  alternates: { canonical: "/what-it-means" },
-};
+  path: "/what-it-means",
+});
 
 /**
  * The story and the philosophy. This page is the client's brief, kept in

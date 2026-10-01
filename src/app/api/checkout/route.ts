@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { bySlug } from "@/data/shop";
+import { SHOP_LIVE } from "@/data/site";
 
 export const runtime = "nodejs";
 
@@ -12,8 +13,9 @@ export const runtime = "nodejs";
  * fetch against Stripe's API rather than the SDK: one call, one shape, no
  * dependency to keep current.
  *
- * Without STRIPE_SECRET_KEY the store is built but switched off, and the
- * visitor is told exactly that rather than shown a fake receipt.
+ * Until SHOP_LIVE (STRIPE_SECRET_KEY and SHOP_OPEN=1, see site.ts) the store
+ * is built but switched off, and the visitor is told exactly that rather
+ * than shown a fake receipt.
  */
 function page(title: string, message: string, status: number, back: string) {
   const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -42,7 +44,7 @@ export async function POST(request: Request) {
   if (!product.sizes.includes(size)) return page("Pick a size", "Choose a size and try again.", 400, `/shop/${product.slug}`);
 
   const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) {
+  if (!SHOP_LIVE || !key) {
     return page(
       "The store is not open yet",
       `The shop is built and switched off until Ruin the Party connects its own Stripe account. Nothing was charged. When it opens, ${product.name.toLowerCase()} in ${size} will be here.`,

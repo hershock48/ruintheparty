@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import Image from "next/image";
 import Mark from "@/components/Mark";
@@ -8,12 +9,13 @@ import { refrain, site } from "@/data/site";
 import { products } from "@/data/shop";
 import ProductCard from "@/components/ProductCard";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: `${site.name} | Be the man who ruins the party`,
   description:
     "When something isn't right, say something. When your friend crosses the line, stop him. Ruin the Party talks to young men about consent and stepping in.",
-  alternates: { canonical: "/" },
-};
+  path: "/",
+  fullTitle: true,
+});
 
 export default function HomePage() {
   return (

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { topics } from "@/data/parents";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "For parents raising boys",
   description:
     "Nine conversations to have with a son about consent, respect, sex, porn, alcohol, peer pressure, relationships, masculinity and speaking up, each with a first sentence you can actually say.",
-  alternates: { canonical: "/parents" },
-};
+  path: "/parents",
+});
 
 export default function ParentsPage() {
   return (

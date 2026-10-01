@@ -99,9 +99,11 @@ verified by hand on the production build (October 1, 2026):
 
 `/api/checkout` is a plain form POST (works with JS off) that creates a Stripe
 Checkout Session with raw fetch, no SDK, on the client's own
-`STRIPE_SECRET_KEY`, and 303s to it. Without the key it answers a real HTML
-page saying the store is not open yet (503); `SHOP_LIVE` in `site.ts` reads
-the same variable so the pages say so too. A bad slug is 404, a size the
+`STRIPE_SECRET_KEY`, and 303s to it. The store opens only when the key AND
+`SHOP_OPEN=1` are both set (`SHOP_LIVE` in `site.ts`), so adding the key
+cannot start charging the placeholder prices; until then it answers a real
+HTML page saying the store is not open yet (503), and the pages say so too.
+The shop pages are static, so changing either variable needs a redeploy. A bad slug is 404, a size the
 product does not have is 400. Success returns to `/shop/thanks`. No webhook
 yet: order notification is the Stripe dashboard email until one is built
 (checklist).
@@ -219,7 +221,7 @@ letter before Kevin sends it (backlog C01).
 
 - [ ] Remove the noindex from BOTH `robots.ts` and `next.config.ts`
 - [ ] Delete `public/pitch/` and the rewrites in `next.config.ts`
-- [ ] `og:image` in `layout.tsx` is pinned to the ruintheparty.glazedweb.com
+- [ ] `og:image` in `src/lib/meta.ts` is pinned to the ruintheparty.glazedweb.com
       host so shares show a picture during the pitch; change it back to
       `/og.jpg` so it resolves against the real domain
 - [ ] Confirm the client's legal name and who is behind the movement, and put
@@ -230,6 +232,8 @@ letter before Kevin sends it (backlog C01).
 - [ ] Set `STRIPE_SECRET_KEY` (the client's own); place a test order with
       4242 4242 4242 4242; decide stock-and-ship versus print-on-demand
 - [ ] Real prices in `shop.ts`; remove the PLACEHOLDER comments
+- [ ] Only then set `SHOP_OPEN=1` in Vercel and redeploy; that is the switch
+      that opens the store
 - [ ] An order webhook or Stripe's own email notifications, confirmed arriving
 - [ ] Re-check every number and address on `/resources` in a browser (they were
       read by search listing from this sandbox, which cannot open the sites)

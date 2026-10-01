@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Shop",
-  description: "Ruin the Party shirts, hoodies, hats, wristbands and stickers. The hashtag on the front. Wearing it starts the conversation.",
-  alternates: { canonical: "/shop" },
-};
+  description: "Ruin the Party shirts, hoodies, hats, wristbands and bottles. The hashtag on the front. Wearing it starts the conversation.",
+  path: "/shop",
+});
 
 export default function ShopPage() {
   return (

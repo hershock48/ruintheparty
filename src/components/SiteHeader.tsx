@@ -88,7 +88,7 @@ export default function SiteHeader() {
             <li key={l.href}>
               <Link
                 href={l.href}
-                aria-current={pathname === l.href ? "page" : undefined}
+                aria-current={pathname === l.href || pathname.startsWith(`${l.href}/`) ? "page" : undefined}
                 className="font-[family-name:var(--font-display)] block w-full py-2.5 text-xl font-bold uppercase tracking-[0.06em] text-chalk aria-[current=page]:text-teal"
               >
                 {l.label}

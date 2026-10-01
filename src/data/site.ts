@@ -44,11 +44,17 @@ export const nav = [
 ] as const;
 
 /**
- * The shop is built and switched off. It turns on when the client's own
- * STRIPE_SECRET_KEY is set in the hosting project; until then the buy button
- * tells the visitor the store is not open yet instead of pretending.
+ * The shop is built and switched off. It takes TWO things to open it: the
+ * client's own STRIPE_SECRET_KEY, and SHOP_OPEN=1, set on purpose once the
+ * real prices are in src/data/shop.ts. The key alone is not enough, because
+ * the moment it is set the placeholder prices would be charged to real cards.
+ * Until both are set the buy button tells the visitor the store is not open
+ * yet instead of pretending.
+ *
+ * Read at BUILD time by the static shop pages and at request time by
+ * /api/checkout, so changing either variable needs a redeploy.
  */
-export const SHOP_LIVE = Boolean(process.env.STRIPE_SECRET_KEY);
+export const SHOP_LIVE = process.env.SHOP_OPEN === "1" && Boolean(process.env.STRIPE_SECRET_KEY);
 
 /** The four moves, from the client's boards. Icons live in the component. */
 export const moves = [

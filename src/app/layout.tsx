@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { site } from "@/data/site";
+import { baseOpenGraph } from "@/lib/meta";
 
 /**
  * Barlow Condensed carries every headline: the condensed heavy caps the
@@ -39,19 +40,10 @@ export const metadata: Metadata = {
   },
   description: site.blurb,
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: site.url,
-    siteName: site.name,
+    ...baseOpenGraph,
+    url: "/",
     title: `${site.name} | ${site.tagline}`,
     description: site.blurb,
-    /*
-      ABSOLUTE, ON THE PITCH HOST, DELIBERATELY, for now. A relative /og.jpg
-      resolves against metadataBase (their real domain), where nothing is
-      deployed yet, so sharing the demo would show no picture. At launch this
-      goes back to plain "/og.jpg"; it is on the README checklist.
-    */
-    images: [{ url: `${site.pitchUrl}/og.jpg`, width: 1200, height: 630, alt: `${site.hashtag}. ${site.tagline}` }],
   },
   /* Card type only. A root twitter block carrying title and image is inherited
      by every sub-page and would hand the homepage's card to any scraper that
