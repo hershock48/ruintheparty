@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>demo og card</title>
+<style>
+/* The site's share card, 1200 x 630, rendered to public/og.jpg by tools/render.mjs.
+   The client's brand entirely (glaze/link-cards.md): their mark, their black,
+   their line. Readable inside x 285 to x 915. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:630px;overflow:hidden;background:#000;font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.card{width:1200px;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 285px}
+.mark{height:360px;width:auto}
+.line{margin-top:28px;font-size:44px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;line-height:1}
+.line b{color:#00DFDF}
+</style></head><body>
+<div class="card"><img class="mark" src="../public/brand/mark.png" alt=""><p class="line">Good men <b>don't stay silent.</b></p></div>
+</body></html>
