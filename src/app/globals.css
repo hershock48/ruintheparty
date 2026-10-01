@@ -291,6 +291,36 @@ html.js [data-reveal][data-shown] .stamp {
 }
 
 /*
+  THE TICKER. One line of #RUINTHEPARTY sliding left, the streetwear
+  version of a hashtag band. The track is the phrase repeated a fixed
+  number of times (page.tsx), and the width is a BUDGET: an animated
+  element wider than about 4096px stops being composited on mobile and
+  can sit dead still on iOS (glaze.md). Six copies at md:text-7xl measure
+  under the budget (the number is in the README); count before adding one. The animation
+  moves the track by exactly half its width and loops, and the two halves
+  are identical, so the seam never shows. Transform only. Reduced motion
+  shows the first screen of the line, still.
+*/
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-block;
+  will-change: transform;
+  animation: ticker 28s linear infinite;
+}
+@keyframes ticker {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/*
   THE MARK ARRIVES. The hero logo is two pieces, the hash and the words, and
   they land on schedules 180ms apart: the words first, then the hash slams
   in from slightly large. Two things arriving together read as a slide

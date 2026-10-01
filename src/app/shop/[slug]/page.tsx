@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
-import { Garment } from "@/components/ProductCard";
 import { bySlug, money, products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 
@@ -26,12 +25,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 /**
  * One product. The buy form is a plain POST to /api/checkout with a slug
  * and a size, nothing else, so it works without JavaScript and cannot carry
- * a price. Sizes are real radios for the same reason.
+ * a price. Sizes are real radios for the same reason. The photo is the
+ * client's own (a crop from his boards, see src/data/shop.ts).
  */
 export default async function ProductPage({ params }: Params) {
   const p = bySlug((await params).slug);
   if (!p) notFound();
-  const useHash = p.kind === "hat" || p.kind === "sticker";
 
   return (
     <section className="bg-black">
@@ -40,16 +39,8 @@ export default async function ProductPage({ params }: Params) {
           &larr; Shop
         </Link>
         <div className="mt-6 grid gap-10 md:grid-cols-2">
-          <Reveal className="relative flex aspect-square items-center justify-center border border-chalk/15 bg-coal">
-            <Garment kind={p.kind} className="h-3/4 w-3/4 text-chalk/60" />
-            <Image
-              src={useHash ? "/brand/hash.png" : "/brand/mark.png"}
-              alt=""
-              width={useHash ? 567 : 1224}
-              height={useHash ? 766 : 1140}
-              sizes="160px"
-              className={`absolute ${p.kind === "hat" ? "top-[38%] h-16 w-auto" : p.kind === "band" ? "h-12 w-auto" : p.kind === "sticker" ? "h-24 w-auto" : "h-24 w-auto"}`}
-            />
+          <Reveal className="relative aspect-square overflow-hidden border border-chalk/15 bg-black">
+            <Image src={p.photo} alt={p.photoAlt} width={800} height={800} priority sizes="(min-width: 768px) 48vw, 92vw" className="h-full w-full object-cover" />
           </Reveal>
           <Reveal delay={100}>
             <h1 className="display text-5xl text-white md:text-6xl">{p.name}</h1>

@@ -5,6 +5,8 @@ import Mark from "@/components/Mark";
 import Moves from "@/components/Moves";
 import Reveal from "@/components/Reveal";
 import { refrain, site } from "@/data/site";
+import { products } from "@/data/shop";
+import ProductCard from "@/components/ProductCard";
 
 export const metadata: Metadata = {
   title: `${site.name} | Be the man who ruins the party`,
@@ -52,12 +54,12 @@ export default function HomePage() {
               <li>When someone needs help, step in.</li>
               <li className="pt-2 font-semibold text-white">Doing what&rsquo;s right matters more than fitting in.</li>
             </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
+            {/* One button. "Why this exists" was the weaker of two and the
+                mark beside it does that job; What it means is one tap away
+                in the nav and the cards below. */}
+            <div className="mt-8">
               <Link href="/be-the-guy" className="btn btn-teal">
-                What to actually do
-              </Link>
-              <Link href="/what-it-means" className="btn btn-ghost">
-                Why this exists
+                Be the guy
               </Link>
             </div>
           </div>
@@ -94,6 +96,27 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
+      </section>
+
+      {/*
+        THE HASHTAG BAND. The phrase has to stand on its own, and nothing
+        else on the page asks anyone to say it. Six copies on the track (an even count, so the two halves match);
+        the width budget is in globals.css (.ticker). aria-hidden on the
+        moving line, the sentence under it carries the meaning.
+      */}
+      <section className="border-b border-chalk/10 bg-black py-8 md:py-10">
+        <div className="ticker" aria-hidden="true">
+          <div className="ticker-track">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <span key={i} className="display inline-block pr-10 text-6xl text-teal md:text-7xl">
+                {site.hashtag.toUpperCase()}
+              </span>
+            ))}
+          </div>
+        </div>
+        <p className="mx-auto mt-5 max-w-6xl px-4 text-chalk sm:px-6 md:text-lg">
+          Post it. Wear it. Say it out loud. The phrase only works if it gets used.
+        </p>
       </section>
 
       {/* THE FOUR MOVES. */}
@@ -186,17 +209,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SHOP. */}
+      {/* SHOP. Three of the tiles, the client's own photos, instead of a sentence. */}
       <section className="bg-coal">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-4 py-14 sm:px-6">
-          <div>
-            <p className="kicker text-teal">Wear it</p>
-            <h2 className="display mt-2 text-4xl text-white">Start the conversation without saying anything.</h2>
-            <p className="mt-3 max-w-xl text-ash">Shirts, hoodies, hats, wristbands, stickers. The hashtag on the front, nothing preachy on the back.</p>
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="kicker text-teal">Wear it</p>
+              <h2 className="display mt-2 text-4xl text-white">Start the conversation without saying anything.</h2>
+            </div>
+            <Link href="/shop" className="btn btn-teal">
+              The shop
+            </Link>
           </div>
-          <Link href="/shop" className="btn btn-teal">
-            The shop
-          </Link>
+          <ul className="mt-8 grid gap-5 sm:grid-cols-3">
+            {products.slice(0, 3).map((p, i) => (
+              <Reveal as="li" key={p.slug} delay={i * 80}>
+                <ProductCard p={p} sizes="(min-width: 640px) 30vw, 90vw" />
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </section>
     </>

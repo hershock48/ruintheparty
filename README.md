@@ -132,6 +132,17 @@ yet: order notification is the Stripe dashboard email until one is built
   trap that putting it underneath walked into.
 - **The mark is first on phones.** Streetwear leads with the mark. It costs
   about a quarter second of LCP on the throttled profile (audit state).
+- **The shop photos are crops from the client's boards.** Kevin, 2026-10-01:
+  use his photos so the store looks legit. The two boards he sent are in
+  `public/brand/`, the five square crops are cut by `tools/crops.sh` into
+  `public/shop/`, and the product list matches what the boards show (the
+  sticker pack became the bottle, which is on the boards; stickers are
+  not). They are concept renders upscaled from about 300px, to be replaced
+  by product photography when the goods exist.
+- **The hashtag ticker** is the streetwear version of a hashtag band: six
+  copies on a track that moves by half its width and loops. The track
+  width is a budget (globals.css, `.ticker`); measure it before adding a
+  copy or a size.
 - **Statistics appear once**, on What it means, with the RAINN link, and
   nowhere else. The brief says not to build a seminar.
 - **Scenarios credit Green Dot's three Ds** (direct, delegate, distract) by
@@ -154,9 +165,13 @@ Against the production build, with the glazedweb harnesses:
   the phone screen (October 1 home pass): the LCP element is now the mark
   image rather than the headline text, and it was 2,424ms with the text
   first. Kevin's call whether brand-first is worth the quarter second.
-  `/be-the-guy` 2,500ms, `/know-the-line` 2,472ms, `/shop` **2,712ms, over
-  the line** (five product tiles each loading the mark). CLS 0 to 0.043
-  everywhere. JS **141KB** compressed, under the 150KB bar.
+  `/be-the-guy` 2,500ms, `/know-the-line` 2,472ms, `/shop` **2,956ms** and
+  `/shop/the-tee` **2,652ms, both over the line** since the tiles became
+  photographs (the first tile is preloaded; the 750-wide webp is 21KB, so
+  the rest is the throttled connection in front of fonts, JS and image).
+  CLS 0 to 0.043 everywhere. JS **141KB** compressed, under the 150KB bar.
+- The hashtag ticker track measures **2,843px** at 1440 (2,409 at 390),
+  under the 4,096px mobile compositing budget in glaze.md. Six copies.
 - `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440
   during the entrance; reduced motion animates nothing.
 - Plate verified: `.gw-plate` computed cream, drip inherits the footer black.
@@ -191,6 +206,7 @@ letter before Kevin sends it (backlog C01).
       `/teams` form asks for them
 - [ ] Photography, if and when it exists, with written permission from
       everyone in it
+- [ ] Product photography to replace the five board crops in `public/shop/`
 - [ ] `/` and `/shop` LCP under 2,500ms on the throttled profile, or record
       why not (home: the mark is first on phones by choice)
 - [ ] LocalBusiness structured data: not applicable, Organization is used
