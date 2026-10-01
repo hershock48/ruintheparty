@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Glazed Web &times; Ruin the Party &middot; Proposal</title>
+<meta name="description" content="A website proposal for Ruin the Party. Every claim links to the evidence, and the site is already built.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Glazed Web">
+<meta property="og:url" content="https://ruintheparty.glazedweb.com/">
+<meta property="og:title" content="Does #RuinTheParty mean anything yet?">
+<meta property="og:description" content="A website proposal for Ruin the Party, where every claim links to the proof.">
+<meta property="og:image" content="https://ruintheparty.glazedweb.com/pitch/ruintheparty/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Does #RuinTheParty mean anything yet? A proposal from Glazed Web.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Does #RuinTheParty mean anything yet?">
+<meta name="twitter:description" content="A website proposal for Ruin the Party, where every claim links to the proof.">
+<meta name="twitter:image" content="https://ruintheparty.glazedweb.com/pitch/ruintheparty/og.jpg">
+<meta name="theme-color" content="#FDF6EC">
+<!--
+  KEVIN, BEFORE SENDING. Three things this letter could not check from the
+  desk it was written at, because that sandbox has no outbound web except a
+  search index:
+    1. Open ruintheparty.com in a browser. The letter says only that the name
+       answers to DNS and does not describe what is there. If it is a real
+       page, finding one changes.
+    2. Open tiktok.com/tag/ruintheparty. The view count (about 253,000) and
+       the nature of the videos came from TikTok's own tag page as a search
+       index surfaced it on October 1, 2026, not from the page itself.
+    3. The price. $4,500 and $150 is a recommendation against the Griffin
+       Claw and Dark Horse shape and the published $8,000 floor it anchors
+       to. Prices are yours (AGENTS.md). The same numbers sit in
+       lib/customOrders.js; change both in one commit.
+  Also: nobody has named the person behind Ruin the Party. The agreement row
+  has their name, title, entity and town as placeholders, and the letter is
+  addressed to the brand rather than to a person for that reason.
+-->
+<!--
+  Icons are declared with ABSOLUTE paths and they are not optional. "/" and
+  "/demo" are rewrites on this host, so a relative icon path resolves against
+  the rewritten route and misses. Undeclared, the page falls back to
+  /favicon.ico at the origin root, and a Glazed sales document goes out
+  wearing the client's own mark. SVG first, .ico second: Safari will not take
+  an SVG through rel=icon.
+-->
+<link rel="icon" href="/pitch/ruintheparty/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/pitch/ruintheparty/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="192x192" href="/pitch/ruintheparty/icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/pitch/ruintheparty/apple-touch-icon.png">
+<style>
+/*
+  One stylesheet, one file, no build step, so this page can be hand-edited on a
+  phone if a call goes sideways.
+
+  A deliberate single look, warm paper, in every viewer setting. color-scheme
+  is pinned to light and every colour on the page is stated rather than
+  inherited, so a reader whose phone is in dark mode gets the same readable
+  document instead of a browser's guess at inverting it.
+*/
+:root{
+ --paper:#FDF6EC; --card:#FFFDF8;
+ --ink:#2B1E16; --ink2:#201712; --body:#6B5747; --mute:#7A6753; --line:#E8DCC8;
+ --pink:#E84D8A; --pink-d:#CE3672; --pink-t:#FCE7F0;
+ /* Pink that has to survive on the paper background rather than on a card:
+    --pink-d measures 4.45 there, a fail, and 4.7 on --card, which is why the
+    same colour passes inside a claim and fails outside one. Token, not
+    element. */
+ --pink-ink:#C9356F;
+ --green:#BFE07A; --green-b:#A9D65C; --green-d:#467C3D; --green-t:#F1F8DC;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+/* The base size is a working knob only if it is set where rem resolves.
+   Children here are sized in rem, so the number lives on html. */
+html{font-size:16.5px;background:var(--paper)}
+/*
+  overflow-wrap is the 320px guard, and this document is full of the tokens
+  that need it: ruintheparty.glazedweb.com/demo/know-the-line is 44 unbreakable
+  characters and glazedweb.com/agreement/ruintheparty is 36. Nothing rect-based catches
+  them, because a bare text node is not an element and the paragraph's border
+  box stays put while its line overflows. break-word only fires when a single
+  token cannot fit its line, so nothing else on the page moves.
+*/
+body{background:var(--paper);color:var(--body);font-family:var(--sans);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4,.k,nav,.num{font-family:var(--sans)}
+.k{font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--green-d)}
+h2{font-size:clamp(30px,4.4vw,48px);font-weight:800;color:var(--ink);letter-spacing:-1.6px;line-height:1.08;margin:10px 0 14px}
+h3{font-size:19px;font-weight:800;color:var(--ink);margin:34px 0 10px;letter-spacing:-.4px}
+p{margin:0 0 14px}
+strong{color:var(--ink);font-weight:600}
+a{color:var(--pink-ink)}
+.rule{height:3px;width:52px;background:var(--pink);border-radius:2px;margin:0 0 18px}
+/* scroll-margin parks an anchored eyebrow under the 62px sticky bar instead
+   of behind it. */
+section{padding:60px 0;border-top:1px solid var(--line);scroll-margin-top:78px}
+section:first-of-type{border-top:0}
+
+/* header */
+header{position:sticky;top:0;z-index:60;background:rgba(253,246,236,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .gmark{height:38px;width:auto;margin-bottom:-6px}
+.bstack{display:flex;flex-direction:column;line-height:1.15}
+.brand .bw{font-family:var(--sans);font-weight:800;font-size:19px;color:var(--ink);letter-spacing:-.6px;line-height:1.1}
+.brand .bw span{font-weight:350;color:var(--mute)}
+.brand .forname{font-size:.72rem;color:var(--mute);font-style:italic}
+nav{display:flex;gap:22px;align-items:center;font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase}
+nav a{color:var(--mute);text-decoration:none;white-space:nowrap}
+nav a:hover{color:var(--pink-d)}
+/* The one action worth carrying on every scroll wears the letter's own pill,
+   the same shape as the verify buttons, so the header's CTA and the body's
+   evidence links read as one family. */
+nav .navcta{border:1.5px solid var(--pink);color:var(--pink-ink);padding:7px 14px;border-radius:999px;transition:all .16s}
+nav .navcta:hover{background:var(--pink);color:#fff}
+@media(max-width:720px){nav{display:none}.brand .forname{display:none}}
+
+/* hero */
+.hero{padding:66px 0 54px;text-align:left}
+.hero .gmark{height:96px;width:auto;margin-bottom:24px}
+/* Capped at 47px, not DeVine's 60. The question is thirty characters a line
+   and the wrap is 712px inside: at 60px the first line measures 884px and the
+   three deliberate line breaks stop meaning anything, because the browser
+   re-breaks each of them in the wrong place. The cap is set from that
+   measurement, not from taste. */
+.hero h1{font-family:var(--sans);font-size:clamp(38px,5.5vw,47px);font-weight:800;color:var(--ink);letter-spacing:-2px;line-height:1.06}
+.hero h1 em{font-style:normal;color:var(--pink)}
+.hero .sub{font-size:1.12rem;color:var(--body);margin-top:20px;max-width:31em}
+.forwho{margin-top:26px;font-family:var(--sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);line-height:1.9}
+.forwho b{color:var(--ink)}
+/* The nav hides below 720px on a document that asks to be read on a phone, so
+   both of its destinations ride this row as well and mobile never loses them. */
+.herocta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:22px 0 0}
+.herocta a{display:inline-block;background:var(--pink-d);color:#fff;font-family:var(--sans);font-weight:700;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;padding:15px 26px;border-radius:999px;text-decoration:none;box-shadow:0 6px 16px -6px rgba(206,54,114,.55);transition:transform .15s ease,background .15s ease}
+.herocta a:hover{background:var(--green);color:var(--ink);transform:translateY(-2px)}
+.herocta a.ghost{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line)}
+.herocta a.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.herocta span{font-size:.9rem;color:var(--mute);max-width:28em}
+@media(max-width:520px){.herocta a{width:100%;text-align:center}}
+
+/* tldr */
+.tldr{background:var(--ink);color:#F6EFE4;border-radius:16px;padding:26px 26px 22px;margin-top:38px}
+.tldr .k{color:var(--green)}
+.tldr ul{list-style:none;margin:14px 0 0}
+.tldr li{display:flex;gap:12px;padding:9px 0;border-top:1px solid rgba(255,255,255,.1);font-size:.97rem;line-height:1.5}
+.tldr li:first-child{border-top:0}
+.tldr .n{font-family:var(--sans);font-weight:800;color:var(--green);flex:0 0 auto;font-size:.8rem;padding-top:3px}
+.tldr b{color:#fff}
+.tldr a{color:var(--green)}
+
+/* The thesis box. ONE per letter, for the sentence the whole pitch hangs on.
+   A second one dilutes the first, which is the mistake this file does not
+   repeat. */
+.gap{background:var(--pink-t);border-left:5px solid var(--pink);border-radius:0 13px 13px 0;padding:24px 26px;margin:30px 0 14px}
+.gap .big{font-family:var(--sans);font-weight:800;font-size:1.35rem;line-height:1.3;color:var(--ink);letter-spacing:-.3px;margin:0 0 12px}
+.gap p{margin:0;font-size:1rem;line-height:1.65}
+
+/* claim cards */
+.claim{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin:12px 0;transition:border-color .16s,transform .16s}
+.claim:hover{border-color:var(--pink);transform:translateY(-1px)}
+.claim h4{font-family:var(--sans);font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:5px;letter-spacing:-.01em}
+.claim p{font-size:.95rem;margin:0 0 10px}
+.claim p:last-of-type{margin-bottom:0}
+.verify{display:inline-flex;align-items:center;gap:7px;margin-top:12px;margin-right:6px;font-family:var(--sans);font-size:.71rem;font-weight:700;
+ letter-spacing:.1em;text-transform:uppercase;color:var(--pink-d);text-decoration:none;border:1.5px solid var(--pink);
+ padding:7px 13px;border-radius:999px;transition:all .16s}
+.verify:hover{background:var(--pink);color:#fff}
+/* Not a link, so not an <a>. An anchor with no href is unfocusable and
+   announces as nothing. */
+.verify.plain{border-color:var(--line);color:var(--mute);cursor:default}
+.verify.plain:hover{background:transparent;color:var(--mute)}
+/* Same pill outside a claim card, where it sits on paper rather than on a
+   card and needs the darker token. */
+.verify.loose{color:var(--pink-ink);letter-spacing:.08em;padding:7px 14px}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:.83em;color:var(--mute)}
+
+/* price */
+.pricebox{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.pricebox>div{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px}
+.pricebox .n{font-family:var(--sans);font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.pricebox .per{font-size:1rem;color:var(--mute)}
+.pricebox .l{font-size:.85rem;color:var(--mute);margin-top:7px;line-height:1.4}
+@media(max-width:600px){.pricebox{grid-template-columns:1fr}}
+/* The market figure is struck and static, never animated into place. A reader
+   with scripts blocked has to be looking at the price we are charging, so the
+   real number is what sits in the markup and the anchor is only ever context
+   beside it. */
+.anchor{font-size:.9rem;color:var(--mute);margin:0 0 4px}
+.anchor s{color:var(--mute)}
+
+/* demo panels */
+.demo{background:linear-gradient(135deg,#201712,#3A2416);color:#F6EFE4;border-radius:18px;padding:32px;margin:22px 0;text-align:center}
+.demo .k{color:var(--green)}
+.demo h3{color:#fff;margin:10px 0 8px;font-size:1.4rem}
+/* margin:0 auto, and not overridden inline. A max-width block inside a centred
+   parent pins to the left edge with margin:0 and only its text centres, which
+   reads as crooked against the eyebrow above it. */
+.demo p{color:#D8CBBA;font-size:.98rem;max-width:34em;margin:0 auto}
+.demo strong,.demo b{color:#fff}
+.demo a.cta{display:inline-block;background:var(--pink-d);color:#fff;font-family:var(--sans);font-weight:700;font-size:.82rem;box-shadow:0 6px 16px -6px rgba(206,54,114,.55);
+ letter-spacing:.09em;text-transform:uppercase;padding:15px 30px;border-radius:999px;text-decoration:none;transition:all .18s;
+ max-width:100%;text-indent:.09em;box-sizing:border-box}
+.demo a.cta:hover{background:var(--green);color:var(--ink);transform:translateY(-2px)}
+/* An inline link inside the dark panel is a LINK. The pill above used to
+   apply to every a in here, which put a full-size button in the middle of a
+   sentence and gave the Scooplist address more visual weight than the one
+   action this letter asks for. */
+.demo a:not(.cta){color:var(--green);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.demo a:not(.cta):hover{color:#fff}
+.demo .fine{font-size:.84rem;opacity:.72;margin-top:18px}
+/* Modifier classes, not inline style attributes, so the next one of these is
+   a copy rather than a hand job. */
+.demo--left{text-align:left}
+.demo--left p{max-width:none;margin:0 0 12px}
+.demo--left p:last-child{margin-bottom:0}
+.demo--light{background:var(--card);color:var(--body);border:2px solid var(--green)}
+.demo--light .k{color:var(--green-d)}
+.demo--light h3{color:var(--ink)}
+.demo--light p{color:var(--body)}
+.demo--light strong{color:var(--ink)}
+/*
+  On a phone a long address is nearly as wide as the card, and an inline-block
+  that outgrows its line does not centre, it overflows right, with its shadow
+  running under the card edge. Smaller type and tighter padding put it back
+  inside, which matters because this is a button we are asking somebody to
+  press on exactly this screen.
+*/
+@media(max-width:430px){
+ .demo{padding:26px 18px}
+ .demo a{font-size:.72rem;padding:14px 20px;letter-spacing:.06em;text-indent:.06em}
+}
+
+/* the proof list: measured or checkable claims, so they get ticks rather than
+   bullets. Nothing goes in here that has not been run. */
+.proof{list-style:none;margin:10px 0 4px}
+.proof li{position:relative;padding:7px 0 7px 26px;font-size:.97rem;border-top:1px solid var(--line)}
+.proof li:first-child{border-top:0}
+.proof li::before{content:"";position:absolute;left:2px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--green-b)}
+.proof b{color:var(--ink)}
+
+/* steps */
+.step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+.step .no{font-family:var(--sans);font-weight:800;font-size:.78rem;color:#fff;background:var(--pink);width:28px;height:28px;
+ border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.step h4{font-family:var(--sans);font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px}
+.step p{font-size:.95rem;margin:0 0 10px}
+.step p:last-child{margin-bottom:0}
+/*
+  The 320px bug in every flex row on this page, and the reason the body's
+  overflow-wrap is not enough on its own. A flex item's min-width defaults to
+  auto, so it refuses to shrink below the widest unbreakable token inside it,
+  and overflow-wrap:break-word does not move min-content. glazedweb.com/
+  agreement/ruintheparty in step two is 36 characters and pushed the whole row
+  past the viewport at 320. min-width:0 lets the item shrink to its container;
+  the wrap rule then does the breaking. Applies to every flex child that holds
+  running text.
+*/
+.step>div,.tldr li>span,footer .wrap>div{min-width:0}
+
+.verdict{background:var(--green-t);border:1.5px solid var(--green);border-radius:12px;padding:17px 19px;font-size:.98rem;line-height:1.55;margin:14px 0}
+.verdict b{color:var(--ink)}
+.verdict p{margin:0 0 10px}
+.verdict p:last-child{margin:0}
+
+footer{background:var(--ink);color:#B9A894;padding:44px 0;font-size:.86rem;margin-top:20px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer .gmark{height:78px;width:auto;opacity:.95}
+footer .bw{display:block;font-weight:800;font-size:21px;color:#F6EFE4;letter-spacing:-.6px;margin-bottom:5px}
+footer .bw span{font-weight:350;color:#A6907F}
+footer a{color:var(--green)}
+.conf{font-size:.72rem;color:#D8CBBA;margin-top:14px;letter-spacing:.04em}
+.note{font-size:.85rem;color:var(--mute);font-style:italic;line-height:1.5}
+.note+.note{margin-top:10px}
+
+/* --- the mark, and its drip, lifted from glazedweb.com --- */
+/* The gradients are defined ONCE, here, and the three copies of the mark
+   reference them. Three inlined <defs> blocks with the same ids is the bug
+   that gets copied forward every time this stylesheet moves. */
+.gdefs{position:absolute;width:0;height:0;overflow:hidden}
+.gmark{display:block;overflow:visible}
+.gmark .goo{transform-box:fill-box;transform-origin:50% 0;animation:breathe 6s ease-in-out infinite}
+.gmark .wob1,.gmark .wob2,.gmark .wob3,.gmark .wobB{transform-box:fill-box;transform-origin:50% 0}
+.gmark .wob1{animation:sagg 3.8s ease-in-out -.6s infinite}
+.gmark .wob2{animation:sagg 4.9s ease-in-out -2.1s infinite}
+.gmark .wob3{animation:sagg 4.3s ease-in-out -1.3s infinite}
+.gmark .wobB{animation:sagg 5.6s ease-in-out -3s infinite}
+.gmark .string{transform-box:fill-box;transform-origin:50% 0;animation:stringy 3.4s cubic-bezier(.55,.1,.8,.5) infinite}
+.gmark .droplet{transform-box:fill-box;transform-origin:center;animation:fall 3.4s cubic-bezier(.5,.08,.85,.6) infinite}
+.gmark .droplet2{transform-box:fill-box;transform-origin:center;animation:fall2 5.1s cubic-bezier(.5,.08,.85,.6) -2.4s infinite}
+@keyframes breathe{0%,to{transform:scaleY(1)}50%{transform:scaleY(1.02)}}
+@keyframes sagg{0%,to{transform:scaleY(1) scaleX(1)}50%{transform:scaleY(1.07) scaleX(.98)}}
+@keyframes stringy{0%{transform:scaleY(.1);opacity:0}25%{transform:scaleY(.8);opacity:1}60%{transform:scaleY(1.7);opacity:.85}80%{transform:scaleY(2.4);opacity:0}to{transform:scaleY(.1);opacity:0}}
+@keyframes fall{0%{transform:translateY(-16px) scaleY(1.5) scaleX(.7);opacity:0}22%{transform:translateY(-8px) scaleY(1.2) scaleX(.85);opacity:1}60%{transform:translateY(10px) scale(1);opacity:1}to{transform:translateY(38px) scaleY(1.15) scaleX(.9);opacity:0}}
+@keyframes fall2{0%{transform:translateY(-10px) scaleY(1.4) scaleX(.75);opacity:0}25%{transform:translateY(-4px) scale(1);opacity:1}65%{transform:translateY(8px) scale(1);opacity:1}to{transform:translateY(26px) scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .gmark .goo,.gmark .wob1,.gmark .wob2,.gmark .wob3,.gmark .wobB,
+ .gmark .string,.gmark .droplet,.gmark .droplet2{animation:none}
+ .claim:hover,.herocta a:hover,.demo a:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg class="gdefs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+<linearGradient id="gwDark" x1="0" y1="92" x2="0" y2="165" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#5FA850"></stop><stop offset="100%" stop-color="#43813A"></stop></linearGradient>
+<linearGradient id="gwLight" x1="0" y1="92" x2="0" y2="215" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#D9EDA0"></stop><stop offset="55%" stop-color="#BFE07A"></stop><stop offset="100%" stop-color="#A3CE55"></stop></linearGradient>
+<radialGradient id="gwPink" cx="40%" cy="34%" r="75%"><stop offset="0%" stop-color="#F887B2"></stop><stop offset="55%" stop-color="#E84D8A"></stop><stop offset="100%" stop-color="#CE3672"></stop></radialGradient>
+<linearGradient id="gwCreep" x1="0" y1="90" x2="0" y2="124" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E3F2B0"></stop><stop offset="100%" stop-color="#C3E181"></stop></linearGradient>
+</defs></svg>
+
+<header><div class="wrap">
+ <a class="brand" href="#top" aria-label="Glazed Web">
+  <svg class="gmark" viewBox="0 0 200 250" overflow="visible" aria-hidden="true"><g class="goo"><g fill="url(#gwDark)"><ellipse cx="100" cy="110" rx="38" ry="15"></ellipse><path class="wobB" d="M 86 100 C 86 116, 87 130, 88 142 C 88 148, 91 149, 92 142 C 93 130, 92 114, 92 100 Z"></path><path d="M 114 100 C 114 112, 115 124, 116 134 C 116 140, 119 141, 120 134 C 121 124, 120 110, 120 100 Z"></path></g><g fill="url(#gwLight)"><path class="wob1" d="M 64 100 C 63 120, 65 138, 66 152 C 66 164, 68 172, 74 173 C 80 172, 83 165, 82 154 C 84 136, 85 116, 86 100 Z"></path><path class="wob2" d="M 92 100 C 91 128, 93 152, 94 172 C 94 188, 97 199, 104 200 C 111 199, 114 190, 112 174 C 113 150, 114 124, 114 100 Z"></path><path class="wob3" d="M 120 100 C 119 116, 120 130, 121 142 C 121 152, 123 159, 129 160 C 134 159, 137 153, 135 144 C 136 130, 137 114, 137 100 Z"></path></g></g><path class="string" d="M 104 199 L 104 209" stroke="#BFE07A" stroke-width="2.5" stroke-linecap="round" fill="none"></path><g class="droplet"><circle cx="104" cy="213" r="7" fill="#BFE07A"></circle><circle cx="102" cy="211" r="2" fill="#F1F8DC" opacity="0.9"></circle></g><circle class="droplet2" cx="74" cy="186" r="4.5" fill="#BFE07A"></circle><circle cx="100" cy="70" r="52" fill="url(#gwPink)"></circle><path d="M 56 98 A 52 52 0 0 0 144 98 C 142 94, 138 92, 134 94 C 130 97, 129 102, 125 104 C 119 106, 116 98, 110 96 C 104 94, 103 102, 98 105 C 93 107, 90 100, 84 97 C 78 95, 76 100, 71 102 C 66 103, 62 100, 56 98 Z" fill="url(#gwCreep)"></path><path d="M 68 106 A 42 42 0 0 0 84 116" fill="none" stroke="#F1F8DC" stroke-width="4" stroke-linecap="round" opacity="0.85"></path><path d="M 97 144 Q 103 151 109 144" fill="none" stroke="#55974A" stroke-width="4" stroke-linecap="round"></path><g stroke="#F1F8DC" fill="none" stroke-linecap="round"><path d="M 97 128 C 96 148, 97 166, 100 182" stroke-width="4.5" opacity="0.85"></path><path d="M 69 118 C 68 132, 70 146, 71 156" stroke-width="3.5" opacity="0.8"></path><path d="M 124 114 C 123 124, 125 138, 126 148" stroke-width="3.5" opacity="0.8"></path></g><circle cx="100" cy="192" r="2.5" fill="#F1F8DC" opacity="0.9"></circle><circle cx="100" cy="72" r="13" fill="#FDF6EC"></circle><circle cx="100" cy="72" r="13" fill="none" stroke="#C22F6B" stroke-width="3" opacity="0.3"></circle><path d="M 62 46 A 44 44 0 0 1 82 28" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"></path><circle cx="92" cy="26" r="3.5" fill="#FFFFFF"></circle></svg>
+  <span class="bstack"><span class="bw">glazed<span>web</span></span><span class="forname">for Ruin the Party</span></span>
+ </a>
+ <!-- One action in the bar (glaze/launch-page.md): the build page. The
+      agreement is a plain link, never a second pill. Both destinations ride
+      the hero row too, because the nav hides below 720px on a letter that
+      asks to be read on a phone. -->
+ <nav>
+  <a href="#cost">Cost</a><a href="#next">Next</a><a href="/demo">The site</a><a href="https://www.glazedweb.com/agreement/ruintheparty" target="_blank" rel="noopener">The agreement</a><a class="navcta" href="https://www.glazedweb.com/build/ruintheparty" target="_blank" rel="noopener">Launch &#8599;</a>
+ </nav>
+</div></header>
+
+<main>
+<div class="hero" id="top"><div class="wrap">
+ <svg class="gmark" viewBox="0 0 200 250" overflow="visible" aria-hidden="true"><g class="goo"><g fill="url(#gwDark)"><ellipse cx="100" cy="110" rx="38" ry="15"></ellipse><path class="wobB" d="M 86 100 C 86 116, 87 130, 88 142 C 88 148, 91 149, 92 142 C 93 130, 92 114, 92 100 Z"></path><path d="M 114 100 C 114 112, 115 124, 116 134 C 116 140, 119 141, 120 134 C 121 124, 120 110, 120 100 Z"></path></g><g fill="url(#gwLight)"><path class="wob1" d="M 64 100 C 63 120, 65 138, 66 152 C 66 164, 68 172, 74 173 C 80 172, 83 165, 82 154 C 84 136, 85 116, 86 100 Z"></path><path class="wob2" d="M 92 100 C 91 128, 93 152, 94 172 C 94 188, 97 199, 104 200 C 111 199, 114 190, 112 174 C 113 150, 114 124, 114 100 Z"></path><path class="wob3" d="M 120 100 C 119 116, 120 130, 121 142 C 121 152, 123 159, 129 160 C 134 159, 137 153, 135 144 C 136 130, 137 114, 137 100 Z"></path></g></g><path class="string" d="M 104 199 L 104 209" stroke="#BFE07A" stroke-width="2.5" stroke-linecap="round" fill="none"></path><g class="droplet"><circle cx="104" cy="213" r="7" fill="#BFE07A"></circle><circle cx="102" cy="211" r="2" fill="#F1F8DC" opacity="0.9"></circle></g><circle class="droplet2" cx="74" cy="186" r="4.5" fill="#BFE07A"></circle><circle cx="100" cy="70" r="52" fill="url(#gwPink)"></circle><path d="M 56 98 A 52 52 0 0 0 144 98 C 142 94, 138 92, 134 94 C 130 97, 129 102, 125 104 C 119 106, 116 98, 110 96 C 104 94, 103 102, 98 105 C 93 107, 90 100, 84 97 C 78 95, 76 100, 71 102 C 66 103, 62 100, 56 98 Z" fill="url(#gwCreep)"></path><path d="M 68 106 A 42 42 0 0 0 84 116" fill="none" stroke="#F1F8DC" stroke-width="4" stroke-linecap="round" opacity="0.85"></path><path d="M 97 144 Q 103 151 109 144" fill="none" stroke="#55974A" stroke-width="4" stroke-linecap="round"></path><g stroke="#F1F8DC" fill="none" stroke-linecap="round"><path d="M 97 128 C 96 148, 97 166, 100 182" stroke-width="4.5" opacity="0.85"></path><path d="M 69 118 C 68 132, 70 146, 71 156" stroke-width="3.5" opacity="0.8"></path><path d="M 124 114 C 123 124, 125 138, 126 148" stroke-width="3.5" opacity="0.8"></path></g><circle cx="100" cy="192" r="2.5" fill="#F1F8DC" opacity="0.9"></circle><circle cx="100" cy="72" r="13" fill="#FDF6EC"></circle><circle cx="100" cy="72" r="13" fill="none" stroke="#C22F6B" stroke-width="3" opacity="0.3"></circle><path d="M 62 46 A 44 44 0 0 1 82 28" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"></path><circle cx="92" cy="26" r="3.5" fill="#FFFFFF"></circle></svg>
+ <div class="k">Website proposal &middot; Ruin the Party</div>
+ <h1>Does #RuinTheParty<br>mean anything yet?<br><em>Not yet.</em></h1>
+ <p class="sub">You sent us a brief. We read it twice, built the site it describes, and then wrote down only what we could prove about the world that site is going into. Every claim below carries the link it came from, so you can check us.</p>
+ <div class="forwho">
+  Prepared by <b>Kevin Hershock &middot; Glazed Web</b><br>
+  Marshall, Michigan &middot; October 2026<br>
+  <b>Every claim below links to the evidence.</b>
+ </div>
+ <p class="herocta"><a href="/demo">See the site &#8599;</a><a class="ghost" href="https://www.glazedweb.com/build/ruintheparty" target="_blank" rel="noopener">Launch &#8599;</a><span>Built already, with your words in it: the phrase, the four moves, the eight situations, and the store. Open it on the phone in your pocket.</span></p>
+
+ <div class="tldr">
+  <div class="k">The short version</div>
+  <ul>
+   <li><span class="n">01</span><span>The phrase is a decision, and today it lives in a brief. <b>Nowhere a seventeen-year-old can find it says what you mean by it.</b> The hashtag on TikTok is comedy about wrecking somebody's birthday.</span></li>
+   <li><span class="n">02</span><span>The people already doing this work are serious and institutional: student chapters on 500 campuses, a coaching program the CDC evaluated. <b>None of them is a phrase a kid would wear.</b> That is the gap, and it is yours.</span></li>
+   <li><span class="n">03</span><span>Your brief has one section that will carry the whole site, and you named it yourself: <b>Be the Guy.</b> We built it first. Eight situations, the words, the moves, and who to call.</span></li>
+   <li><span class="n">04</span><span>The store is built on <b>your own Stripe</b> and switched off until you price it. No platform bill, nobody taking a cut.</span></li>
+   <li><span class="n">05</span><span>The whole thing is live at <a class="cta" href="/demo">ruintheparty.glazedweb.com/demo</a>. Nothing in this letter is a mockup.</span></li>
+  </ul>
+ </div>
+</div></div>
+
+<section id="found" aria-labelledby="h-found"><div class="wrap">
+ <div class="k">Section one</div>
+ <div class="rule"></div>
+ <h2 id="h-found">What we read.</h2>
+
+ <p>First, what this is not. It is not a critique of the idea. Your brief is the clearest one we have been sent: a phrase that is a decision rather than a slogan, a message aimed at the men who are not the problem, and three jobs for the website in the right order, educate, empower, spread. Most of what follows in section three is your words, because they were already right.</p>
+
+ <p>What follows here is what the web does to that idea on day one. It was read out of the world on <strong>October 1, 2026</strong>, and anything we could not open ourselves is marked that way rather than dressed up.</p>
+
+ <div class="claim">
+  <h4>The name is held, and that is all we can say about it</h4>
+  <p>ruintheparty.com answers to DNS, so somebody registered it, which is the right first move. What the address shows a visitor today we could not open from the desk this was written at, so this letter does not describe it. Open it yourself and you will know in one tap whether there is a site there or a registrar's parking page. Either way, nothing at that address today says what Ruin the Party means.</p>
+  <a class="verify" href="https://ruintheparty.com/" target="_blank" rel="noopener">ruintheparty.com &#8599;</a>
+ </div>
+
+ <div class="claim">
+  <h4>The hashtag already has an audience, and it is laughing at something else</h4>
+  <p>TikTok's own tag page for <span class="mono">#ruintheparty</span> counts roughly <strong>253,000 views</strong>. The videos are comedy: somebody wrecking a birthday, a wedding, a kid's party. That is not a problem. It is the audience the phrase has to take over, and right now nothing on that page, and nothing anywhere else, tells those viewers what you mean by it. The site is what the first person who asks gets sent to.</p>
+  <a class="verify" href="https://www.tiktok.com/tag/ruintheparty" target="_blank" rel="noopener">The tag on TikTok &#8599;</a>
+ </div>
+
+ <div class="claim">
+  <h4>The field is full of institutions, not phrases</h4>
+  <p>It's On Us, started in 2014 out of the White House task force on campus sexual assault, has run more than 6,000 programs through student chapters on more than 500 campuses, and 440,000 people have signed its pledge. Coaching Boys Into Men gives a coach twelve fifteen-minute talks to have with his team across a season, and a three-year evaluation paid for by the CDC found the athletes who went through it were significantly more likely to step in. Green Dot taught a generation of colleges the three ways to intervene. Every one of them speaks in the voice of a university or a nonprofit, which is exactly what your brief says this must not sound like. None of them is on a hat.</p>
+  <p>So the site does not compete with them. It points at them, by name, on the pages for coaches and for parents, and it does the one thing they do not: give a nineteen-year-old a phrase he would say out loud.</p>
+  <a class="verify" href="https://itsonus.org/about/mission-impact/" target="_blank" rel="noopener">It's On Us, their numbers &#8599;</a>
+  <a class="verify" href="https://coachescorner.org/" target="_blank" rel="noopener">Coaching Boys Into Men &#8599;</a>
+  <a class="verify" href="https://alteristic.org/services/green-dot/" target="_blank" rel="noopener">Green Dot &#8599;</a>
+ </div>
+
+ <div class="claim">
+  <h4>The numbers, so the site never has to shout them</h4>
+  <p>RAINN's campus page, reporting the 2019 survey of American universities: <strong>13 percent</strong> of undergraduates experienced rape or sexual assault after enrolling. <strong>One in four</strong> undergraduate women and <strong>one in fourteen</strong> undergraduate men experienced nonconsensual sexual contact by force or while unable to consent. Those three figures appear on the site exactly once, with that link under them, and nowhere else. A site that shouts statistics at a nineteen-year-old is the corporate seminar your brief says not to build.</p>
+  <a class="verify" href="https://rainn.org/facts-statistics-the-scope-of-the-problem/statistics-campus-sexual-violence/" target="_blank" rel="noopener">RAINN's campus statistics &#8599;</a>
+ </div>
+
+ <div class="claim">
+  <h4>Your brief had already written the two strongest pages</h4>
+  <p><span class="mono">"No" is a complete sentence. It doesn't matter when no is said.</span> That is a page, and it is on the site in letters the height of a phone screen, with the five moments under it exactly as you listed them. And <strong>Be the Guy</strong>, which you said could become the most important section on the site. You were right, so it got built first and biggest: eight situations a young man actually ends up in, what to say in each, what to do, when to hand it to a bouncer, a coach, an RA or the police, and what to do the next day.</p>
+  <a class="verify" href="/demo/know-the-line">Know the line &#8599;</a>
+  <a class="verify" href="/demo/be-the-guy">Be the guy &#8599;</a>
+ </div>
+
+ <div class="gap">
+  <p class="big">The real one is that a phrase cannot stand on a merch store.</p>
+  <p>Your brief says the merchandise should not feel like nonprofit merchandise,
+  and it is right. But a shirt that says Ruin the Party only means something if
+  the person who asks what it means can be sent somewhere that answers in
+  thirty seconds, in words he would use himself. That is the whole job of the
+  website. The shop is how the question gets asked. The site is the answer.
+  Build the store without the answer and you have a streetwear brand with a
+  hashtag. Build the answer without the store and you have a pamphlet.</p>
+ </div>
+
+ <p class="note">How this was done, and what was not done. The brief was read,
+ the site was built from it, and the claims above were checked against the
+ organizations' own pages and RAINN's on October 1, 2026, each with the link
+ that proves it. Two of them, the domain and the TikTok tag, we could not open
+ ourselves and say so where they appear. No speed test was run on anything of
+ yours, because there is nothing of yours to run one on yet.</p>
+</div></section>
+
+<section id="matters" aria-labelledby="h-matters"><div class="wrap">
+ <div class="k">Section two</div>
+ <div class="rule"></div>
+ <h2 id="h-matters">The part that matters most.</h2>
+
+ <h3>Two jobs that pull against each other</h3>
+ <p>The site has to be a store young men would actually buy from, and it has to be the reason the shirt means anything. Most movements end up with one of the two: a nonprofit site with a merch tab bolted on, or a storefront with an About page nobody reads. We built one site where the phrase does the heavy lifting in both places. The hashtag is the hero of every page and the chest of every shirt, and every page a shirt could send somebody to answers in one screen, in the voice of your brief rather than the voice of a training module.</p>
+
+ <h3>You own it. All of it.</h3>
+ <p>Written down, not implied. When the build fee is paid in full, these are yours: the design, the source code, every word on it, the accounts, the code repository, the hosting project, and every login to them. The domain stays registered in your name and transfers to any registrar you name, free, whenever you ask. After launch it is month to month, thirty days' notice, no penalty, and the site keeps working on the way out the door. The terms are one plain-English page published at <a href="https://www.glazedweb.com/agreement" target="_blank" rel="noopener">glazedweb.com/agreement</a>, the same page every client gets.</p>
+ <p>Nothing underneath the site is rented. No store platform, no page builder, no form service, no plugin bill arriving in a year. <strong>If a feature can be written instead of rented, we write it.</strong> The one exception is Stripe, because somebody has to take the card: its fee is published, it is charged to your account, and it is the only line on any bill that is not ours.</p>
+
+ <h3>Three questions worth asking any web vendor, including us</h3>
+ <p><strong>1.</strong> If we stop paying you, what do we keep? <strong>2.</strong> Whose name is the domain registered in? <strong>3.</strong> Can we leave in thirty days? Our answers are everything, yours, and yes. Ask us the same three in person and hold us to them.</p>
+</div></section>
+
+<section id="build" aria-labelledby="h-build"><div class="wrap">
+ <div class="k">Section three</div>
+ <div class="rule"></div>
+ <h2 id="h-build">What we built.</h2>
+ <p>Not a description of a website. We built it, so the rest of this section is mostly a list of what to open.</p>
+
+ <div class="demo">
+  <div class="k">Open it now</div>
+  <h3>The site is built, and it is your brief inside it.</h3>
+  <p>Nine pages, the store, the forms, your mark lifted from the file you sent
+  rather than redrawn, and your words wherever they were already right.</p>
+  <a href="/demo">ruintheparty.glazedweb.com/demo &#8599;</a>
+  <p class="fine">A working site, not a finished one. Where a fact has never
+  been given to us, the page says so rather than inventing it, and the list of
+  those is below.</p>
+ </div>
+
+ <p><strong>Home.</strong> <a href="/demo">Your opening, word for word</a>: Be the man who ruins the party, and the four lines under it. Then the decision in one sentence, the five situations that each end the same way, the four moves from your boards, and "No" is a complete sentence. The mark arrives in two pieces, the words first and the hash a beat later, which is the only motion on the page and it is your logo doing it.</p>
+
+ <p><strong>What it means.</strong> <a href="/demo/what-it-means">The story and the philosophy</a>, in your words: the list that was handed to women for generations, what Ruin the Party asks of men instead, the core message, and who it is for. The three numbers live here, once.</p>
+
+ <p><strong>Know the line.</strong> <a href="/demo/know-the-line">Consent</a>, written for a nineteen-year-old. The five moments no still counts, the six things nobody owes anyone sex for, drunk, asleep, pressure, and one line at the bottom linking what RAINN says and how the law differs by state.</p>
+
+ <p><strong>Be the guy.</strong> <a href="/demo/be-the-guy">Eight situations</a>. Your friend taking home someone who can barely stand. Your friend still pushing after she said no. A stranger walking a very drunk girl out the door. The group chat. The joke. Being called dramatic. Getting her out. And the one your brief ends on, what to say when someone tells you it happened to them. Each one: what to say, what to do, when to get somebody with authority, and the next day.</p>
+
+ <p><strong>Parents.</strong> <a href="/demo/parents">Your nine topics</a>, in your order, each with the first sentence a parent could actually say in a car. Consent, respect, sex, pornography and expectations, alcohol, peer pressure, relationships, masculinity, speaking up.</p>
+
+ <p><strong>Teams.</strong> <a href="/demo/teams">A four-minute locker-room talk</a> a coach can give before a party weekend, the season program that has evidence behind it, and a form that asks coaches and schools what they need, because the materials you want organizations to hand to young men are not written yet, and what they ask for should decide what gets written first.</p>
+
+ <p><strong>Resources.</strong> <a href="/demo/resources">Six lines that answer</a>, 911 first, each number and address read off the organization's own site, and six organizations with what each one is for. The page says in its first paragraph that Ruin the Party is educational and is not a replacement for emergency services, law enforcement, medical care or professional crisis support, and the footer of every page says it again.</p>
+
+ <p><strong>Shop.</strong> <a href="/demo/shop">Five products</a> with your mark on them, real sizes, and a buy button that goes to Stripe. Section four.</p>
+
+ <ul class="proof">
+  <li><b>Zero accessibility violations on every page</b>, measured at 320, 390, 768 and 1440 pixels wide, not glanced at. Text contrast is computed per color pair; the teal is never allowed to be text on a light ground, because it fails there.</li>
+  <li><b>Works with JavaScript off.</b> The menu, the contact form, the buy button and every link. A form that fails quietly on a bad connection at a party is the one form that cannot fail quietly.</li>
+  <li><b>141KB of JavaScript, total.</b> Under the 150KB line we hold every build to. Most of that is the framework; the site itself is a few kilobytes.</li>
+  <li><b>Every page has its own title and description.</b> The share card for the site is yours, black, with your mark on it.</li>
+  <li><b>The mark is your file.</b> The brush logo on every page is the image you sent with the black keyed out, not a redraw. The icon in the browser tab is the hash cut from it.</li>
+  <li><b>Nothing rented underneath.</b> Fonts are downloaded once at build time and served from your own address. No form service, no store platform, no analytics anybody pays for.</li>
+ </ul>
+
+ <p class="note">What is provisional, said here rather than discovered later. The
+ shop prices are sample prices and the page says so in its first screen. The
+ email address and the Instagram and TikTok handles are placeholders marked in
+ the code, because nobody has given us real ones. There is no photography on
+ the site and the design does not wait for any; when you have photographs of
+ real young men who have agreed to be on it, there are three places they go.
+ The materials for coaches and schools are not written. And nobody has told us
+ who is behind Ruin the Party, as you want it said, so the site does not say.</p>
+</div></section>
+
+<section id="sell" aria-labelledby="h-sell"><div class="wrap">
+ <div class="k">Section four</div>
+ <div class="rule"></div>
+ <h2 id="h-sell">The part that can take money.</h2>
+
+ <h3>The store runs on your own Stripe</h3>
+ <p>The buy button on every product goes to a checkout page hosted by Stripe, on your Stripe account, not ours. Prices resolve on the server from one file, so a tampered order cannot invent one. Sizes are real choices. The money settles to the bank account you name, on Stripe's schedule, at Stripe's published rate, and that rate is the only cost on the store that is not in this letter.</p>
+ <p>It is off today, behind a single setting, because a buy button put in front of a visitor promises a store nobody has stocked. <strong>Nothing can be charged on the site as it stands.</strong> Press Buy and it tells you so, in those words.</p>
+
+ <div class="demo demo--left">
+  <div class="k">What we would rather scope with you than guess at</div>
+  <h3>Who prints it, and who ships it.</h3>
+  <p><strong>Two ways this works.</strong> You hold stock and ship it yourself, in which case the site tells you an order came in and you put it in a box. Or a print-on-demand service makes and ships each piece and takes its cut, in which case the site hands the order across and you never touch a box. The site is built for either; the price of the build does not move; the agreement names which one.</p>
+  <p><strong>What decides it</strong> is how many you expect to sell in the first year, and we have no idea. Neither do you yet. That is the first conversation to have, and it is a short one.</p>
+  <p><strong>Prices.</strong> The five on the demo are placeholders so the shop reads as a shop. Yours go in one file, and the page stops calling them samples the day you set them.</p>
+</div>
+
+ <p class="verdict"><strong>What it costs to run.</strong> Stripe's rate is Stripe's, published on their site and charged to your account; we do not touch it and we do not mark it up. On top of that there is <strong>nothing</strong>: no percentage of the ticket, no per-order fee, no platform subscription. A store that sells forty shirts a year should not cost more to run than a store that sells four thousand, and on this one it does not.</p>
+
+ <p class="note">The brief says the merchandise should feel like something young
+ men actually want to wear. We agree, and we are a website studio, not a
+ clothing label. The products on the demo are our best reading of your boards.
+ The shirts themselves, the blanks, the print method and the patch on the hat
+ are decisions you will make with whoever prints them, and the site will show
+ whatever you decide.</p>
+</div></section>
+
+<section id="cost" aria-labelledby="h-cost"><div class="wrap">
+ <div class="k">Section five</div>
+ <div class="rule"></div>
+ <h2 id="h-cost">What it costs.</h2>
+
+ <p>This is a Custom Order, because it is a store and a nine-page site for a movement rather than a flavor off the menu. The number is a number, not a starting point.</p>
+ <p class="anchor">A published 2026 range for a nonprofit website from a full-service agency runs <s>$8,000</s> to $25,000. This is the bottom of that range, and then some.<br><a class="verify loose" href="https://vincecomfort.com/cost-of-a-nonprofit-website-in-2026/" target="_blank" rel="noopener">The published range &#8599;</a></p>
+
+ <div class="pricebox">
+  <div><div class="n">$4,500</div><div class="l">The build, once. Everything in sections three and four, finished and launched on ruintheparty.com, with the store switched on against your Stripe. Half to start, half at launch, and you own all of it from the day the balance clears.</div></div>
+  <div><div class="n">$150<span class="per">/mo</span></div><div class="l">Hosting, SSL, security updates, backups, domain renewal where we hold it, the Stripe webhook that tells you an order landed, and edits. A new product, a new scenario, a changed number on the resources page? Send a text.</div></div>
+ </div>
+
+ <p>That is <strong>$6,300</strong> across the first twelve months, then <strong>$1,800 a year</strong>, and <strong>$11,700</strong> over five years. The store is inside it. So are both forms, the resources page, the search and share setup, and the nine pages. There is no platform fee and no plugin bill underneath it.</p>
+
+ <ul class="proof">
+  <li><b>Month to month after launch.</b> Thirty days' notice, no early termination penalty, and you leave with the whole site working.</li>
+  <li><b>Two hours of edits a month are in the monthly.</b> A new scenario on Be the Guy is an edit. A new product is an edit. Re-checking every number on the resources page when one changes is an edit, and we will do that one without being asked.</li>
+  <li><b>Nothing is ever added to your bill without you hearing the price first.</b> That promise lives in the agreement, not only in this letter.</li>
+ </ul>
+</div></section>
+
+<section id="next" aria-labelledby="h-next"><div class="wrap">
+ <div class="k">Section six</div>
+ <div class="rule"></div>
+ <h2 id="h-next">What happens next.</h2>
+
+ <div class="step"><div class="no">1</div><div><h4>Launch</h4><p>Everything from here lives on one page, yours: <a href="https://www.glazedweb.com/build/ruintheparty" target="_blank" rel="noopener">glazedweb.com/build/ruintheparty</a>. Where things stand, the short list of what only you can supply, what happens in what order, and where your stuff is. We keep it current as things land, so if a circle is still open there, we have not received it yet. Nothing to schedule and nothing to remember; the page remembers.</p></div></div>
+
+ <div class="step"><div class="no">2</div><div><h4>Accept the agreement</h4><p>It is already written and it is waiting at <a href="https://www.glazedweb.com/agreement/ruintheparty" target="_blank" rel="noopener">glazedweb.com/agreement/ruintheparty</a>. Two documents: the plain-English terms every client gets, and an Exhibit A carrying your scope and your numbers. You type your name and both of us get the signed record by email. The build fee is paid on the same page by card, in full or half now and half at launch, or we invoice it; the monthly begins once the site is live on ruintheparty.com, and not before.</p></div></div>
+
+ <h3>What we would need from you</h3>
+ <p>Nine things, none of them long, and every one of them is on your build page with the reason it is needed, in the order they block other work. Your name and the registered name of whatever Ruin the Party is come first, because the agreement waits on them and nothing else does. The list lives there and not here on purpose: one copy, ticked as it arrives, so it can never say two different things.</p>
+
+ <div class="demo">
+  <div class="k">The one thing to do</div>
+  <h3>Everything from here is on one page.</h3>
+  <p>Where things stand, what we need from you, what happens in what order, and where your stuff is.</p>
+  <a class="cta" href="https://www.glazedweb.com/build/ruintheparty" target="_blank" rel="noopener">Launch &#8599;</a>
+ </div>
+
+ <p class="note">Written by Kevin Hershock, who lives in Marshall, Michigan.
+ Glazed Web builds and looks after websites by hand, one at a time.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+ <div>
+  <span class="bw">glazed<span>web</span></span> Kevin Hershock &middot; Marshall, Michigan<br>
+  <a href="https://www.glazedweb.com" target="_blank" rel="noopener">glazedweb.com</a> &middot; <a href="mailto:kevin@glazedweb.com">kevin@glazedweb.com</a>
+  <div class="conf">Prepared for Ruin the Party &middot; October 2026 &middot; Valid 60 days</div>
+ </div>
+ <svg class="gmark" viewBox="0 0 200 250" overflow="visible" aria-hidden="true"><g class="goo"><g fill="url(#gwDark)"><ellipse cx="100" cy="110" rx="38" ry="15"></ellipse><path class="wobB" d="M 86 100 C 86 116, 87 130, 88 142 C 88 148, 91 149, 92 142 C 93 130, 92 114, 92 100 Z"></path><path d="M 114 100 C 114 112, 115 124, 116 134 C 116 140, 119 141, 120 134 C 121 124, 120 110, 120 100 Z"></path></g><g fill="url(#gwLight)"><path class="wob1" d="M 64 100 C 63 120, 65 138, 66 152 C 66 164, 68 172, 74 173 C 80 172, 83 165, 82 154 C 84 136, 85 116, 86 100 Z"></path><path class="wob2" d="M 92 100 C 91 128, 93 152, 94 172 C 94 188, 97 199, 104 200 C 111 199, 114 190, 112 174 C 113 150, 114 124, 114 100 Z"></path><path class="wob3" d="M 120 100 C 119 116, 120 130, 121 142 C 121 152, 123 159, 129 160 C 134 159, 137 153, 135 144 C 136 130, 137 114, 137 100 Z"></path></g></g><path class="string" d="M 104 199 L 104 209" stroke="#BFE07A" stroke-width="2.5" stroke-linecap="round" fill="none"></path><g class="droplet"><circle cx="104" cy="213" r="7" fill="#BFE07A"></circle><circle cx="102" cy="211" r="2" fill="#F1F8DC" opacity="0.9"></circle></g><circle class="droplet2" cx="74" cy="186" r="4.5" fill="#BFE07A"></circle><circle cx="100" cy="70" r="52" fill="url(#gwPink)"></circle><path d="M 56 98 A 52 52 0 0 0 144 98 C 142 94, 138 92, 134 94 C 130 97, 129 102, 125 104 C 119 106, 116 98, 110 96 C 104 94, 103 102, 98 105 C 93 107, 90 100, 84 97 C 78 95, 76 100, 71 102 C 66 103, 62 100, 56 98 Z" fill="url(#gwCreep)"></path><path d="M 68 106 A 42 42 0 0 0 84 116" fill="none" stroke="#F1F8DC" stroke-width="4" stroke-linecap="round" opacity="0.85"></path><path d="M 97 144 Q 103 151 109 144" fill="none" stroke="#55974A" stroke-width="4" stroke-linecap="round"></path><g stroke="#F1F8DC" fill="none" stroke-linecap="round"><path d="M 97 128 C 96 148, 97 166, 100 182" stroke-width="4.5" opacity="0.85"></path><path d="M 69 118 C 68 132, 70 146, 71 156" stroke-width="3.5" opacity="0.8"></path><path d="M 124 114 C 123 124, 125 138, 126 148" stroke-width="3.5" opacity="0.8"></path></g><circle cx="100" cy="192" r="2.5" fill="#F1F8DC" opacity="0.9"></circle><circle cx="100" cy="72" r="13" fill="#201712"></circle><circle cx="100" cy="72" r="13" fill="none" stroke="#C22F6B" stroke-width="3" opacity="0.3"></circle><path d="M 62 46 A 44 44 0 0 1 82 28" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"></path><circle cx="92" cy="26" r="3.5" fill="#FFFFFF"></circle></svg>
+</div></footer>
+</body></html>
