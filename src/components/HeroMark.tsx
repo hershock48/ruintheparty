@@ -27,8 +27,12 @@ import { site } from "@/data/site";
  *
  * ORDER AND DIRECTION, the way a hand draws a hash: left vertical top to
  * bottom, right vertical top to bottom, upper bar left to right, lower
- * bar left to right. Centerlines were read off a grid over the art and
- * checked against it (the coordinates are in hash.png's 567x766 space).
+ * bar left to right. The paths are TRACED from the pixels by
+ * tools/centerlines.py (the center of each row's or column's ink,
+ * smoothed, one point every 20px, in hash.png's 567x766 space), and the
+ * script checks that every ink pixel of a layer lies inside its mask
+ * width, so the write-on follows the brush exactly and leaves nothing
+ * unrevealed. Rerun it if the art or the layers change.
  *
  * data-ready is set once all four layers have been fetched (see the
  * effect), and the write-on keys on it (globals.css); before that the mask
@@ -38,10 +42,10 @@ import { site } from "@/data/site";
  * come from useId so two instances could never share one.
  */
 const STROKES = [
-  { layer: "/brand/hash-s1.webp", d: "M268 95 L118 735", width: 150 },
-  { layer: "/brand/hash-s2.webp", d: "M432 12 L262 700", width: 140 },
-  { layer: "/brand/hash-s3.webp", d: "M25 325 L485 248", width: 140 },
-  { layer: "/brand/hash-s4.webp", d: "M15 478 L560 385", width: 150 },
+  { layer: "/brand/hash-s1.webp", d: "M289 106 L262 121 L257 141 L261 161 L250 181 L244 201 L239 221 L234 241 L228 261 L226 281 L218 301 L216 321 L205 341 L187 361 L193 381 L189 401 L188 421 L180 441 L181 461 L177 481 L165 501 L162 521 L161 541 L155 561 L148 581 L144 601 L140 621 L134 641 L129 661 L125 681 L128 698 L127 700", width: 150 },
+  { layer: "/brand/hash-s2.webp", d: "M479 18 L471 34 L449 54 L438 74 L432 94 L413 114 L402 134 L405 154 L385 174 L379 194 L373 214 L367 234 L373 254 L364 274 L363 294 L349 314 L344 334 L339 354 L334 374 L338 394 L340 414 L328 434 L320 454 L306 474 L298 494 L293 514 L293 534 L269 584 L264 637 L260 658 L256 677", width: 140 },
+  { layer: "/brand/hash-s3.webp", d: "M50 362 L66 356 L86 351 L106 337 L126 334 L146 330 L209 311 L287 305 L307 288 L417 273 L442 269 L460 269 L462 268", width: 140 },
+  { layer: "/brand/hash-s4.webp", d: "M26 513 L41 504 L61 496 L81 491 L101 485 L121 467 L237 457 L262 443 L333 427 L398 411 L418 405 L438 409 L460 417 L480 404 L500 401 L514 395", width: 150 },
 ];
 
 export default function HeroMark({ className = "", priority = false }: { className?: string; priority?: boolean }) {
