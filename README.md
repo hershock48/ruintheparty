@@ -132,6 +132,17 @@ yet: order notification is the Stripe dashboard email until one is built
   trap that putting it underneath walked into.
 - **The mark is first on phones.** Streetwear leads with the mark. It costs
   about a quarter second of LCP on the throttled profile (audit state).
+- **The mark is painted in, not faded in.** Kevin, 2026-10-01, on the
+  first version (a 14px rise and a bouncy pop in under a second): "rushed
+  and cheap." Now the hash is stroked in, then RUIN, THE and PARTY are
+  wiped in along the mark's own lean, a beat apart, about 1.6s to the last
+  stroke, nothing overshooting. Four layers of the client's artwork
+  (`hash.png`, three bands of `words.png`) under clip-paths; the clips open
+  only once both images have loaded (`HeroMark.tsx` sets `data-ready`), so
+  a slow connection never runs the wipes over nothing. The band lines (41%
+  and 52%) are the valleys in the ink profile of `words.png`; change them
+  in `Mark.tsx` and `globals.css` together. Frames of the entrance were
+  captured and looked at; reduced motion shows the finished mark.
 - **The shop photos are crops from the client's boards.** Kevin, 2026-10-01:
   use his photos so the store looks legit. The two boards he sent are in
   `public/brand/`, the five square crops are cut by `tools/crops.sh` into
@@ -173,7 +184,10 @@ Against the production build, with the glazedweb harnesses:
 - The hashtag ticker track measures **2,843px** at 1440 (2,409 at 390),
   under the 4,096px mobile compositing budget in glaze.md. Six copies.
 - `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440
-  during the entrance; reduced motion animates nothing.
+  during the entrance; reduced motion animates nothing. The first
+  painted-in version failed this: the reduced-motion overrides had lower
+  specificity than the `[data-ready]` rules that start the animations, so
+  the mark animated anyway. The overrides now name the same selectors.
 - Plate verified: `.gw-plate` computed cream, drip inherits the footer black.
 - Both API routes exercised in every state (above).
 - `npm audit`: **0 vulnerabilities**, after moving to Next 16.3.8 (16.3.0

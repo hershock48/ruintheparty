@@ -321,41 +321,78 @@ html.js [data-reveal][data-shown] .stamp {
 }
 
 /*
-  THE MARK ARRIVES. The hero logo is two pieces, the hash and the words, and
-  they land on schedules 180ms apart: the words first, then the hash slams
-  in from slightly large. Two things arriving together read as a slide
-  transition; two arriving apart read as somebody painting (glaze.md on
-  desynchronisation). Transform and opacity only. The resting state is the
-  finished mark, so under reduced motion or without JS the frame is simply
-  the logo.
+  THE MARK IS PAINTED IN. The hero logo is four layers of the client's own
+  artwork (Mark.tsx): the hash, then RUIN, THE and PARTY as three bands of
+  the words. Each is revealed by a clip-path that opens along the mark's
+  lean (the wipe edge is slanted about ten percent, the angle the letters
+  sit at), on its own schedule, a beat apart, the way a hand writes it.
+  The first version rose 14px and popped the hash in with an overshoot in
+  under a second; Kevin: "rushed and cheap." This is slower, about 1.6s to
+  the last stroke, and nothing overshoots: a brush stroke is quick and
+  even, so the curve is a gentle in-out with no bounce.
+
+  clip-path repaints the clipped element each frame rather than
+  compositing it, which is the trade for an edge that follows the art.
+  It is four small elements, once, on load. The resting state is the
+  finished mark, so without JS or under reduced motion the hero simply
+  shows the logo. The band bounds (41%, 52%) are where the ink profile
+  of words.png has its valleys; change them in Mark.tsx and here together.
 */
-html.js .rtp-words {
-  animation: rtp-words 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+/* Closed until the artwork has loaded (HeroMark sets data-ready), then the
+   four clips open on their schedule. The hash first; the words start as
+   the hash finishes; THE is short because it is small. */
+html.js .rtp-mark:not([data-ready]) .rtp-hash,
+html.js .rtp-mark:not([data-ready]) .rtp-w1,
+html.js .rtp-mark:not([data-ready]) .rtp-w2,
+html.js .rtp-mark:not([data-ready]) .rtp-w3 {
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
 }
-html.js .rtp-hash {
-  animation: rtp-hash 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.28s both;
+html.js .rtp-mark[data-ready] .rtp-hash {
+  animation: rtp-hash 0.5s cubic-bezier(0.3, 0, 0.5, 1) 0.1s both;
 }
-/*
-  The words arrive by transform ONLY, never from opacity 0. On phones the
-  mark is the first thing on the screen and therefore the Largest
-  Contentful Paint candidate, and Chrome does not count an element as
-  painted while its opacity is 0: a 0.7s fade pushed LCP from 2.4s to 2.9s
-  on the throttled profile. A rise with no fade keeps the two-piece
-  arrival and lets the browser count the mark the moment it paints.
-*/
-@keyframes rtp-words {
-  from { transform: translate3d(0, 14px, 0); }
-  to { transform: none; }
+html.js .rtp-mark[data-ready] .rtp-w1 {
+  animation: rtp-w1 0.45s cubic-bezier(0.3, 0, 0.5, 1) 0.5s both;
 }
+html.js .rtp-mark[data-ready] .rtp-w2 {
+  animation: rtp-w2 0.3s cubic-bezier(0.3, 0, 0.5, 1) 0.85s both;
+}
+html.js .rtp-mark[data-ready] .rtp-w3 {
+  animation: rtp-w3 0.5s cubic-bezier(0.3, 0, 0.5, 1) 1.05s both;
+}
+/* The underline under the headline draws once the mark is complete. It
+   is keyed on the same readiness so it never runs ahead of the mark. */
+html.js .rtp-stroke {
+  transform: scaleX(0);
+}
+html.js body:has(.rtp-mark[data-ready]) .rtp-stroke {
+  animation: rtp-stroke 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 1.6s both;
+}
+/* The hash: a diagonal sweep from its top left corner. */
 @keyframes rtp-hash {
-  from { opacity: 0; transform: scale(1.18) rotate(-4deg); }
-  to { opacity: 1; transform: none; }
+  from { clip-path: polygon(0 0, 0 0, 0 0, 0 0); }
+  to { clip-path: polygon(0 0, 260% 0, 260% 0, 0 260%); }
+}
+/* Each word band: a slanted edge moving left to right inside its band. The
+   polygons keep four points so the browser can interpolate them. */
+.rtp-w1 { clip-path: polygon(0 0, 100% 0, 100% 41%, 0 41%); }
+.rtp-w2 { clip-path: polygon(0 41%, 100% 41%, 100% 52%, 0 52%); }
+.rtp-w3 { clip-path: polygon(0 52%, 100% 52%, 100% 100%, 0 100%); }
+@keyframes rtp-w1 {
+  from { clip-path: polygon(0 0, 2% 0, -10% 41%, 0 41%); }
+  to { clip-path: polygon(0 0, 125% 0, 112% 41%, 0 41%); }
+}
+@keyframes rtp-w2 {
+  from { clip-path: polygon(0 41%, 2% 41%, -6% 52%, 0 52%); }
+  to { clip-path: polygon(0 41%, 120% 41%, 112% 52%, 0 52%); }
+}
+@keyframes rtp-w3 {
+  from { clip-path: polygon(0 52%, 2% 52%, -12% 100%, 0 100%); }
+  to { clip-path: polygon(0 52%, 128% 52%, 112% 100%, 0 100%); }
 }
 
-/* The stroke under the hero line draws left to right once the mark has landed. */
+/* The stroke under the hero line draws left to right once the mark has landed (keyed above). */
 html.js .rtp-stroke {
   transform-origin: 0 50%;
-  animation: rtp-stroke 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.75s both;
 }
 @keyframes rtp-stroke {
   from { transform: scaleX(0); }
@@ -373,10 +410,21 @@ html.js .rtp-stroke {
     transform: rotate(-1.5deg);
     transition: none;
   }
-  html.js .rtp-words,
-  html.js .rtp-hash,
-  html.js .rtp-stroke {
+  html.js .rtp-mark:not([data-ready]) .rtp-hash,
+  html.js .rtp-mark:not([data-ready]) .rtp-w1,
+  html.js .rtp-mark:not([data-ready]) .rtp-w2,
+  html.js .rtp-mark:not([data-ready]) .rtp-w3,
+  html.js .rtp-mark[data-ready] .rtp-hash,
+  html.js .rtp-mark[data-ready] .rtp-w1,
+  html.js .rtp-mark[data-ready] .rtp-w2,
+  html.js .rtp-mark[data-ready] .rtp-w3 {
     animation: none;
+    clip-path: none;
+  }
+  html.js .rtp-stroke,
+  html.js body:has(.rtp-mark[data-ready]) .rtp-stroke {
+    animation: none;
+    transform: none;
   }
   .btn-teal:hover {
     transform: none;
