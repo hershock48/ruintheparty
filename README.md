@@ -132,17 +132,19 @@ yet: order notification is the Stripe dashboard email until one is built
   trap that putting it underneath walked into.
 - **The mark is first on phones.** Streetwear leads with the mark. It costs
   about a quarter second of LCP on the throttled profile (audit state).
-- **The mark is painted in, not faded in.** Kevin, 2026-10-01, on the
-  first version (a 14px rise and a bouncy pop in under a second): "rushed
-  and cheap." Now the hash is stroked in, then RUIN, THE and PARTY are
-  wiped in along the mark's own lean, a beat apart, about 1.6s to the last
-  stroke, nothing overshooting. Four layers of the client's artwork
-  (`hash.png`, three bands of `words.png`) under clip-paths; the clips open
-  only once both images have loaded (`HeroMark.tsx` sets `data-ready`), so
-  a slow connection never runs the wipes over nothing. The band lines (41%
-  and 52%) are the valleys in the ink profile of `words.png`; change them
-  in `Mark.tsx` and `globals.css` together. Frames of the entrance were
-  captured and looked at; reduced motion shows the finished mark.
+- **Only the hash is painted in; the words are static.** Kevin, 2026-10-01,
+  on the first two versions (a rise and a bouncy pop; then every word wiped
+  in behind a hard edge): "rushed and cheap", then "a bad transition on
+  PowerPoint." The words now sit there from the first frame and the hash is
+  painted in four strokes in the order it was drawn, each the hash artwork
+  clipped to a quad around that stroke and revealed by a soft-edged mask
+  sweeping along the stroke's direction (`HeroMark.tsx`, `.rtp-s1` to
+  `.rtp-s4` in `globals.css`, quads in `hash.png`'s 567x766 space). The
+  fourth layer is the whole hash, swept last, so stray spatter arrives with
+  the final stroke. The sweeps wait for `hash.png` to load (`data-ready`).
+  Frames captured and looked at; reduced motion and no-JS show the finished
+  mark. The words being static from the first paint is also why home LCP
+  came back under the line.
 - **The shop photos are crops from the client's boards.** Kevin, 2026-10-01:
   use his photos so the store looks legit. The two boards he sent are in
   `public/brand/`, the five square crops are cut by `tools/crops.sh` into
@@ -171,11 +173,10 @@ Against the production build, with the glazedweb harnesses:
 - `audit.mjs`, 13 routes at 390 and 1440: axe violations **0**, horizontal
   overflow **none**, console errors **none**, 4xx/5xx **none**.
 - `width-check.mjs`, 10 routes at 320 and 768: **0** violations, no overflow.
-- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` **2,696 to
-  2,748ms, over the 2,500 line** since the mark became the first thing on
-  the phone screen (October 1 home pass): the LCP element is now the mark
-  image rather than the headline text, and it was 2,424ms with the text
-  first. Kevin's call whether brand-first is worth the quarter second.
+- `perf-check.mjs` (1.6Mbps, 150ms, 4x CPU, 390x844): `/` **2,200ms**
+  with the words static from the first paint (it was 2,696 to 2,748 while
+  the whole mark animated in and sat first on the phone screen; the LCP
+  element is the words image).
   `/be-the-guy` 2,500ms, `/know-the-line` 2,472ms, `/shop` **2,956ms** and
   `/shop/the-tee` **2,652ms, both over the line** since the tiles became
   photographs (the first tile is preloaded; the 750-wide webp is 21KB, so
@@ -222,7 +223,7 @@ letter before Kevin sends it (backlog C01).
       everyone in it
 - [ ] Product photography to replace the five board crops in `public/shop/`
 - [ ] `/` and `/shop` LCP under 2,500ms on the throttled profile, or record
-      why not (home: the mark is first on phones by choice)
+      why not (home is under it; the shop pages are not)
 - [ ] LocalBusiness structured data: not applicable, Organization is used
 - [ ] Studio credit: the client told it is there, and the wording confirmed
       with Kevin ("Baked by")
