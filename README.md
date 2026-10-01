@@ -141,7 +141,8 @@ yet: order notification is the Stripe dashboard email until one is built
   sweeping along the stroke's direction (`HeroMark.tsx`, `.rtp-s1` to
   `.rtp-s4` in `globals.css`, quads in `hash.png`'s 567x766 space). The
   fourth layer is the whole hash, swept last, so stray spatter arrives with
-  the final stroke. The sweeps wait for `hash.png` to load (`data-ready`).
+  the final stroke, about 3.3s to the end (Kevin asked for double the
+  first cut's 1.6s). The sweeps wait for `hash.png` to load (`data-ready`).
   Frames captured and looked at; reduced motion and no-JS show the finished
   mark. The words being static from the first paint is also why home LCP
   came back under the line.
