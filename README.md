@@ -121,6 +121,14 @@ yet: order notification is the Stripe dashboard email until one is built
 - **No photography, and the design does not wait for any.** There is none
   on file. When real photographs of real young men who agreed to be on the
   site exist, they go behind the home hero, on What it means, and on Teams.
+- **Timing on the home page was walked with frames, not eyeballed.** The
+  headline underline draws as the hash's first stroke lands (0.7s), not
+  after the last (3.35s), where it read as a mistake. The refrain stamp
+  waits for its line's 0.6s reveal to finish and lands in the beat after
+  (0.65s); at 0.26s it landed mid-fade and the two smeared together. Both
+  were captured frame by frame (`tools/` has no copy of the capture
+  scripts; they live in the session scratchpad and are two short
+  Playwright loops).
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.
@@ -145,6 +153,9 @@ yet: order notification is the Stripe dashboard email until one is built
   layers, `public/brand/hash-s1.webp` to `hash-s4.webp`, which
   `tools/strokes.py` cuts from `hash.png` by nearest centerline (crossings
   to the verticals, painted first); they recombine to the original exactly.
+  The mask paths are TRACED from the pixels by `tools/centerlines.py`
+  (the center of each row's or column's ink, smoothed, a point every
+  20px), and the script checks every ink pixel lies inside its mask width.
   Order: left vertical, right vertical, upper bar, lower bar, about 3.3s.
   The write-on waits for the four layers to be fetched (`data-ready`, set
   from an effect: React does not deliver load events for SVG `<image>`,
