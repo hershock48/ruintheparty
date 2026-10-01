@@ -1,7 +1,11 @@
 /**
  * The merchandise. Prices here are PLACEHOLDER values so the shop renders as
  * a shop; the client sets real prices and the shop page says out loud that
- * these are sample prices until then. Prices resolve SERVER-SIDE from this
+ * these are sample prices until then. The five products are the five on
+ * the client's own boards, and each tile photo is a crop from those boards
+ * (public/shop/, cut by tools/crops.sh), to be replaced by product
+ * photography when the goods exist. Kevin, 2026-10-01: use his photos so
+ * the store looks legit. Prices resolve SERVER-SIDE from this
  * file in /api/checkout; a tampered form cannot invent one.
  *
  * Amounts are integer cents. Floating-point money is how a $28 shirt becomes
@@ -18,7 +22,11 @@ export type Product = {
   print: string;
   /** The colorway, for the card. */
   color: "black" | "teal" | "white";
-  kind: "tee" | "hoodie" | "hat" | "band" | "sticker";
+  kind: "tee" | "hoodie" | "hat" | "band" | "bottle";
+  /** The tile photo, a crop from the client's own boards (public/shop/). */
+  photo: string;
+  /** What the crop shows, for the alt text. */
+  photoAlt: string;
 };
 
 export const products: Product[] = [
@@ -31,6 +39,8 @@ export const products: Product[] = [
     print: "#RuinTheParty on the front, nothing on the back.",
     color: "black",
     kind: "tee",
+    photo: "/shop/the-tee.jpg",
+    photoAlt: "A black tee with the brush mark across the chest",
   },
   {
     slug: "the-hoodie",
@@ -41,16 +51,20 @@ export const products: Product[] = [
     print: "Speak up. Step in. Protect. Be a better man. Ruin the party.",
     color: "black",
     kind: "hoodie",
+    photo: "/shop/the-hoodie.jpg",
+    photoAlt: "The back of a gray hoodie with the four lines printed down it",
   },
   {
     slug: "the-hat",
     name: "The hat",
-    line: "Trucker. Black mesh. Patch on the front.",
+    line: "Trucker. Black mesh. Stitched patch on the front.",
     priceCents: 3200,
     sizes: ["One size"],
-    print: "The #R mark on a stitched patch.",
+    print: "The boxed RUIN THE PARTY mark on a stitched patch.",
     color: "black",
     kind: "hat",
+    photo: "/shop/the-hat.jpg",
+    photoAlt: "A black trucker cap with the boxed Ruin the Party patch, on a rock",
   },
   {
     slug: "the-wristband",
@@ -61,16 +75,20 @@ export const products: Product[] = [
     print: "#RUINTHEPARTY on the outside. GOOD MEN DON'T STAY SILENT. on the inside.",
     color: "black",
     kind: "band",
+    photo: "/shop/the-wristband.jpg",
+    photoAlt: "Two black silicone wristbands, one reading #RuinTheParty and one reading Good men don't stay silent",
   },
   {
-    slug: "sticker-pack",
-    name: "Sticker pack",
-    line: "Five stickers. Water bottles, laptops, helmets, lockers.",
-    priceCents: 800,
-    sizes: ["Pack of 5"],
-    print: "The mark, the hashtag, the #R, and two of the lines.",
-    color: "teal",
-    kind: "sticker",
+    slug: "the-bottle",
+    name: "The bottle",
+    line: "Matte black steel. The mark on one side, the #R on the other.",
+    priceCents: 2400,
+    sizes: ["32 oz"],
+    print: "#RuinTheParty on one side, the #R mark on the other.",
+    color: "black",
+    kind: "bottle",
+    photo: "/shop/the-bottle.jpg",
+    photoAlt: "A matte black steel bottle with the brush mark on it",
   },
 ];
 
