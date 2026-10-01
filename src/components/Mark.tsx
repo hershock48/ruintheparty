@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site } from "@/data/site";
+import HeroMark from "@/components/HeroMark";
 
 /**
  * The client's brush mark, lifted from the file they sent, never redrawn.
@@ -7,10 +8,17 @@ import { site } from "@/data/site";
  * two flat inks, teal #00DFDF and white, on black) so it sits on any dark
  * ground; the source webp is kept beside it.
  *
- * `hero` splits it into the hash and the words so the two can arrive on
- * different schedules (globals.css, .rtp-hash and .rtp-words). The split is
- * two crops of the same image, so the resting frame is pixel-identical to
- * the one-piece mark.
+ * `hero` paints the mark in rather than fading it in (HeroMark.tsx): the
+ * hash is stroked first, then RUIN, THE and PARTY are each wiped in along
+ * the mark's own lean, a beat apart, the way a hand writes it. Four
+ * layers of the same artwork: hash.png (the teal hash alone) and three
+ * bands of words.png (the white words alone), each band a clip-path that
+ * opens in globals.css (.rtp-hash, .rtp-w1, .rtp-w2, .rtp-w3), once the
+ * images have loaded. The band edges come
+ * from a row profile of the ink: RUIN 0 to 41%, THE 41 to 52%, PARTY
+ * 52 to 100% of the mark's height. The resting frame is the complete
+ * mark, pixel for pixel, so without JS or under reduced motion the hero
+ * simply shows the logo.
  *
  * The phone `sizes` are the rendered pixel widths (the hero caps the mark
  * at 280px below md), not a viewport fraction: 90vw at 390 wide asked the
@@ -18,35 +26,16 @@ import { site } from "@/data/site";
  * Largest Contentful Paint element on phones.
  */
 export default function Mark({ className = "", hero = false, priority = false }: { className?: string; hero?: boolean; priority?: boolean }) {
-  if (!hero) {
-    return (
-      <Image
-        src="/brand/mark.png"
-        alt={`${site.hashtag}`}
-        width={1224}
-        height={1140}
-        priority={priority}
-        sizes="(min-width: 768px) 40vw, 90vw"
-        className={className}
-      />
-    );
-  }
+  if (hero) return <HeroMark className={className} priority={priority} />;
   return (
-    <span className={`relative block ${className}`} style={{ aspectRatio: "1224 / 1140" }} role="img" aria-label={site.hashtag}>
-      {/* The words, full image with the hash region left to the layer below.
-          Cropping with overflow and an inset rather than two files keeps one
-          source of truth for the artwork. */}
-      <span className="rtp-words absolute inset-0 block overflow-hidden">
-        <Image src="/brand/mark.png" alt="" width={1224} height={1140} priority={priority} sizes="(min-width: 768px) 40vw, 280px" className="h-full w-full" />
-      </span>
-      {/* The hash alone, on top, at its own position inside the mark's box:
-          it was cut from x=5 y=94 at 567x766 of the 1224x1140 source. */}
-      <span
-        className="rtp-hash absolute block"
-        style={{ left: `${(5 / 1224) * 100}%`, top: `${(94 / 1140) * 100}%`, width: `${(567 / 1224) * 100}%` }}
-      >
-        <Image src="/brand/hash.png" alt="" width={567} height={766} priority={priority} sizes="(min-width: 768px) 19vw, 130px" className="h-auto w-full" />
-      </span>
-    </span>
+    <Image
+      src="/brand/mark.png"
+      alt={`${site.hashtag}`}
+      width={1224}
+      height={1140}
+      priority={priority}
+      sizes="(min-width: 768px) 40vw, 280px"
+      className={className}
+    />
   );
 }
