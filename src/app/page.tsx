@@ -88,7 +88,7 @@ export default function HomePage() {
         many are in view (Kevin, 2026-10-02: "they're all going off, and
         super fast too").
       */}
-      <section className="grain overflow-hidden border-b border-chalk/10 bg-black">
+      <section className="grain refrain overflow-hidden border-b border-chalk/10 bg-black">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
           <ul className="space-y-10 md:space-y-14">
             {refrain.map((r, i) => (

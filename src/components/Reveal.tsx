@@ -66,7 +66,9 @@ export default function Reveal({
    * at least `gap` ms apart. For a list that is read line by line, like
    * the home page refrain: three lines fit in a desktop viewport and all
    * five in a phone's, so without this they all went off at once and the
-   * chant was over before the reader reached its second line.
+   * chant was over before the reader reached its second line. A
+   * `--reveal-gap` custom property on the element (or an ancestor) wins
+   * over the prop, so the beat can differ by viewport in CSS.
    */
   queue?: string;
   gap?: number;
@@ -89,8 +91,13 @@ export default function Reveal({
       ([entry]) => {
         if (!entry.isIntersecting) return;
         observer.disconnect();
-        if (queue) enqueue(queue, gap, { el, show: () => setShown(true) });
-        else setShown(true);
+        if (!queue) {
+          setShown(true);
+          return;
+        }
+        const css = getComputedStyle(el).getPropertyValue("--reveal-gap").trim();
+        const beat = css ? parseFloat(css) * (css.endsWith("ms") ? 1 : 1000) : gap;
+        enqueue(queue, beat, { el, show: () => setShown(true) });
       },
       { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
     );

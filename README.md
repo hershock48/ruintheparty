@@ -137,8 +137,10 @@ yet: order notification is the Stripe dashboard email until one is built
   document order at least 1.1s apart, each stamp landing 0.8s after its
   line over half a second. The browser does not run per-element
   IntersectionObserver callbacks in page order (it ran them 1, 3, 4, 2),
-  so the waiting list is sorted by position. Measured: lines shown at 0,
-  1.1, 2.2, 3.3s.
+  so the waiting list is sorted by position. The beat is `--reveal-gap`
+  on `.refrain` in globals.css: 1.1s on desktop, 1.45s below 768px
+  (Kevin: "slow it down a touch more on phone"). Measured: lines shown
+  at 0, 1.1, 2.2, 3.3s on desktop and 0, 1.45, 2.9, 4.4s on a phone.
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.
