@@ -37,6 +37,8 @@ import GlazedCredit from "@/components/GlazedCredit";
  *                    15.05; both pass AA. Taupe #8A7663 measures 4.07 and 4.03 — it clears AA
  *                    for large text only, so it is NOT safe for a 12px credit line. Do not
  *                    reach for it here.
+ *   --gw-drip        optional. The drip's fill when it should not be the footer colour. This
+ *                    site sets it to the mark's teal over a black plate under a black footer.
  *
  * THE CLIENT'S COPYRIGHT STAYS IN THE CLIENT'S BAR. Only the credit moves onto the plate.
  * Sweeping their copyright line onto Glazed's chocolate would make the studio's plate the last

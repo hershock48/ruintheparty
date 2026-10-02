@@ -4,9 +4,9 @@ Spec build of [ruintheparty.com](https://ruintheparty.com) by
 [Glazed Web](https://glazedweb.com), October 2026, from the client's own brief
 and the brush mark they sent. Next.js App Router, TypeScript, Tailwind 4, no
 CMS, no paid services. The client has not bought this; the footer carries the
-studio credit until they do ("Baked by", because a donut pun under a page
-about consent is the wrong reading of a joke with two readings; Kevin's call
-per build).
+studio credit until they do ("Double Dipped by", the studio default; the
+first cut used "Baked by" on a worry about the pun under this subject, and
+Kevin overruled it on 2026-10-02).
 
 The proposal lives at `public/pitch/ruintheparty/` and is served at the root
 of ruintheparty.glazedweb.com; the site is at `/demo` on that host. Delete the
@@ -292,8 +292,8 @@ letter before Kevin sends it (backlog C01).
 - [ ] `/` and `/shop` LCP under 2,500ms on the throttled profile, or record
       why not (home is under it; the shop pages are not)
 - [ ] LocalBusiness structured data: not applicable, Organization is used
-- [ ] Studio credit: the client told it is there, and the wording confirmed
-      with Kevin ("Baked by")
+- [x] Studio credit: the wording confirmed with Kevin ("Double Dipped by",
+      2026-10-02); the client still to be told it is there
 - [ ] `npm audit` reviewed, any remaining advisory named here with a reason
 - [ ] Point the canonical host at ruintheparty.com everywhere it appears; DNS
       cutover; HTTPS enforced

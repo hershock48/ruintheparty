@@ -593,6 +593,7 @@ html:not(.js) button[aria-controls="mobile-nav"] {
      --gw-above      the footer colour directly above (the drip's fill)
      --gw-plate      cream #FDF6EC under a dark footer, chocolate-2 #201712 under a light one
      --gw-plate-ink  cream on chocolate (16.41) or chocolate on cream (15.05); both AA
+     --gw-drip       optional; the drip's own colour when it is not the footer's (this site: teal)
    The inversion is not taste — a chocolate plate under a #191919 footer measures 1.00 and the
    drip vanishes. See the table in GlazedPlate for every footer in the account.
    ─────────────────────────────────────────────────────────────────────────── */
@@ -608,8 +609,9 @@ html:not(.js) button[aria-controls="mobile-nav"] {
   display: block;
   width: 100%;
   height: 46px;
-  /* The drip is the colour of the band above it, dripping down into the plate. */
-  color: var(--gw-above);
+  /* The drip is the colour of the band above it, dripping down into the
+     plate, unless a site sets --gw-drip to make the drip its own colour. */
+  color: var(--gw-drip, var(--gw-above));
   fill: currentColor;
   /* Kills the hairline of plate colour that otherwise shows along the top edge from
      subpixel rounding — the same -1px his DripDivider uses. */
@@ -633,15 +635,17 @@ html:not(.js) button[aria-controls="mobile-nav"] {
 
 /*
   THIS SITE'S PLATE, set AFTER the generic defaults above so it wins the
-  cascade (the first cut put these values before them, which is why the
-  plate once rendered on Glazed's defaults). Kevin, 2026-10-02: black plate,
-  teal drips. So the plate is the footer's black and the drip is the mark's
-  own teal, a glaze line between the two blacks rather than a step to cream.
-  --gw-above is the drip's fill, not the footer colour here, on purpose.
-  The credit is chalk on black, 16.83.
+  cascade. The first cut put these values BEFORE the defaults, so the
+  defaults won and the plate shipped chocolate with cream drips (the built
+  CSS confirmed it; Kevin saw brown). Kevin, 2026-10-02: black plate, teal
+  drips. --gw-above stays the footer's black, as the component's contract
+  says; --gw-drip is the one extra knob, the mark's own teal, so the edge
+  reads as a glaze line between the two blacks. The credit is chalk on
+  black, 16.83.
 */
 .gw-plate {
-  --gw-above: #00DFDF;
+  --gw-above: #000000;
+  --gw-drip: #00DFDF;
   --gw-plate: #000000;
   --gw-plate-ink: #E6E6E6;
 }
