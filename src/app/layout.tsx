@@ -76,8 +76,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         {/* Flags that JS is available before first paint. Reveal and the hero
             motion only engage on .js, so without it everything renders
-            visible and nothing ever flashes. */}
-        <script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js')` }} />
+            visible and nothing ever flashes. .loaded follows the window's
+            load event: decoration that must not compete with the first
+            paint for bandwidth waits for it (globals.css, .hero-ghost). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `var d=document.documentElement;d.classList.add('js');addEventListener('load',function(){d.classList.add('loaded')})`,
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

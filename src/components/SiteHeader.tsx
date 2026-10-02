@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { nav, site } from "@/data/site";
 
 /**
- * Sticky black bar. The mark in the corner is the client's own, at header
+ * Sticky black glass bar (globals.css, "THE GLASS BAR"). The mark in the corner is the client's own, at header
  * size. The home link's destination is resolved from the hostname at render
  * time on the client: on the pitch host "/" is the proposal, not the site,
  * so a logo linking to "/" would throw the client out of their own demo and
@@ -45,7 +45,7 @@ export default function SiteHeader() {
   }, []);
 
   return (
-    <header ref={ref} className="sticky top-0 z-40 border-b border-chalk/10 bg-black/95 backdrop-blur">
+    <header ref={ref} className="glass-bar sticky top-0 z-40 border-b border-chalk/10">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href={home} className="tap flex items-center" aria-label={`${site.name} home`}>
           <Image src="/brand/mark.png" alt="" width={1224} height={1140} sizes="48px" className="h-11 w-auto" priority />

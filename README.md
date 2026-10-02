@@ -170,6 +170,32 @@ yet: order notification is the Stripe dashboard email until one is built
   sticker pack became the bottle, which is on the boards; stickers are
   not). They are concept renders upscaled from about 300px, to be replaced
   by product photography when the goods exist.
+- **The header is black glass.** 70% black with an 18px backdrop blur, so
+  the teal band and the shop photographs show through it as they scroll
+  under. 70% is a contrast floor: over white the bar mixes to about
+  #4D4D4D, where chalk measures 6.8 and the teal current link 5.1. Without
+  `backdrop-filter` it falls back to the 95% black it was. It is the one
+  place glass is used; on a black page glass needs colour behind it, and
+  glass cards or buttons would read as a tech site, not a brush mark.
+- **A product tile grows into its page.** The tile photo and the product
+  page photo share a React `<ViewTransition name>` (Next 16 ships it with
+  no config), so the browser's View Transitions API carries the picture
+  from the grid into the page, 420ms, with a 2px blur mid-flight to hide
+  the resampling. No library, no JavaScript of ours. Browsers without the
+  API just navigate. The product photo is NOT inside a `Reveal` for this
+  reason: the morph would land on an invisible picture. Reduced motion
+  turns every view transition off (`globals.css`).
+- **Inner pages open on the home hero's ground.** `PageHero` carries the
+  same grain and the hash from the mark, faint and low on the right. Both
+  are held back until the window `load` event (`html.loaded`, set in
+  `layout.tsx`): as plain images they downloaded beside the fonts the
+  headline waits for and cost the inner pages about 350ms of LCP on the
+  throttled profile. `hash-ghost.webp` is `hash.png` at 420px (20KB vs
+  124KB) because at 9% opacity nobody sees the compression.
+- **The shop photos are the second cut** (`tools/crops.sh`). The first
+  carried half a wristband in the tee tile, the board's border across the
+  hoodie and scraps of other lettering beside the bottle. The files are
+  named `-2` because the image optimizer caches by URL.
 - **The hashtag ticker** is the streetwear version of a hashtag band: six
   copies on a track that moves by half its width and loops. The track
   width is a budget (globals.css, `.ticker`); measure it before adding a
@@ -200,6 +226,15 @@ Against the production build, with the glazedweb harnesses:
   photographs (the first tile is preloaded; the 750-wide webp is 21KB, so
   the rest is the throttled connection in front of fonts, JS and image).
   CLS 0 to 0.043 everywhere. JS **141KB** compressed, under the 150KB bar.
+- October 2 (glass header, photo morph, inner-page ground, second crop),
+  measured before and after on the same profile with a Playwright LCP
+  observer, three runs each, in this sandbox: `/` 1,040 to 1,045ms,
+  `/be-the-guy` 2,405 to 2,433, `/teams` 2,459 to 2,455, `/shop` 2,691 to
+  2,675, `/shop/the-tee` 2,525 to **713** (the tile the visitor came from
+  is already cached). Unchanged within noise everywhere else, which is the
+  point of deferring the ground to the load event: the first version of it
+  was +350ms. Absolute numbers differ from the October 1 harness because the
+  machines differ; compare within a row.
 - The hashtag ticker track measures **2,843px** at 1440 (2,409 at 390),
   under the 4,096px mobile compositing budget in glaze.md. Six copies.
 - `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440

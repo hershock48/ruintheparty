@@ -259,6 +259,18 @@ html.js [data-reveal][data-shown] {
   pointer-events: none;
 }
 /*
+  .grain-late: the same grain, held back until the window load event on
+  the inner pages' heroes (PageHero.tsx). There the headline is the LCP
+  element and waits on the fonts, and the 15KB tile downloading beside
+  them cost about 90ms on the throttled phone profile. The home hero keeps
+  the plain .grain: its LCP is the mark, and the grain is part of the
+  first look there.
+*/
+html.js:not(.loaded) .grain-late::before {
+  background-image: none;
+}
+
+/*
   NOT `.grain > * { position: relative }` to lift the content above the
   grain. That plain rule, sitting after Tailwind's utilities, beat the
   `absolute` utility on the hero's background stroke (glaze.md: plain CSS
@@ -398,6 +410,110 @@ html.js .rtp-stroke {
   }
   .btn-teal:hover {
     transform: none;
+  }
+}
+
+/*
+  THE GHOST HASH behind every inner page's heading (PageHero.tsx). The
+  image is only requested once <html> has .loaded (the window load event,
+  layout.tsx), so it never shares the first paint's bandwidth with the
+  fonts; it then fades up to its 9%. Without JS it is simply there.
+  hash-ghost.webp is hash.png at 420px, 20KB: at 9% opacity nobody sees
+  the compression, and the original is 124KB.
+*/
+.hero-ghost {
+  aspect-ratio: 567 / 766;
+  background: no-repeat center / contain;
+  opacity: 0.09;
+}
+html:not(.js) .hero-ghost,
+html.loaded .hero-ghost {
+  background-image: url("/brand/hash-ghost.webp");
+}
+html.loaded .hero-ghost {
+  animation: hero-ghost-in 1.2s ease-out both;
+}
+@keyframes hero-ghost-in {
+  from { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.loaded .hero-ghost {
+    animation: none;
+  }
+}
+
+/*
+  THE GLASS BAR. The header is black glass rather than a black slab: the
+  teal band, the photographs and the paper bands show through it, blurred
+  and a little more saturated, as they pass underneath. On a black page
+  this is the one place glass reads at all; it needs colour behind it.
+
+  70% black, not less, and that is a contrast floor, not taste. Over the
+  worst ground (white paper or the white of a photograph) the bar mixes to
+  about #4D4D4D: chalk nav type measures 6.8 on it and the teal current
+  link 5.1, both past AA at the nav's size. At 60% the teal link fell to
+  3.4. Without backdrop-filter there is no blur to hide what is behind, so
+  the bar goes back to the near-solid black it was.
+*/
+.glass-bar {
+  background-color: rgb(0 0 0 / 0.95);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .glass-bar {
+    background-color: rgb(0 0 0 / 0.7);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    /* A hairline of light along the top edge of the glass. */
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+}
+
+/*
+  THE PHOTO MORPH. A product tile and its product page share a
+  view-transition name (ProductCard.tsx, shop/[slug]/page.tsx), so React
+  hands the navigation to the browser's View Transitions API and the photo
+  travels from the tile into the page's picture. The browser does the
+  work; no animation library, no JavaScript of ours. A browser without the
+  API simply navigates, as before.
+
+  The pair carries the `morph` class. 420ms with an ease that leaves fast
+  and settles, and a 2px blur at the middle of the flight to hide the
+  resampling of a picture that is changing size. The rest of the page
+  cross-fades underneath on the browser's default (the root), shortened so
+  it finishes inside the photo's travel.
+*/
+::view-transition-group(.morph) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation: rtp-morph-blur 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@keyframes rtp-morph-blur {
+  40% { filter: blur(2px); }
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+}
+/* The sticky header is the same on both pages; keeping it out of the
+   cross-fade stops it from flickering on every navigation. */
+.glass-bar {
+  view-transition-name: site-header;
+}
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 
