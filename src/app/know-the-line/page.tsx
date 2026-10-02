@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = pageMeta({
@@ -23,22 +24,24 @@ export default function KnowTheLinePage() {
 
   return (
     <>
-      <section className="border-b border-chalk/10 bg-paper text-ink">
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-16 sm:px-6 md:pt-24">
-          <Reveal>
-            <p className="kicker text-teal-ink">Know the line</p>
-            <h1 className="display mt-3 text-[4rem] leading-[0.9] sm:text-8xl md:text-[8.5rem]">
-              &ldquo;No&rdquo; is a
-              <br />
-              complete
-              <br />
-              sentence.
-            </h1>
-            <span className="rule mt-6" aria-hidden="true" />
-            <p className="display mt-6 text-3xl text-teal-ink sm:text-4xl">It doesn&rsquo;t matter when no is said.</p>
-          </Reveal>
-        </div>
-      </section>
+      {/* The same black hero as every other inner page. The first cut opened
+          on a paper block like the home page's "No" panel, and this was the
+          one page that did not look like the rest of the site (Kevin,
+          2026-10-02). The line stays; the ground matches. */}
+      <PageHero
+        kicker="Know the line"
+        title={
+          <>
+            &ldquo;No&rdquo; is a
+            <br />
+            complete
+            <br />
+            sentence.
+          </>
+        }
+      >
+        <p className="display mt-6 text-3xl text-teal sm:text-4xl">It doesn&rsquo;t matter when no is said.</p>
+      </PageHero>
 
       <section className="bg-black">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
