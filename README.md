@@ -4,9 +4,9 @@ Spec build of [ruintheparty.com](https://ruintheparty.com) by
 [Glazed Web](https://glazedweb.com), October 2026, from the client's own brief
 and the brush mark they sent. Next.js App Router, TypeScript, Tailwind 4, no
 CMS, no paid services. The client has not bought this; the footer carries the
-studio credit until they do ("Baked by", because a donut pun under a page
-about consent is the wrong reading of a joke with two readings; Kevin's call
-per build).
+studio credit until they do ("Double Dipped by", the studio default; the
+first cut used "Baked by" on a worry about the pun under this subject, and
+Kevin overruled it on 2026-10-02).
 
 The proposal lives at `public/pitch/ruintheparty/` and is served at the root
 of ruintheparty.glazedweb.com; the site is at `/demo` on that host. Delete the
@@ -99,9 +99,11 @@ verified by hand on the production build (October 1, 2026):
 
 `/api/checkout` is a plain form POST (works with JS off) that creates a Stripe
 Checkout Session with raw fetch, no SDK, on the client's own
-`STRIPE_SECRET_KEY`, and 303s to it. Without the key it answers a real HTML
-page saying the store is not open yet (503); `SHOP_LIVE` in `site.ts` reads
-the same variable so the pages say so too. A bad slug is 404, a size the
+`STRIPE_SECRET_KEY`, and 303s to it. The store opens only when the key AND
+`SHOP_OPEN=1` are both set (`SHOP_LIVE` in `site.ts`), so adding the key
+cannot start charging the placeholder prices; until then it answers a real
+HTML page saying the store is not open yet (503), and the pages say so too.
+The shop pages are static, so changing either variable needs a redeploy. A bad slug is 404, a size the
 product does not have is 400. Success returns to `/shop/thanks`. No webhook
 yet: order notification is the Stripe dashboard email until one is built
 (checklist).
@@ -202,6 +204,32 @@ yet: order notification is the Stripe dashboard email until one is built
   sticker pack became the bottle, which is on the boards; stickers are
   not). They are concept renders upscaled from about 300px, to be replaced
   by product photography when the goods exist.
+- **The header is black glass.** 70% black with an 18px backdrop blur, so
+  the teal band and the shop photographs show through it as they scroll
+  under. 70% is a contrast floor: over white the bar mixes to about
+  #4D4D4D, where chalk measures 6.8 and the teal current link 5.1. Without
+  `backdrop-filter` it falls back to the 95% black it was. It is the one
+  place glass is used; on a black page glass needs colour behind it, and
+  glass cards or buttons would read as a tech site, not a brush mark.
+- **A product tile grows into its page.** The tile photo and the product
+  page photo share a React `<ViewTransition name>` (Next 16 ships it with
+  no config), so the browser's View Transitions API carries the picture
+  from the grid into the page, 420ms, with a 2px blur mid-flight to hide
+  the resampling. No library, no JavaScript of ours. Browsers without the
+  API just navigate. The product photo is NOT inside a `Reveal` for this
+  reason: the morph would land on an invisible picture. Reduced motion
+  turns every view transition off (`globals.css`).
+- **Inner pages open on the home hero's ground.** `PageHero` carries the
+  same grain and the hash from the mark, faint and low on the right. Both
+  are held back until the window `load` event (`html.loaded`, set in
+  `layout.tsx`): as plain images they downloaded beside the fonts the
+  headline waits for and cost the inner pages about 350ms of LCP on the
+  throttled profile. `hash-ghost.webp` is `hash.png` at 420px (20KB vs
+  124KB) because at 9% opacity nobody sees the compression.
+- **The shop photos are the second cut** (`tools/crops.sh`). The first
+  carried half a wristband in the tee tile, the board's border across the
+  hoodie and scraps of other lettering beside the bottle. The files are
+  named `-2` because the image optimizer caches by URL.
 - **The hashtag ticker** is the streetwear version of a hashtag band: six
   copies on a track that moves by half its width and loops. The track
   width is a budget (globals.css, `.ticker`); measure it before adding a
@@ -213,8 +241,10 @@ yet: order notification is the Stripe dashboard email until one is built
 - **Organization schema, not LocalBusiness.** It is a movement, not a shop
   with an address. The launch checklist's LocalBusiness line is marked not
   applicable below.
-- **The plate inverts to cream** under the black footer (`plate.mjs`:
-  chocolate measures 1.19, cream 19.57).
+- **The plate is black with teal drips** (Kevin, 2026-10-02). The drip
+  edge is filled with the mark's teal instead of the footer colour, so it
+  reads as a glaze line between the footer's black and the plate's black;
+  the credit is chalk on black (16.83).
 
 ## Audit state (October 1, 2026, this sandbox)
 
@@ -232,6 +262,25 @@ Against the production build, with the glazedweb harnesses:
   photographs (the first tile is preloaded; the 750-wide webp is 21KB, so
   the rest is the throttled connection in front of fonts, JS and image).
   CLS 0 to 0.043 everywhere. JS **141KB** compressed, under the 150KB bar.
+- October 2 (glass header, photo morph, inner-page ground, second crop),
+  measured before and after on the same profile with a Playwright LCP
+  observer, three runs each, in this sandbox: `/` 1,040 to 1,045ms,
+  `/be-the-guy` 2,405 to 2,433, `/teams` 2,459 to 2,455, `/shop` 2,691 to
+  2,675, `/shop/the-tee` 2,525 to **713** (the tile the visitor came from
+  is already cached). Unchanged within noise everywhere else, which is the
+  point of deferring the ground to the load event: the first version of it
+  was +350ms. Absolute numbers differ from the October 1 harness because the
+  machines differ; compare within a row.
+- October 2, final pass, 14 routes at 320, 390, 768 and 1440 with axe-core
+  4 (wcag2a, 2aa, 21aa, best-practice): **0 violations** after the pass
+  (before it: h3 under h1 on the shop grid, no h1 on `/thanks`,
+  `/shop/thanks` and the 404), console errors **none**, horizontal
+  overflow **none**. Checked by hand: the mobile menu opens, closes on
+  navigation and on Escape (focus returns to the button); the size and
+  "I am a" radios show a focus ring, not only the checked state; no-JS
+  shows every reveal and the menu; the contact form keeps the message on
+  screen and names the address when sending fails; reduced motion shows
+  the finished hash and no view transitions.
 - The hashtag ticker track measures **2,843px** at 1440 (2,409 at 390),
   under the 4,096px mobile compositing budget in glaze.md. Six copies.
 - `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440
@@ -253,7 +302,7 @@ letter before Kevin sends it (backlog C01).
 
 - [ ] Remove the noindex from BOTH `robots.ts` and `next.config.ts`
 - [ ] Delete `public/pitch/` and the rewrites in `next.config.ts`
-- [ ] `og:image` in `layout.tsx` is pinned to the ruintheparty.glazedweb.com
+- [ ] `og:image` in `src/lib/meta.ts` is pinned to the ruintheparty.glazedweb.com
       host so shares show a picture during the pitch; change it back to
       `/og.jpg` so it resolves against the real domain
 - [ ] Confirm the client's legal name and who is behind the movement, and put
@@ -264,6 +313,8 @@ letter before Kevin sends it (backlog C01).
 - [ ] Set `STRIPE_SECRET_KEY` (the client's own); place a test order with
       4242 4242 4242 4242; decide stock-and-ship versus print-on-demand
 - [ ] Real prices in `shop.ts`; remove the PLACEHOLDER comments
+- [ ] Only then set `SHOP_OPEN=1` in Vercel and redeploy; that is the switch
+      that opens the store
 - [ ] An order webhook or Stripe's own email notifications, confirmed arriving
 - [ ] Re-check every number and address on `/resources` in a browser (they were
       read by search listing from this sandbox, which cannot open the sites)
@@ -275,8 +326,8 @@ letter before Kevin sends it (backlog C01).
 - [ ] `/` and `/shop` LCP under 2,500ms on the throttled profile, or record
       why not (home is under it; the shop pages are not)
 - [ ] LocalBusiness structured data: not applicable, Organization is used
-- [ ] Studio credit: the client told it is there, and the wording confirmed
-      with Kevin ("Baked by")
+- [x] Studio credit: the wording confirmed with Kevin ("Double Dipped by",
+      2026-10-02); the client still to be told it is there
 - [ ] `npm audit` reviewed, any remaining advisory named here with a reason
 - [ ] Point the canonical host at ruintheparty.com everywhere it appears; DNS
       cutover; HTTPS enforced

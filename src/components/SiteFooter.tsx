@@ -72,11 +72,10 @@ export default function SiteFooter() {
       </div>
 
       {/* Glazed Web signs off below the client's footer, not inside it.
-          "Baked by" rather than the default "Double Dipped by": a donut pun
-          under a page about consent is the wrong reading of a joke that has
-          two readings (brand.md). Kevin's call per build; flagged in the
-          client file. */}
-      <GlazedPlate line="Baked by" />
+          The line is the studio default, "Double Dipped by". The first cut
+          used "Baked by" on the reading that a donut pun under a page about
+          consent lands wrong; Kevin, 2026-10-02: Double Dipped. */}
+      <GlazedPlate line="Double Dipped by" />
     </footer>
   );
 }

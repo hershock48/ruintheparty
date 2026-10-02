@@ -75,11 +75,18 @@ export async function POST(request: Request) {
       return htmlPage("That did not work", "The form could not be read. Please go back and try again.", 400, backHrefFrom(request));
     }
   } else {
+    let parsed: unknown;
     try {
-      b = (await request.json()) as Record<string, unknown>;
+      parsed = await request.json();
     } catch {
       return NextResponse.json({ error: "Invalid request." }, { status: 400 });
     }
+    // Valid JSON is not necessarily an object: null, a number or an array
+    // would otherwise crash the field reads below with a 500.
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    }
+    b = parsed as Record<string, unknown>;
   }
 
   /** One reply helper so the JSON and form paths cannot drift. */

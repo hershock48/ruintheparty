@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "For coaches, teams and schools",
   description:
     "A locker-room talk you can give this week, a season plan that already has evidence behind it, and a way to bring Ruin the Party to your program.",
-  alternates: { canonical: "/teams" },
-};
+  path: "/teams",
+});
 
 export default function TeamsPage() {
   return (

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Know the line: consent, in plain words",
   description:
     "No is a complete sentence. It does not matter when no is said. Consent, alcohol and the line, written for young men rather than for a training seminar.",
-  alternates: { canonical: "/know-the-line" },
-};
+  path: "/know-the-line",
+});
 
 /**
  * Consent. Short, direct, second person. The facts about consent and

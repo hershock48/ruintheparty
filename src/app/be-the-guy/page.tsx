@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import { scenarios } from "@/data/scenarios";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Be the guy: what to say and what to do",
   description:
     "Eight real situations young men end up in, with the words that work, the moves that work, and when to get a bouncer, a coach, an RA or the police involved.",
-  alternates: { canonical: "/be-the-guy" },
-};
+  path: "/be-the-guy",
+});
 
 export default function BeTheGuyPage() {
   return (

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Shop",
-  description: "Ruin the Party shirts, hoodies, hats, wristbands and stickers. The hashtag on the front. Wearing it starts the conversation.",
-  alternates: { canonical: "/shop" },
-};
+  description: "Ruin the Party shirts, hoodies, hats, wristbands and bottles. The hashtag on the front. Wearing it starts the conversation.",
+  path: "/shop",
+});
 
 export default function ShopPage() {
   return (
@@ -27,7 +28,7 @@ export default function ShopPage() {
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p, i) => (
               <Reveal as="li" key={p.slug} delay={(i % 3) * 80}>
-                <ProductCard p={p} priority={i === 0} />
+                <ProductCard p={p} priority={i === 0} heading="h2" />
               </Reveal>
             ))}
           </ul>
