@@ -207,8 +207,10 @@ yet: order notification is the Stripe dashboard email until one is built
 - **Organization schema, not LocalBusiness.** It is a movement, not a shop
   with an address. The launch checklist's LocalBusiness line is marked not
   applicable below.
-- **The plate inverts to cream** under the black footer (`plate.mjs`:
-  chocolate measures 1.19, cream 19.57).
+- **The plate is black with teal drips** (Kevin, 2026-10-02). The drip
+  edge is filled with the mark's teal instead of the footer colour, so it
+  reads as a glaze line between the footer's black and the plate's black;
+  the credit is chalk on black (16.83).
 
 ## Audit state (October 1, 2026, this sandbox)
 

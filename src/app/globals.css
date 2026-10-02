@@ -530,18 +530,6 @@ html:not(.js) button[aria-controls="mobile-nav"] {
   display: none;
 }
 
-/*
-  The studio credit plate. Values from `node glaze/scripts/plate.mjs "#000000"`:
-  chocolate under this footer measures 1.19, cream 19.57, so the plate is
-  cream and the drip is the footer's black. --gw-above must match the footer
-  EXACTLY or a seam shows.
-*/
-.gw-plate {
-  --gw-above: #000000;
-  --gw-plate: #FDF6EC;
-  --gw-plate-ink: #2B1E16;
-}
-
 /* ───────────────────────────────────────────────────────────────────────────
    Glazed Web studio credit — pairs with components/GlazedCredit.
    Everything is scoped to .gw-credit. The words inherit the footer's own colour
@@ -641,4 +629,19 @@ html:not(.js) button[aria-controls="mobile-nav"] {
 @media (max-width: 640px) {
   .gw-plate-drip { height: 34px; }
   .gw-plate-bar { justify-content: center; padding: 0 16px 16px; }
+}
+
+/*
+  THIS SITE'S PLATE, set AFTER the generic defaults above so it wins the
+  cascade (the first cut put these values before them, which is why the
+  plate once rendered on Glazed's defaults). Kevin, 2026-10-02: black plate,
+  teal drips. So the plate is the footer's black and the drip is the mark's
+  own teal, a glaze line between the two blacks rather than a step to cream.
+  --gw-above is the drip's fill, not the footer colour here, on purpose.
+  The credit is chalk on black, 16.83.
+*/
+.gw-plate {
+  --gw-above: #00DFDF;
+  --gw-plate: #000000;
+  --gw-plate-ink: #E6E6E6;
 }
