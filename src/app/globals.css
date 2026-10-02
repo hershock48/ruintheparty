@@ -273,8 +273,10 @@ html.js [data-reveal][data-shown] {
   THE REFRAIN. Each setup is a line of the chant; "Ruin the party." stamps
   in a beat after the line arrives, slightly crooked, the way a stamp
   lands. The li reveals through Reveal (data-reveal); the stamp inside
-  waits for that reveal to finish (0.6s) and lands in the beat after. Transform and opacity only. Without JS or under
-  reduced motion the stamp is simply there, at its resting tilt.
+  waits for that reveal to finish (0.6s) and lands in the beat after.
+  Which line goes when is Reveal's queue (page.tsx), not this file.
+  Transform and opacity only. Without JS or under reduced motion the
+  stamp is simply there, at its resting tilt.
 */
 .stamp {
   display: inline-block;
@@ -285,8 +287,9 @@ html.js [data-reveal] .stamp {
   transform: scale(1.18) rotate(-6deg);
   /* The line's own reveal takes 0.6s; the stamp waits for it to finish
      and lands in the beat after. At 0.26s it landed while the line was
-     still fading in, and the two read as one smeared motion. */
-  transition: opacity 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.65s, transform 0.32s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.65s;
+     still fading in, and the two read as one smeared motion. The landing
+     itself takes half a second: at 0.3s it was a flicker. */
+  transition: opacity 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.8s, transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.8s;
 }
 html.js [data-reveal][data-shown] .stamp {
   opacity: 1;

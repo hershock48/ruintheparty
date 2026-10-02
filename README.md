@@ -129,6 +129,16 @@ yet: order notification is the Stripe dashboard email until one is built
   were captured frame by frame (`tools/` has no copy of the capture
   scripts; they live in the session scratchpad and are two short
   Playwright loops).
+- **The refrain goes off one line at a time.** Three lines fit a desktop
+  viewport and all five a phone's, so with one reveal per line they all
+  fired together and the chant was over before the reader reached its
+  second line (Kevin, 2026-10-02: "they're all going off, and super fast
+  too"). `Reveal` has a `queue` prop: lines sharing a queue show in
+  document order at least 1.1s apart, each stamp landing 0.8s after its
+  line over half a second. The browser does not run per-element
+  IntersectionObserver callbacks in page order (it ran them 1, 3, 4, 2),
+  so the waiting list is sorted by position. Measured: lines shown at 0,
+  1.1, 2.2, 3.3s.
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.
