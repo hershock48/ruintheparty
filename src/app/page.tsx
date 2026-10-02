@@ -85,13 +85,16 @@ export default function HomePage() {
         and the signature piece of the page: each setup in big condensed
         caps, the answer stamping in a beat later, the lines alternating
         left and right down the page like a chant. The stamp's motion is in
-        globals.css (.stamp); the li reveals through Reveal.
+        globals.css (.stamp); the li reveals through Reveal, and the lines
+        share a queue so they go off one at a time, a beat apart, however
+        many are in view (Kevin, 2026-10-02: "they're all going off, and
+        super fast too").
       */}
-      <section className="grain overflow-hidden border-b border-chalk/10 bg-black">
+      <section className="grain refrain overflow-hidden border-b border-chalk/10 bg-black">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
           <ul className="space-y-10 md:space-y-14">
             {refrain.map((r, i) => (
-              <Reveal as="li" key={r.setup} delay={60} className={i % 2 ? "md:text-right" : ""}>
+              <Reveal as="li" key={r.setup} queue="refrain" className={i % 2 ? "md:text-right" : ""}>
                 <p className={`display max-w-4xl text-3xl text-white sm:text-4xl md:text-5xl ${i % 2 ? "md:ml-auto" : ""}`}>{r.setup}</p>
                 <p className="stamp display mt-3 text-4xl text-teal sm:text-5xl md:text-6xl">{"answer" in r ? r.answer : "Ruin the party."}</p>
               </Reveal>
@@ -141,12 +144,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NO IS A COMPLETE SENTENCE. The second big message, on paper. */}
+      {/*
+        "NO." IS A COMPLETE SENTENCE. The second big message, on paper. The
+        period sits inside the quotes on purpose (Kevin, 2026-10-02): the
+        line claims "No." is a sentence, and the full stop is the proof.
+        The brief writes it plain; this is the version that makes its point.
+      */}
       <section className="bg-paper text-ink">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
           <Reveal>
             <p className="display text-6xl sm:text-7xl md:text-8xl">
-              &ldquo;No&rdquo;
+              &ldquo;No.&rdquo;
               <br />
               is a
               <br />

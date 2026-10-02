@@ -285,8 +285,10 @@ html.js:not(.loaded) .grain-late::before {
   THE REFRAIN. Each setup is a line of the chant; "Ruin the party." stamps
   in a beat after the line arrives, slightly crooked, the way a stamp
   lands. The li reveals through Reveal (data-reveal); the stamp inside
-  waits for that reveal to finish (0.6s) and lands in the beat after. Transform and opacity only. Without JS or under
-  reduced motion the stamp is simply there, at its resting tilt.
+  waits for that reveal to finish (0.6s) and lands in the beat after.
+  Which line goes when is Reveal's queue (page.tsx), not this file.
+  Transform and opacity only. Without JS or under reduced motion the
+  stamp is simply there, at its resting tilt.
 */
 .stamp {
   display: inline-block;
@@ -297,12 +299,57 @@ html.js [data-reveal] .stamp {
   transform: scale(1.18) rotate(-6deg);
   /* The line's own reveal takes 0.6s; the stamp waits for it to finish
      and lands in the beat after. At 0.26s it landed while the line was
-     still fading in, and the two read as one smeared motion. */
-  transition: opacity 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.65s, transform 0.32s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.65s;
+     still fading in, and the two read as one smeared motion. The landing
+     itself takes half a second: at 0.3s it was a flicker. */
+  transition: opacity 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.8s, transform 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.1) 0.8s;
 }
 html.js [data-reveal][data-shown] .stamp {
   opacity: 1;
   transform: rotate(-1.5deg);
+}
+/* The beat between refrain lines (Reveal's queue reads --reveal-gap).
+   Longer on a phone, where all five lines share one screen and the
+   whole chant plays out in front of the reader (Kevin, 2026-10-02:
+   "slow it down a touch more on phone"). */
+.refrain {
+  --reveal-gap: 1100ms;
+}
+@media (max-width: 47.99rem) {
+  .refrain {
+    --reveal-gap: 1450ms;
+  }
+}
+
+/*
+  THE COUNTERS on the four moves (Moves.tsx). .odo is a window one digit
+  tall; .odo-col is the column of digits 0..n inside it, moved up n
+  digits so the last one shows. With JS the column starts on 0 and rolls
+  up once the card is shown, 0.28s a digit after a 0.35s pause for the
+  card's own fade, settling like an odometer. Transform only, which is
+  what keeps it off the main thread and out of WebKit's frozen-counter
+  bug. Without JS or under reduced motion it sits on its number.
+*/
+.odo {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  vertical-align: top;
+}
+.odo-col {
+  display: block;
+  transform: translateY(calc(-1em * var(--n)));
+}
+.odo-col > span {
+  display: block;
+  height: 1em;
+}
+html.js [data-reveal] .odo-col {
+  transform: none;
+  transition: transform calc(0.4s + 0.28s * var(--n)) cubic-bezier(0.2, 0.6, 0.25, 1) 0.35s;
+}
+html.js [data-reveal][data-shown] .odo-col {
+  transform: translateY(calc(-1em * var(--n)));
 }
 
 /*
@@ -393,6 +440,10 @@ html.js .rtp-stroke {
   html.js [data-reveal] .stamp {
     opacity: 1;
     transform: rotate(-1.5deg);
+    transition: none;
+  }
+  html.js [data-reveal] .odo-col {
+    transform: translateY(calc(-1em * var(--n)));
     transition: none;
   }
   html.js .rtp-mark .rtp-p,

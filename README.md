@@ -131,6 +131,29 @@ yet: order notification is the Stripe dashboard email until one is built
   were captured frame by frame (`tools/` has no copy of the capture
   scripts; they live in the session scratchpad and are two short
   Playwright loops).
+- **The refrain goes off one line at a time.** Three lines fit a desktop
+  viewport and all five a phone's, so with one reveal per line they all
+  fired together and the chant was over before the reader reached its
+  second line (Kevin, 2026-10-02: "they're all going off, and super fast
+  too"). `Reveal` has a `queue` prop: lines sharing a queue show in
+  document order at least 1.1s apart, each stamp landing 0.8s after its
+  line over half a second. The browser does not run per-element
+  IntersectionObserver callbacks in page order (it ran them 1, 3, 4, 2),
+  so the waiting list is sorted by position. The beat is `--reveal-gap`
+  on `.refrain` in globals.css: 1.1s on desktop, 1.45s below 768px
+  (Kevin: "slow it down a touch more on phone"). Measured: lines shown
+  at 0, 1.1, 2.2, 3.3s on desktop and 0, 1.45, 2.9, 4.4s on a phone.
+- **The four moves' figures roll up like a counter.** Kevin, 2026-10-02:
+  "have the numbers count up like a ticker." Each figure is a column of
+  digits 0 to n in a window one digit tall (`.odo` in globals.css,
+  `Moves.tsx`), translated up by n digits; with JS it starts on 0 and
+  rolls once the card is shown, 0.28s a digit after the card's own fade.
+  Transform only: no timer to miss, no scroll-scrubbing, no animated CSS
+  counter (the catalog's year-counter notes say WebKit freezes those; the
+  Schulers reference itself could not be opened from this session).
+  Without JS or under reduced motion the column sits on its number.
+  Measured: the four settle at 1.05, 1.34, 1.62 and 1.9s after the row
+  comes into view.
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.
@@ -153,11 +176,22 @@ yet: order notification is the Stripe dashboard email until one is built
   (CSS-Tricks, "Animate Calligraphy with SVG"; "Handwriting Animation With
   Irregular SVG Strokes"). `HeroMark.tsx` does that over four stroke
   layers, `public/brand/hash-s1.webp` to `hash-s4.webp`, which
-  `tools/strokes.py` cuts from `hash.png` by nearest centerline (crossings
-  to the verticals, painted first); they recombine to the original exactly.
-  The mask paths are TRACED from the pixels by `tools/centerlines.py`
-  (the center of each row's or column's ink, smoothed, a point every
-  20px), and the script checks every ink pixel lies inside its mask width.
+  `tools/strokes.py` cuts from `hash.png` along each stroke's ACTUAL
+  outline (the run of ink around the traced centerline in every row or
+  column, with the crossings bridged by straight edges fitted through
+  the clean lines either side and blended back into the real edge;
+  crossings go to the verticals, painted first; bristle streaks and
+  spatter go to the nearest outline). The first cut used a fixed band
+  around a straight centerline and left slivers of the bars in the
+  verticals' layers, which showed through while the verticals were being
+  drawn (Kevin saw it, 2026-10-02). The script proves the layers
+  recombine to the original exactly and that no bar-outline pixel sits in
+  a vertical's layer beyond its crossings. The mask paths are TRACED from
+  the pixels by `tools/centerlines.py` (the center of each row's or
+  column's ink, smoothed, a point every 20px), and it checks every ink
+  pixel lies inside its mask width (all four at 0 outside). Trace, feed
+  the paths back as the split's guides, split, trace again: it converges
+  in one round.
   Order: left vertical, right vertical, upper bar, lower bar, about 3.3s.
   The write-on waits for the four layers to be fetched (`data-ready`, set
   from an effect: React does not deliver load events for SVG `<image>`,
