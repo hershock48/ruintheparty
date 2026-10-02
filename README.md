@@ -151,11 +151,22 @@ yet: order notification is the Stripe dashboard email until one is built
   (CSS-Tricks, "Animate Calligraphy with SVG"; "Handwriting Animation With
   Irregular SVG Strokes"). `HeroMark.tsx` does that over four stroke
   layers, `public/brand/hash-s1.webp` to `hash-s4.webp`, which
-  `tools/strokes.py` cuts from `hash.png` by nearest centerline (crossings
-  to the verticals, painted first); they recombine to the original exactly.
-  The mask paths are TRACED from the pixels by `tools/centerlines.py`
-  (the center of each row's or column's ink, smoothed, a point every
-  20px), and the script checks every ink pixel lies inside its mask width.
+  `tools/strokes.py` cuts from `hash.png` along each stroke's ACTUAL
+  outline (the run of ink around the traced centerline in every row or
+  column, with the crossings bridged by straight edges fitted through
+  the clean lines either side and blended back into the real edge;
+  crossings go to the verticals, painted first; bristle streaks and
+  spatter go to the nearest outline). The first cut used a fixed band
+  around a straight centerline and left slivers of the bars in the
+  verticals' layers, which showed through while the verticals were being
+  drawn (Kevin saw it, 2026-10-02). The script proves the layers
+  recombine to the original exactly and that no bar-outline pixel sits in
+  a vertical's layer beyond its crossings. The mask paths are TRACED from
+  the pixels by `tools/centerlines.py` (the center of each row's or
+  column's ink, smoothed, a point every 20px), and it checks every ink
+  pixel lies inside its mask width (all four at 0 outside). Trace, feed
+  the paths back as the split's guides, split, trace again: it converges
+  in one round.
   Order: left vertical, right vertical, upper bar, lower bar, about 3.3s.
   The write-on waits for the four layers to be fetched (`data-ready`, set
   from an effect: React does not deliver load events for SVG `<image>`,
