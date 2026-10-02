@@ -295,6 +295,18 @@ html.js [data-reveal][data-shown] .stamp {
   opacity: 1;
   transform: rotate(-1.5deg);
 }
+/* The beat between refrain lines (Reveal's queue reads --reveal-gap).
+   Longer on a phone, where all five lines share one screen and the
+   whole chant plays out in front of the reader (Kevin, 2026-10-02:
+   "slow it down a touch more on phone"). */
+.refrain {
+  --reveal-gap: 1100ms;
+}
+@media (max-width: 47.99rem) {
+  .refrain {
+    --reveal-gap: 1450ms;
+  }
+}
 
 /*
   THE TICKER. One line of #RUINTHEPARTY sliding left, the streetwear
