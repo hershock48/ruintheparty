@@ -142,12 +142,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NO IS A COMPLETE SENTENCE. The second big message, on paper. */}
+      {/*
+        "NO." IS A COMPLETE SENTENCE. The second big message, on paper. The
+        period sits inside the quotes on purpose (Kevin, 2026-10-02): the
+        line claims "No." is a sentence, and the full stop is the proof.
+        The brief writes it plain; this is the version that makes its point.
+      */}
       <section className="bg-paper text-ink">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
           <Reveal>
             <p className="display text-6xl sm:text-7xl md:text-8xl">
-              &ldquo;No&rdquo;
+              &ldquo;No.&rdquo;
               <br />
               is a
               <br />
