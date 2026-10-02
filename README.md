@@ -141,6 +141,17 @@ yet: order notification is the Stripe dashboard email until one is built
   on `.refrain` in globals.css: 1.1s on desktop, 1.45s below 768px
   (Kevin: "slow it down a touch more on phone"). Measured: lines shown
   at 0, 1.1, 2.2, 3.3s on desktop and 0, 1.45, 2.9, 4.4s on a phone.
+- **The four moves' figures roll up like a counter.** Kevin, 2026-10-02:
+  "have the numbers count up like a ticker." Each figure is a column of
+  digits 0 to n in a window one digit tall (`.odo` in globals.css,
+  `Moves.tsx`), translated up by n digits; with JS it starts on 0 and
+  rolls once the card is shown, 0.28s a digit after the card's own fade.
+  Transform only: no timer to miss, no scroll-scrubbing, no animated CSS
+  counter (the catalog's year-counter notes say WebKit freezes those; the
+  Schulers reference itself could not be opened from this session).
+  Without JS or under reduced motion the column sits on its number.
+  Measured: the four settle at 1.05, 1.34, 1.62 and 1.9s after the row
+  comes into view.
 - **The refrain repeats on purpose, once.** "Ruin the party." after each
   setup is the client's device from the brief. It appears on the home page
   and nowhere else, so the house rule on counted repetition still holds.

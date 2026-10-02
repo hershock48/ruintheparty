@@ -309,6 +309,38 @@ html.js [data-reveal][data-shown] .stamp {
 }
 
 /*
+  THE COUNTERS on the four moves (Moves.tsx). .odo is a window one digit
+  tall; .odo-col is the column of digits 0..n inside it, moved up n
+  digits so the last one shows. With JS the column starts on 0 and rolls
+  up once the card is shown, 0.28s a digit after a 0.35s pause for the
+  card's own fade, settling like an odometer. Transform only, which is
+  what keeps it off the main thread and out of WebKit's frozen-counter
+  bug. Without JS or under reduced motion it sits on its number.
+*/
+.odo {
+  display: inline-block;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  vertical-align: top;
+}
+.odo-col {
+  display: block;
+  transform: translateY(calc(-1em * var(--n)));
+}
+.odo-col > span {
+  display: block;
+  height: 1em;
+}
+html.js [data-reveal] .odo-col {
+  transform: none;
+  transition: transform calc(0.4s + 0.28s * var(--n)) cubic-bezier(0.2, 0.6, 0.25, 1) 0.35s;
+}
+html.js [data-reveal][data-shown] .odo-col {
+  transform: translateY(calc(-1em * var(--n)));
+}
+
+/*
   THE TICKER. One line of #RUINTHEPARTY sliding left, the streetwear
   version of a hashtag band. The track is the phrase repeated a fixed
   number of times (page.tsx), and the width is a BUDGET: an animated
@@ -396,6 +428,10 @@ html.js .rtp-stroke {
   html.js [data-reveal] .stamp {
     opacity: 1;
     transform: rotate(-1.5deg);
+    transition: none;
+  }
+  html.js [data-reveal] .odo-col {
+    transform: translateY(calc(-1em * var(--n)));
     transition: none;
   }
   html.js .rtp-mark .rtp-p,
