@@ -83,13 +83,16 @@ export default function HomePage() {
         and the signature piece of the page: each setup in big condensed
         caps, the answer stamping in a beat later, the lines alternating
         left and right down the page like a chant. The stamp's motion is in
-        globals.css (.stamp); the li reveals through Reveal.
+        globals.css (.stamp); the li reveals through Reveal, and the lines
+        share a queue so they go off one at a time, a beat apart, however
+        many are in view (Kevin, 2026-10-02: "they're all going off, and
+        super fast too").
       */}
       <section className="grain overflow-hidden border-b border-chalk/10 bg-black">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
           <ul className="space-y-10 md:space-y-14">
             {refrain.map((r, i) => (
-              <Reveal as="li" key={r.setup} delay={60} className={i % 2 ? "md:text-right" : ""}>
+              <Reveal as="li" key={r.setup} queue="refrain" className={i % 2 ? "md:text-right" : ""}>
                 <p className={`display max-w-4xl text-3xl text-white sm:text-4xl md:text-5xl ${i % 2 ? "md:ml-auto" : ""}`}>{r.setup}</p>
                 <p className="stamp display mt-3 text-4xl text-teal sm:text-5xl md:text-6xl">{"answer" in r ? r.answer : "Ruin the party."}</p>
               </Reveal>
