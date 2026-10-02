@@ -39,7 +39,7 @@ export const products: Product[] = [
     print: "#RuinTheParty on the front, nothing on the back.",
     color: "black",
     kind: "tee",
-    photo: "/shop/the-tee-2.jpg",
+    photo: "/shop/the-tee.jpg",
     photoAlt: "A black tee with the brush mark across the chest",
   },
   {
@@ -51,7 +51,7 @@ export const products: Product[] = [
     print: "Speak up. Step in. Protect. Be a better man. Ruin the party.",
     color: "black",
     kind: "hoodie",
-    photo: "/shop/the-hoodie-2.jpg",
+    photo: "/shop/the-hoodie.jpg",
     photoAlt: "The back of a gray hoodie with the four lines printed down it",
   },
   {
@@ -63,7 +63,7 @@ export const products: Product[] = [
     print: "The boxed RUIN THE PARTY mark on a stitched patch.",
     color: "black",
     kind: "hat",
-    photo: "/shop/the-hat-2.jpg",
+    photo: "/shop/the-hat.jpg",
     photoAlt: "A black trucker cap with the boxed Ruin the Party patch, on a rock",
   },
   {
@@ -75,7 +75,7 @@ export const products: Product[] = [
     print: "#RUINTHEPARTY on the outside. GOOD MEN DON'T STAY SILENT. on the inside.",
     color: "black",
     kind: "band",
-    photo: "/shop/the-wristband-2.jpg",
+    photo: "/shop/the-wristband.jpg",
     photoAlt: "Two black silicone wristbands, one reading #RuinTheParty and one reading Good men don't stay silent",
   },
   {
@@ -87,7 +87,7 @@ export const products: Product[] = [
     print: "#RuinTheParty on one side, the #R mark on the other.",
     color: "black",
     kind: "bottle",
-    photo: "/shop/the-bottle-2.jpg",
+    photo: "/shop/the-bottle.jpg",
     photoAlt: "A matte black steel bottle with the brush mark on it",
   },
 ];

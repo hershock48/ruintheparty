@@ -226,10 +226,11 @@ yet: order notification is the Stripe dashboard email until one is built
   headline waits for and cost the inner pages about 350ms of LCP on the
   throttled profile. `hash-ghost.webp` is `hash.png` at 420px (20KB vs
   124KB) because at 9% opacity nobody sees the compression.
-- **The shop photos are the second cut** (`tools/crops.sh`). The first
-  carried half a wristband in the tee tile, the board's border across the
-  hoodie and scraps of other lettering beside the bottle. The files are
-  named `-2` because the image optimizer caches by URL.
+- **The shop photos are the first cut** (`tools/crops.sh`). A tighter
+  second cut, one product per tile, shipped on October 2 and Kevin
+  preferred the first: the neighbouring goods in frame read as a styled
+  flat lay, not a catalogue cutout. The second cut's coordinates are kept
+  in the script's comment.
 - **The hashtag ticker** is the streetwear version of a hashtag band: six
   copies on a track that moves by half its width and loops. The track
   width is a budget (globals.css, `.ticker`); measure it before adding a
