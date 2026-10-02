@@ -12,7 +12,7 @@ export default function OrderThanksPage() {
   return (
     <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-start justify-center px-4 py-24 sm:px-6">
       <p className="kicker text-teal">Order placed</p>
-      <p className="display mt-3 text-5xl text-white">Wear it somewhere it will get asked about.</p>
+      <h1 className="display mt-3 text-5xl text-white">Wear it somewhere it will get asked about.</h1>
       <p className="mt-4 text-lg text-chalk">Stripe has emailed you the receipt. Shipping details follow by email.</p>
       <Link href="/be-the-guy" className="btn btn-teal mt-8">
         Now read this

@@ -28,7 +28,7 @@ export default function ShopPage() {
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p, i) => (
               <Reveal as="li" key={p.slug} delay={(i % 3) * 80}>
-                <ProductCard p={p} priority={i === 0} />
+                <ProductCard p={p} priority={i === 0} heading="h2" />
               </Reveal>
             ))}
           </ul>

@@ -235,6 +235,16 @@ Against the production build, with the glazedweb harnesses:
   point of deferring the ground to the load event: the first version of it
   was +350ms. Absolute numbers differ from the October 1 harness because the
   machines differ; compare within a row.
+- October 2, final pass, 14 routes at 320, 390, 768 and 1440 with axe-core
+  4 (wcag2a, 2aa, 21aa, best-practice): **0 violations** after the pass
+  (before it: h3 under h1 on the shop grid, no h1 on `/thanks`,
+  `/shop/thanks` and the 404), console errors **none**, horizontal
+  overflow **none**. Checked by hand: the mobile menu opens, closes on
+  navigation and on Escape (focus returns to the button); the size and
+  "I am a" radios show a focus ring, not only the checked state; no-JS
+  shows every reveal and the menu; the contact form keeps the message on
+  screen and names the address when sending fails; reduced motion shows
+  the finished hash and no view transitions.
 - The hashtag ticker track measures **2,843px** at 1440 (2,409 at 390),
   under the 4,096px mobile compositing budget in glaze.md. Six copies.
 - `motion-check.mjs` on `/`: no transient overflow at 320, 390 or 1440

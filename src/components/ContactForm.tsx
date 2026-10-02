@@ -75,7 +75,7 @@ export default function ContactForm({ preset = "" }: { preset?: string }) {
         <legend className="kicker text-chalk">I am a</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {["Student", "Athlete", "Parent", "Coach or teacher", "School or organization", "Other"].map((who) => (
-            <label key={who} className="inline-flex min-h-12 cursor-pointer items-center gap-2 border border-chalk/25 px-4 py-2 text-chalk has-checked:border-teal has-checked:bg-teal/10 has-checked:text-white">
+            <label key={who} className="inline-flex min-h-12 cursor-pointer items-center gap-2 border border-chalk/25 px-4 py-2 text-chalk has-checked:border-teal has-checked:bg-teal/10 has-checked:text-white has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-teal">
               <input type="radio" name="who" value={who} defaultChecked={preset ? who === preset : who === "Student"} className="accent-teal" />
               {who}
             </label>

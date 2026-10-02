@@ -33,6 +33,19 @@ export default function SiteHeader() {
      the pitch host. */
   const home = useSyncExternalStore(subscribeNever, getHomeClient, getHomeServer);
 
+  /* Escape closes the open menu and puts focus back on the button, so a
+     keyboard user is not left in a list they cannot dismiss. */
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenAt(null);
+      ref.current?.querySelector<HTMLButtonElement>('button[aria-controls="mobile-nav"]')?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
   /* Publish the measured header height so anchor offsets stay honest. */
   useEffect(() => {
     const el = ref.current;

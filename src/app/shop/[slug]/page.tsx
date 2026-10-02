@@ -59,7 +59,7 @@ export default async function ProductPage({ params }: Params) {
                 <legend className="kicker text-chalk">Size</legend>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {p.sizes.map((s, i) => (
-                    <label key={s} className="inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center border border-chalk/30 px-4 text-white has-checked:border-teal has-checked:bg-teal has-checked:text-black">
+                    <label key={s} className="inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center border border-chalk/30 px-4 text-white has-checked:border-teal has-checked:bg-teal has-checked:text-black has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-teal">
                       <input type="radio" name="size" value={s} defaultChecked={i === 0} className="sr-only" />
                       {s}
                     </label>
