@@ -354,7 +354,7 @@ letter before Kevin sends it (backlog C01).
 - [ ] `GIVING.percent` in `shop.ts`: the client wants a share of every sale
       to go to local youth resources; the pages say "a portion" until he
       names the number
-- [x] `PREORDER.ships`: about 4 weeks, confirmed by the client (2026-10-03)
+- [x] `PREORDER.ships`: 4 to 6 weeks, confirmed by the client (2026-10-03)
 - [ ] Confirm the CDC YRBS high school figure on `/what-it-means` (1 in 9,
       11.4%) against the live CDC page; it was read from the search index
 - [ ] Green Dot: `alteristic.org/services/green-dot/` 404s (2026-10-03);
