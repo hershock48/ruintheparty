@@ -26,7 +26,7 @@ export const topics: Topic[] = [
   },
   {
     key: "sex",
-    title: "Sex",
+    title: "The talk",
     why: "Awkward for about ninety seconds. Then it is a conversation you have both had, and the next one is easier.",
     start: [
       "“I'm not going to ask what you're doing. I'm going to tell you what I expect, and then you can ask me anything.”",

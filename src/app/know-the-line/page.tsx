@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMeta({
  * link for that.
  */
 export default function KnowTheLinePage() {
-  const whens = ["Before anything happens.", "After kissing.", "After clothes come off.", "After someone previously said yes.", "In the middle of sex."];
+  const whens = ["Before anything happens.", "After kissing.", "After clothes come off.", "After someone previously said yes.", "In the middle of it."];
   const owes = ["They flirted with you.", "They let you buy the drink.", "They went home with you.", "They kissed you.", "They said yes last time.", "They said yes an hour ago."];
 
   return (
@@ -61,7 +61,7 @@ export default function KnowTheLinePage() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <p className="kicker text-teal">Nobody owes you sex because</p>
+            <p className="kicker text-teal">Nobody owes you anything because</p>
             <ul className="mt-3 space-y-3">
               {owes.map((o) => (
                 <li key={o} className="border-l-4 border-chalk/30 pl-4 text-xl text-chalk">

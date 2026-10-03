@@ -171,10 +171,10 @@ export default function HomePage() {
               <li>After kissing.</li>
               <li>After clothes come off.</li>
               <li>After someone previously said yes.</li>
-              <li>In the middle of sex.</li>
+              <li>In the middle of it.</li>
             </ul>
             <p className="mt-6 max-w-md text-smoke">
-              Consent can be taken back at any time. Nobody owes anyone sex because they flirted, took a drink, went home
+              Consent can be taken back at any time. Nobody owes anyone anything because they flirted, took a drink, went home
               with them, kissed them, or said yes before.
             </p>
             <Link href="/know-the-line" className="btn btn-ink mt-8">
