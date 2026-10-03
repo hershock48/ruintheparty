@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PREORDER } from "@/data/shop";
 
 export const metadata: Metadata = {
   title: "Order placed",
@@ -13,7 +14,9 @@ export default function OrderThanksPage() {
     <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-start justify-center px-4 py-24 sm:px-6">
       <p className="kicker text-teal">Order placed</p>
       <h1 className="display mt-3 text-5xl text-white">Wear it somewhere it will get asked about.</h1>
-      <p className="mt-4 text-lg text-chalk">Stripe has emailed you the receipt. Shipping details follow by email.</p>
+      <p className="mt-4 text-lg text-chalk">
+        Stripe has emailed you the receipt.{PREORDER.on ? ` This is a pre-order from the first run; it ships ${PREORDER.ships}, and you will get a shipping email when it does.` : " Shipping details follow by email."}
+      </p>
       <Link href="/be-the-guy" className="btn btn-teal mt-8">
         Now read this
       </Link>

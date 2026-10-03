@@ -77,8 +77,12 @@ export default function WhatItMeansPage() {
 
       {/* THE NUMBERS, once, with the link, and nowhere else on the site. A
           site that shouts statistics at a nineteen-year-old is the seminar
-          the brief says not to build. Source: RAINN's campus page, reporting
-          the 2019 AAU Campus Climate Survey; read October 1, 2026. */}
+          the brief says not to build. Sources: RAINN's campus page, reporting
+          the 2019 AAU Campus Climate Survey (read October 1, 2026), and the
+          CDC's 2023 YRBS (11.4% of grades 9 to 12 experienced sexual violence
+          by anyone in the past 12 months, N=20,103; read from the search index
+          October 3, 2026, confirm in a browser). The client swapped the
+          undergraduate-men figure for a high school one, 2026-10-03. */}
       <section className="border-b border-chalk/10 bg-coal">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16">
           <Reveal>
@@ -93,8 +97,8 @@ export default function WhatItMeansPage() {
                 <dd className="mt-2 text-ash">undergraduate women, nonconsensual sexual contact by force or while unable to consent.</dd>
               </div>
               <div>
-                <dt className="display text-6xl text-white">1 in 14</dt>
-                <dd className="mt-2 text-ash">undergraduate men, the same. It happens to men too, and they talk about it less.</dd>
+                <dt className="display text-6xl text-white">1 in 9</dt>
+                <dd className="mt-2 text-ash">high school students experienced sexual violence in the past year. It starts before college.</dd>
               </div>
             </dl>
             <p className="mt-5 text-sm text-ash">
@@ -102,8 +106,11 @@ export default function WhatItMeansPage() {
               <a href="https://rainn.org/facts-statistics-the-scope-of-the-problem/statistics-campus-sexual-violence/" className="link" target="_blank" rel="noopener noreferrer">
                 RAINN&rsquo;s campus statistics
               </a>
-              , reporting the 2019 Association of American Universities campus climate survey. The rest of this site has no
-              statistics in it on purpose.
+              , reporting the 2019 Association of American Universities campus climate survey, and the{" "}
+              <a href="https://www.cdc.gov/mmwr/volumes/73/su/su7304a7.htm" className="link" target="_blank" rel="noopener noreferrer">
+                CDC&rsquo;s 2023 Youth Risk Behavior Survey
+              </a>{" "}
+              of students in grades 9 to 12. The rest of this site has no statistics in it on purpose.
             </p>
           </Reveal>
         </div>
@@ -131,8 +138,7 @@ export default function WhatItMeansPage() {
                 Teenagers. College students. Athletes. Coaches. Fathers. Brothers. Friends. Fraternities. Teams. Schools.
               </p>
               <p className="mt-6 text-lg text-chalk">
-                The message isn&rsquo;t that men are bad. The message is that good men have a responsibility to act. We want
-                men to feel able to step in, not attacked for being men.
+                Good men have a responsibility to act, and we want every one of them to feel able to step in.
               </p>
             </Reveal>
           </div>

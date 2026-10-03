@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
+import { PREORDER } from "@/data/shop";
 
 export const metadata: Metadata = pageMeta({
   title: "Shop",
@@ -20,6 +21,10 @@ export default function ShopPage() {
           <p className="mt-6 inline-block border border-chalk/30 px-4 py-3 text-sm text-chalk">
             The store is built and not open yet. Prices shown are sample prices until Ruin the Party sets its own, and the
             buy button says so instead of taking a card.
+          </p>
+        ) : PREORDER.on ? (
+          <p className="mt-6 inline-block border border-teal/40 px-4 py-3 text-sm text-chalk">
+            First run. Everything here is a pre-order and ships {PREORDER.ships}.
           </p>
         ) : null}
       </PageHero>

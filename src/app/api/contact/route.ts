@@ -101,17 +101,21 @@ export async function POST(request: Request) {
   const name = clean(b.name, MAX.name);
   const email = clean(b.email, MAX.email);
   const who = clean(b.who, MAX.who) || "Not said";
+  // Team and school requests (the Teams page) go to the person who handles
+  // them when TEAMS_TO is set; everything else to CONTACT_TO.
+  const topic = clean(b.topic, 20);
   const message = clean(b.message, MAX.message);
 
   if (!name) return fail("Please add your name.", 400);
   if (!email || !looksLikeEmail(email)) return fail("Please add an email address we can answer.", 400);
   if (!message) return fail("Please tell us what you need.", 400);
 
-  const { SMTP_HOST, SMTP_USER, SMTP_PASS, CONTACT_TO } = process.env;
+  const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+  const CONTACT_TO = (topic === "teams" && process.env.TEAMS_TO) || process.env.CONTACT_TO;
   const port = Number(process.env.SMTP_PORT || 587);
   const from = process.env.CONTACT_FROM || `${site.name} Website <${SMTP_USER}>`;
 
-  const text = [`Name: ${name}`, `Email: ${email}`, `I am a: ${who}`, "", message].join("\n");
+  const text = [`Name: ${name}`, `Email: ${email}`, `I am a: ${who}`, topic ? `From: the ${topic} page` : "", "", message].filter((l, i) => l !== "" || i === 4).join("\n");
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
     // Unconfigured. Log everything so nothing is lost, then tell the truth.

@@ -92,6 +92,14 @@ export const products: Product[] = [
   },
 ];
 
+/**
+ * The first run is sold as pre-orders (the client, 2026-10-03): the buy
+ * button says so and the checkout line item carries it, so nobody expects
+ * a box in three days. Plain words, no campaign, no goal, no countdown.
+ * SHIPS is PLACEHOLDER until the client gives a date or window.
+ */
+export const PREORDER = { on: true, ships: "in 4 to 6 weeks" } as const;
+
 export const bySlug = (slug: string) => products.find((p) => p.slug === slug);
 
 export const money = (cents: number) =>

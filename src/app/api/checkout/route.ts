@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { bySlug } from "@/data/shop";
+import { PREORDER, bySlug } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 
 export const runtime = "nodejs";
@@ -59,8 +59,8 @@ export async function POST(request: Request) {
     "line_items[0][quantity]": "1",
     "line_items[0][price_data][currency]": "usd",
     "line_items[0][price_data][unit_amount]": String(product.priceCents),
-    "line_items[0][price_data][product_data][name]": `${product.name} (${size})`,
-    "line_items[0][price_data][product_data][description]": product.print,
+    "line_items[0][price_data][product_data][name]": `${product.name} (${size})${PREORDER.on ? ", pre-order" : ""}`,
+    "line_items[0][price_data][product_data][description]": PREORDER.on ? `${product.print} Pre-order: ships ${PREORDER.ships}.` : product.print,
     "metadata[slug]": product.slug,
     "metadata[size]": size,
     "shipping_address_collection[allowed_countries][0]": "US",
