@@ -86,7 +86,10 @@ export const orgs: Org[] = [
     name: "Green Dot",
     forWho: "Schools, colleges and communities",
     what: "The bystander program that gave everyone the three ways to step in: do it yourself, get somebody else, or break the moment. Run by Alteristic.",
-    url: "https://alteristic.org/services/green-dot/",
+    /* The root, not a Green Dot page: /services/green-dot/ answered 404 on
+       2026-10-03 and the sandbox cannot open the site to find the new path.
+       Re-point when someone finds it in a browser (README checklist). */
+    url: "https://alteristic.org/",
   },
   {
     name: "A Call to Men",

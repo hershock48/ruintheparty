@@ -79,9 +79,15 @@ which is a hand-written HTML file. You cannot grep a JPEG.
   front of first paint and pushed LCP over 3 seconds on every route.
 - **Every mark `<Image>` carries `sizes`.** Without it the optimizer serves a
   1920px variant to a 420px slot and preloads it.
-- **`favicon.ico` carries bitmap payloads** (ImageMagick packs them), three
-  sizes: 48 from the real hash, 32 and 16 from a simplified four-bar hash,
-  because the brush strokes turn to mush at 16px (standards.md).
+- **The icon is the #R roundel from the boards, redrawn as vector**
+  (`tools/icon/`, 2026-10-03). `src/app/icon.svg` is the roundel with the R
+  as outlines (Barlow Condensed 800, no font needed); `icon.png`, the brand
+  PNGs and the 48px ICO frame are cut from it; the 32 and 16px ICO frames
+  and `apple-icon.png` come from `roundel-small.svg`, the same two glyphs
+  with no ring filling a black square, because at 16px the ring ate a third
+  of the space and the mark went to mush. `tools/icon/icon.html` plus
+  `render.mjs` re-renders both at 1024 with the site's own font file if the
+  art changes. The proposal's icons are the same files.
 
 ## Forms and the store
 
@@ -348,6 +354,9 @@ letter before Kevin sends it (backlog C01).
       weeks"); get the real date or window from the client
 - [ ] Confirm the CDC YRBS high school figure on `/what-it-means` (1 in 9,
       11.4%) against the live CDC page; it was read from the search index
+- [ ] Green Dot: `alteristic.org/services/green-dot/` 404s (2026-10-03);
+      both links point at the root for now. Find the current Green Dot page
+      in a browser and re-point `resources.ts` and `be-the-guy/page.tsx`
 - [ ] Re-check every number and address on `/resources` in a browser (they were
       read by search listing from this sandbox, which cannot open the sites)
 - [ ] Write the materials for coaches and schools, in whatever order the

@@ -55,7 +55,7 @@ export default function BeTheGuyPage() {
             </div>
             <p className="mt-5 text-sm text-ash">
               Bystander programs call these direct, delegate and distract. The{" "}
-              <a href="https://alteristic.org/services/green-dot/" className="link" target="_blank" rel="noopener noreferrer">
+              <a href="https://alteristic.org/" className="link" target="_blank" rel="noopener noreferrer">
                 Green Dot
               </a>{" "}
               program has taught them to schools and colleges for years. The words on this page are ours.
