@@ -46,9 +46,11 @@ which is a hand-written HTML file. You cannot grep a JPEG.
 
 ## Traps, this will break if you do not know
 
-- **The noindex is deliberate and lives in TWO places:** `src/app/robots.ts`
-  (disallow all) and `next.config.ts` (`X-Robots-Tag` on every response).
-  Remove BOTH on launch day, and not before.
+- **The noindex is host-scoped since launch (2026-10-03):** `next.config.ts`
+  sends `X-Robots-Tag: noindex` only on `ruintheparty.glazedweb.com`, so
+  the proposal and the `/demo` copy stay out of search while
+  ruintheparty.com is indexed. `robots.ts` allows everything (it cannot
+  vary by host). Delete the header with the pitch folder and rewrites.
 - **`/pitch/*` 404s on every host except ruintheparty.glazedweb.com.** That
   is the `missing: onPitchHost` rewrite. To look at the proposal locally,
   serve `public/` with a static server (`npx http-server public -p 4491`)
@@ -301,11 +303,19 @@ letter before Kevin sends it (backlog C01).
 
 ## Before launch (when this stops being a spec build)
 
-- [ ] Remove the noindex from BOTH `robots.ts` and `next.config.ts`
-- [ ] Delete `public/pitch/` and the rewrites in `next.config.ts`
-- [ ] `og:image` in `src/lib/meta.ts` is pinned to the ruintheparty.glazedweb.com
-      host so shares show a picture during the pitch; change it back to
-      `/og.jpg` so it resolves against the real domain
+- [x] Noindex: lifted from ruintheparty.com, kept on the pitch host only
+      (2026-10-03)
+- [ ] Delete `public/pitch/` and the rewrites and the host-scoped header in
+      `next.config.ts` once the agreement is signed and the letter is no
+      longer being sent
+- [x] `og:image` back to `/og.jpg`, resolving against the real domain
+      (2026-10-03)
+- [ ] Point ruintheparty.com at Vercel: the domain is the client's, at
+      GoDaddy. Add `ruintheparty.com` and `www.ruintheparty.com` to the
+      Vercel project, then at GoDaddy an A record `@` to `76.76.21.21` and a
+      CNAME `www` to `cname.vercel-dns.com` (or GoDaddy delegate access to
+      the studio so we set them). Confirm HTTPS issues and `www` redirects
+      to the apex.
 - [ ] Confirm the client's legal name and who is behind the movement, and put
       it on the site where they want it said (`site.ts` `founder`)
 - [ ] Replace the PLACEHOLDER email, Instagram and TikTok handles in `site.ts`

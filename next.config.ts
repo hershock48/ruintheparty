@@ -1,18 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // NOINDEX, DELIBERATELY, UNTIL THIS IS THEIR SITE.
+  // NOINDEX ON THE PITCH HOST ONLY, since launch (2026-10-03).
   //
-  // This is a spec build served from a Glazed Web hostname. Letting search
-  // engines index it would put a copy of Ruin the Party's content in
-  // competition with the real thing on ruintheparty.com the day it launches.
-  // src/app/robots.ts disallows everything and this header is the belt to its
-  // braces: robots.txt is a request, X-Robots-Tag is an instruction on every
-  // response. Remove BOTH on the day it becomes their site, and not before.
-  // It is on the before-launch checklist in the README.
+  // ruintheparty.com is the site and is indexable. The copy at
+  // ruintheparty.glazedweb.com/demo and the proposal at its root stay out
+  // of search: a second copy of the content would compete with the real
+  // one, and the letter is a sales document. robots.txt cannot vary by
+  // host, so this header is the lock: X-Robots-Tag is an instruction on
+  // every response from that host. Delete with the pitch folder and the
+  // rewrites below.
   async headers() {
     return [
-      { source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "ruintheparty.glazedweb.com" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 
