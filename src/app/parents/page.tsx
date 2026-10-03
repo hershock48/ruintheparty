@@ -3,6 +3,7 @@ import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import Mark from "@/components/Mark";
 import { topics } from "@/data/parents";
 
 export const metadata: Metadata = pageMeta({
@@ -39,6 +40,18 @@ export default function ParentsPage() {
                 </ul>
               </Reveal>
             ))}
+            {/* The tenth cell. Nine conversations in a two-column grid leave
+                the last cell empty, and an empty cell at the end of a list
+                reads as something missing (Kevin, 2026-10-03). The mark fills
+                it: the brand closing its own list, on the home hero's grain.
+                Decorative, so it is hidden from assistive tech and the list
+                still counts nine. */}
+            <li aria-hidden="true" className="grain relative flex min-h-[18rem] items-center justify-center overflow-hidden bg-black p-8">
+              <div className="relative flex flex-col items-center gap-5">
+                <Mark className="w-48 md:w-56" />
+                <p className="font-[family-name:var(--font-display)] text-2xl font-extrabold uppercase tracking-[0.04em] text-teal">#RuinTheParty</p>
+              </div>
+            </li>
           </ol>
         </div>
       </section>
