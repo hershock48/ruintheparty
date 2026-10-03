@@ -106,9 +106,17 @@ Checkout Session with raw fetch, no SDK, on the client's own
 cannot start charging the placeholder prices; until then it answers a real
 HTML page saying the store is not open yet (503), and the pages say so too.
 The shop pages are static, so changing either variable needs a redeploy. A bad slug is 404, a size the
-product does not have is 400. Success returns to `/shop/thanks`. No webhook
-yet: order notification is the Stripe dashboard email until one is built
-(checklist).
+product does not have is 400. Success returns to `/shop/thanks`.
+
+`/api/stripe-webhook` receives `checkout.session.completed`, checks the
+signature by hand (HMAC, five-minute tolerance) and emails the order (item,
+size, buyer, shipping address, Stripe link) to `ORDER_TO` over the same SMTP.
+That is fulfillment for now: the client places each order with the
+dropshipper by hand (his call, 2026-10-03, as the worst case). The seamless
+version, where the webhook hands the order to Printful's API and Printful
+ships and reports tracking, is built and running in the beanumber repo
+(`src/lib/printful/`, `docs/printful.md`); porting it needs the client's own
+Printful account, his designs uploaded there, and an API key.
 
 ## Decisions, with reasoning
 
@@ -326,7 +334,13 @@ letter before Kevin sends it (backlog C01).
 - [ ] Real prices in `shop.ts`; remove the PLACEHOLDER comments
 - [ ] Only then set `SHOP_OPEN=1` in Vercel and redeploy; that is the switch
       that opens the store
-- [ ] An order webhook or Stripe's own email notifications, confirmed arriving
+- [ ] Register the Stripe webhook on the client's account and set
+      `STRIPE_WEBHOOK_SECRET` and `ORDER_TO`; place a test order and confirm
+      the email arrives
+- [ ] Dropshipping: the client wants seamless (pay here, the dropshipper
+      prints and ships). Port beanumber's Printful line once he has a
+      Printful account with the designs on it; until then orders are
+      emailed and placed by hand
 - [ ] Re-check every number and address on `/resources` in a browser (they were
       read by search listing from this sandbox, which cannot open the sites)
 - [ ] Write the materials for coaches and schools, in whatever order the

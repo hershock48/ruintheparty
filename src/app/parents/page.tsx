@@ -8,7 +8,7 @@ import { topics } from "@/data/parents";
 export const metadata: Metadata = pageMeta({
   title: "For parents raising boys",
   description:
-    "Nine conversations to have with a son about consent, respect, sex, porn, alcohol, peer pressure, relationships, masculinity and speaking up, each with a first sentence you can actually say.",
+    "Nine conversations to have with a son about consent, respect, the talk, porn, alcohol, peer pressure, relationships, masculinity and speaking up, each with a first sentence you can actually say.",
   path: "/parents",
 });
 
