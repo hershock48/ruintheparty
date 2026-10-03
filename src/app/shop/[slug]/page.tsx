@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
-import { PREORDER, bySlug, money, products } from "@/data/shop";
+import { PREORDER, bySlug, givingLine, money, products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 import { pageMeta } from "@/lib/meta";
 
@@ -50,6 +50,7 @@ export default async function ProductPage({ params }: Params) {
           <Reveal delay={100}>
             <h1 className="display text-5xl text-white md:text-6xl">{p.name}</h1>
             <p className="mt-3 font-[family-name:var(--font-display)] text-4xl font-bold text-teal">{money(p.priceCents)}</p>
+            <p className="mt-2 text-sm text-chalk">{givingLine()}</p>
             <p className="mt-4 text-lg text-chalk">{p.line}</p>
             <p className="mt-2 text-ash">{p.print}</p>
 

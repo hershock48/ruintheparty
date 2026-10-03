@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
-import { PREORDER } from "@/data/shop";
+import { PREORDER, givingLine } from "@/data/shop";
 
 export const metadata: Metadata = pageMeta({
   title: "Shop",
@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMeta({
 export default function ShopPage() {
   return (
     <>
-      <PageHero kicker="Shop" title="Wear the phrase." lead="Bold, simple, black. Nothing that looks like a fundraiser. Wearing it is how the phrase ends up standing on its own.">
+      <PageHero kicker="Shop" title="Wear the phrase." lead={`Bold, simple, black. Nothing that looks like a fundraiser. Wearing it is how the phrase ends up standing on its own. ${givingLine()}`}>
         {!SHOP_LIVE ? (
           <p className="mt-6 inline-block border border-chalk/30 px-4 py-3 text-sm text-chalk">
             The store is built and not open yet. Prices shown are sample prices until Ruin the Party sets its own, and the
