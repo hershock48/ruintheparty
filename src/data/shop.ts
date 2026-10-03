@@ -100,6 +100,19 @@ export const products: Product[] = [
  */
 export const PREORDER = { on: true, ships: "in 4 to 6 weeks" } as const;
 
+/**
+ * Where the money goes (the client, 2026-10-03): a share of every sale
+ * goes to local youth resources. He has not named the percentage yet, so
+ * the line says "a portion"; when he does, set `percent` and the line
+ * will say the number. One place, three surfaces (shop, product, home).
+ */
+export const GIVING = {
+  percent: null as number | null,
+  to: "local youth resources",
+} as const;
+export const givingLine = () =>
+  GIVING.percent ? `${GIVING.percent}% of every sale goes to ${GIVING.to}.` : `A portion of every sale goes to ${GIVING.to}.`;
+
 export const bySlug = (slug: string) => products.find((p) => p.slug === slug);
 
 export const money = (cents: number) =>

@@ -6,7 +6,7 @@ import Mark from "@/components/Mark";
 import Moves from "@/components/Moves";
 import Reveal from "@/components/Reveal";
 import { refrain, site } from "@/data/site";
-import { products } from "@/data/shop";
+import { givingLine, products } from "@/data/shop";
 import ProductCard from "@/components/ProductCard";
 
 export const metadata: Metadata = pageMeta({
@@ -226,6 +226,7 @@ export default function HomePage() {
             <div>
               <p className="kicker text-teal">Wear it</p>
               <h2 className="display mt-2 text-4xl text-white">Start the conversation without saying anything.</h2>
+              <p className="mt-3 text-ash">{givingLine()}</p>
             </div>
             <Link href="/shop" className="btn btn-teal">
               The shop

@@ -350,6 +350,9 @@ letter before Kevin sends it (backlog C01).
       prints and ships). Port beanumber's Printful line once he has a
       Printful account with the designs on it; until then orders are
       emailed and placed by hand
+- [ ] `GIVING.percent` in `shop.ts`: the client wants a share of every sale
+      to go to local youth resources; the pages say "a portion" until he
+      names the number
 - [ ] `PREORDER.ships` in `shop.ts` is a PLACEHOLDER window ("in 4 to 6
       weeks"); get the real date or window from the client
 - [ ] Confirm the CDC YRBS high school figure on `/what-it-means` (1 in 9,
