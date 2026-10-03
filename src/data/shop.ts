@@ -45,14 +45,14 @@ export const products: Product[] = [
   {
     slug: "the-hoodie",
     name: "The hoodie",
-    line: "Small mark on the chest. The four lines on the back.",
+    line: "Small mark on the chest. The five lines on the back.",
     priceCents: 5800,
     sizes: ["S", "M", "L", "XL", "2XL"],
     print: "Speak up. Step in. Protect. Be a better man. Ruin the party.",
     color: "black",
     kind: "hoodie",
     photo: "/shop/the-hoodie.jpg",
-    photoAlt: "The back of a gray hoodie with the four lines printed down it",
+    photoAlt: "The back of a gray hoodie with the five lines printed down it",
   },
   {
     slug: "the-hat",
@@ -98,9 +98,9 @@ export const products: Product[] = [
  * a box in three days. The point he wants made is that a buyer is in at
  * the start of something, the first run, not a backer of a campaign: so
  * the copy says "first run" and "in at the start", and there is no goal,
- * no counter, no countdown. The window is his (4 to 6 weeks, confirmed).
+ * no counter, no countdown. The window is his (about 4 weeks, confirmed).
  */
-export const PREORDER = { on: true, ships: "in 4 to 6 weeks" } as const;
+export const PREORDER = { on: true, ships: "in about 4 weeks" } as const;
 
 /**
  * Where the money goes (the client, 2026-10-03): a share of every sale
