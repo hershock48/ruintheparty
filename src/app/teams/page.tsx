@@ -107,7 +107,7 @@ export default function TeamsPage() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <ContactForm preset="Coach or teacher" />
+            <ContactForm preset="Coach or teacher" email="jon@cruzconsultants.com" topic="teams" />
           </Reveal>
         </div>
       </section>

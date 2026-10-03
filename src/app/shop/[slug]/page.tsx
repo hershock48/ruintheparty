@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
-import { bySlug, money, products } from "@/data/shop";
+import { PREORDER, bySlug, money, products } from "@/data/shop";
 import { SHOP_LIVE } from "@/data/site";
 import { pageMeta } from "@/lib/meta";
 
@@ -67,12 +67,14 @@ export default async function ProductPage({ params }: Params) {
                 </div>
               </fieldset>
               <button type="submit" className="btn btn-teal mt-6 w-full sm:w-auto">
-                {SHOP_LIVE ? "Buy" : "Buy (store not open yet)"}
+                {!SHOP_LIVE ? "Buy (store not open yet)" : PREORDER.on ? "Pre-order" : "Buy"}
               </button>
               <p className="mt-3 text-sm text-ash">
-                {SHOP_LIVE
-                  ? "Checkout runs on Stripe. Ships in the US."
-                  : "The store is built and switched off until Ruin the Party connects its own Stripe account. Nothing is charged."}
+                {!SHOP_LIVE
+                  ? "The store is built and switched off until Ruin the Party connects its own Stripe account. Nothing is charged."
+                  : PREORDER.on
+                    ? `This is a pre-order. The first run ships ${PREORDER.ships}, in the US. Checkout runs on Stripe.`
+                    : "Checkout runs on Stripe. Ships in the US."}
               </p>
             </form>
           </Reveal>

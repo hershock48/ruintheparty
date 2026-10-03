@@ -12,7 +12,7 @@ export const topics: Topic[] = [
     why: "He will hear a version of this from friends and the internet first. Make sure yours gets there too.",
     start: [
       "“No is a complete sentence. If she says it, or stops saying yes, you stop. Even if you're halfway through.”",
-      "“If she's drunk enough that you'd take her keys, she's too drunk for anything else.”",
+      "“If she's drunk enough that you'd take her keys, she's too intoxicated for anything else.”",
     ],
   },
   {

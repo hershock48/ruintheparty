@@ -342,6 +342,10 @@ letter before Kevin sends it (backlog C01).
       prints and ships). Port beanumber's Printful line once he has a
       Printful account with the designs on it; until then orders are
       emailed and placed by hand
+- [ ] `PREORDER.ships` in `shop.ts` is a PLACEHOLDER window ("in 4 to 6
+      weeks"); get the real date or window from the client
+- [ ] Confirm the CDC YRBS high school figure on `/what-it-means` (1 in 9,
+      11.4%) against the live CDC page; it was read from the search index
 - [ ] Re-check every number and address on `/resources` in a browser (they were
       read by search listing from this sandbox, which cannot open the sites)
 - [ ] Write the materials for coaches and schools, in whatever order the

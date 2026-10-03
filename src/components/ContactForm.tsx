@@ -11,7 +11,13 @@ type Status = "idle" | "sending" | "done" | "error";
  * lies: if sending is not configured or errors, the visitor sees the real
  * email address and their message stays on the screen.
  */
-export default function ContactForm({ preset = "" }: { preset?: string }) {
+/**
+ * `email` is the address shown beside the button and in failure copy; the
+ * Teams page passes the person who handles team and school requests.
+ * `topic` rides along as a hidden field so /api/contact can route the
+ * message to that person's inbox (TEAMS_TO) instead of the general one.
+ */
+export default function ContactForm({ preset = "", email = site.email, topic = "" }: { preset?: string; email?: string; topic?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -28,13 +34,13 @@ export default function ContactForm({ preset = "" }: { preset?: string }) {
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(typeof json.error === "string" ? json.error : `Something went wrong on our end. Email ${site.email} instead.`);
+        setError(typeof json.error === "string" ? json.error : `Something went wrong on our end. Email ${email} instead.`);
         setStatus("error");
         return;
       }
       setStatus("done");
     } catch {
-      setError(`Something went wrong on our end. Email ${site.email} instead.`);
+      setError(`Something went wrong on our end. Email ${email} instead.`);
       setStatus("error");
     }
   }
@@ -51,6 +57,7 @@ export default function ContactForm({ preset = "" }: { preset?: string }) {
   return (
     <form action="/api/contact" method="post" onSubmit={onSubmit} className="grid gap-5">
       {/* Honeypot. Real people never see it; bots fill it and are quietly dropped. */}
+      {topic ? <input type="hidden" name="topic" value={topic} /> : null}
       <div className="hidden" aria-hidden="true">
         <label htmlFor="company">Company</label>
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
@@ -102,8 +109,8 @@ export default function ContactForm({ preset = "" }: { preset?: string }) {
         </button>
         <p className="text-sm text-ash">
           Or email{" "}
-          <a href={`mailto:${site.email}`} className="link">
-            {site.email}
+          <a href={`mailto:${email}`} className="link">
+            {email}
           </a>
           .
         </p>

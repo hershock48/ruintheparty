@@ -195,7 +195,7 @@ export default function HomePage() {
           <Reveal>
             <p className="kicker text-teal">Who this is for</p>
             <h2 className="display mt-3 max-w-3xl text-4xl text-white sm:text-5xl">
-              The message isn&rsquo;t that men are bad. It&rsquo;s that good men have a responsibility to act.
+              Good men have a responsibility to act.
             </h2>
           </Reveal>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
