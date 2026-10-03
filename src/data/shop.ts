@@ -1,7 +1,7 @@
 /**
- * The merchandise. Prices here are PLACEHOLDER values so the shop renders as
- * a shop; the client sets real prices and the shop page says out loud that
- * these are sample prices until then. The five products are the five on
+ * The merchandise. The prices are the client's (confirmed 2026-10-03; the
+ * first cut carried them as placeholders and he kept them). The five
+ * products are the five on
  * the client's own boards, and each tile photo is a crop from those boards
  * (public/shop/, cut by tools/crops.sh), to be replaced by product
  * photography when the goods exist. Kevin, 2026-10-01: use his photos so
@@ -15,7 +15,7 @@ export type Product = {
   slug: string;
   name: string;
   line: string;
-  /** PLACEHOLDER until the client prices it. Integer cents. */
+  /** Integer cents. The client's price. */
   priceCents: number;
   sizes: string[];
   /** What is printed where. Keep it to what the boards show. */
@@ -95,8 +95,10 @@ export const products: Product[] = [
 /**
  * The first run is sold as pre-orders (the client, 2026-10-03): the buy
  * button says so and the checkout line item carries it, so nobody expects
- * a box in three days. Plain words, no campaign, no goal, no countdown.
- * SHIPS is PLACEHOLDER until the client gives a date or window.
+ * a box in three days. The point he wants made is that a buyer is in at
+ * the start of something, the first run, not a backer of a campaign: so
+ * the copy says "first run" and "in at the start", and there is no goal,
+ * no counter, no countdown. The window is his (4 to 6 weeks, confirmed).
  */
 export const PREORDER = { on: true, ships: "in 4 to 6 weeks" } as const;
 

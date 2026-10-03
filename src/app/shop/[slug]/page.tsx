@@ -48,7 +48,8 @@ export default async function ProductPage({ params }: Params) {
             </div>
           </ViewTransition>
           <Reveal delay={100}>
-            <h1 className="display text-5xl text-white md:text-6xl">{p.name}</h1>
+            {SHOP_LIVE && PREORDER.on ? <p className="kicker text-teal">Pre-order · First run</p> : null}
+            <h1 className="display mt-2 text-5xl text-white md:text-6xl">{p.name}</h1>
             <p className="mt-3 font-[family-name:var(--font-display)] text-4xl font-bold text-teal">{money(p.priceCents)}</p>
             <p className="mt-2 text-sm text-chalk">{givingLine()}</p>
             <p className="mt-4 text-lg text-chalk">{p.line}</p>
@@ -74,7 +75,7 @@ export default async function ProductPage({ params }: Params) {
                 {!SHOP_LIVE
                   ? "The store is built and switched off until Ruin the Party connects its own Stripe account. Nothing is charged."
                   : PREORDER.on
-                    ? `This is a pre-order. The first run ships ${PREORDER.ships}, in the US. Checkout runs on Stripe.`
+                    ? `First run, pre-order. You are in at the start; it ships ${PREORDER.ships}, in the US, and you get an email when it does. Checkout runs on Stripe.`
                     : "Checkout runs on Stripe. Ships in the US."}
               </p>
             </form>

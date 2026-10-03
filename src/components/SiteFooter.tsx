@@ -49,8 +49,8 @@ export default function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" className="tap font-medium text-chalk hover:text-teal">
-                TikTok
+              <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" className="tap font-medium text-chalk hover:text-teal">
+                Facebook
               </a>
             </li>
           </ul>
