@@ -65,7 +65,6 @@ const jsonLd = {
   alternateName: site.hashtag,
   url: site.url,
   logo: `${site.url}/brand/icon-512.png`,
-  email: site.email,
   sameAs: [site.social.instagram, site.social.tiktok],
   slogan: site.tagline,
 };

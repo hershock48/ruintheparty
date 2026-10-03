@@ -53,11 +53,6 @@ export default function SiteFooter() {
                 TikTok
               </a>
             </li>
-            <li>
-              <a href={`mailto:${site.email}`} className="tap font-medium text-chalk hover:text-teal">
-                {site.email}
-              </a>
-            </li>
           </ul>
           <p className="mt-5 font-[family-name:var(--font-display)] text-2xl font-extrabold uppercase text-white">
             {site.hashtag}

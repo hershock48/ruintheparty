@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/data/site";
 
 type Status = "idle" | "sending" | "done" | "error";
 
@@ -12,12 +11,12 @@ type Status = "idle" | "sending" | "done" | "error";
  * email address and their message stays on the screen.
  */
 /**
- * `email` is the address shown beside the button and in failure copy; the
- * Teams page passes the person who handles team and school requests.
  * `topic` rides along as a hidden field so /api/contact can route the
- * message to that person's inbox (TEAMS_TO) instead of the general one.
+ * message to a different inbox (TEAMS_TO for the Teams page) than the
+ * general one. No address is ever shown: the client does not want his own
+ * on the site and there is no mailbox at the domain.
  */
-export default function ContactForm({ preset = "", email = site.email, topic = "" }: { preset?: string; email?: string; topic?: string }) {
+export default function ContactForm({ preset = "", topic = "" }: { preset?: string; topic?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -34,13 +33,13 @@ export default function ContactForm({ preset = "", email = site.email, topic = "
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(typeof json.error === "string" ? json.error : `Something went wrong on our end. Email ${email} instead.`);
+        setError(typeof json.error === "string" ? json.error : "Something went wrong on our end. Please try again in a few minutes; your message is still here.");
         setStatus("error");
         return;
       }
       setStatus("done");
     } catch {
-      setError(`Something went wrong on our end. Email ${email} instead.`);
+      setError("Something went wrong on our end. Please try again in a few minutes; your message is still here.");
       setStatus("error");
     }
   }
@@ -107,13 +106,7 @@ export default function ContactForm({ preset = "", email = site.email, topic = "
         <button type="submit" disabled={status === "sending"} className="btn btn-teal disabled:opacity-60">
           {status === "sending" ? "Sending" : "Send it"}
         </button>
-        <p className="text-sm text-ash">
-          Or email{" "}
-          <a href={`mailto:${email}`} className="link">
-            {email}
-          </a>
-          .
-        </p>
+        <p className="text-sm text-ash">A person reads every one.</p>
       </div>
     </form>
   );
