@@ -34,9 +34,9 @@ Every fact is in `src/data/` and nowhere else:
 - `parents.ts`, the nine conversations.
 - `resources.ts`, every help line and organization, with the URL each number
   was read from.
-- `shop.ts`, the products. Prices are integer cents and PLACEHOLDER until the
-  client sets them; `/api/checkout` resolves price and name from this file,
-  never from the form.
+- `shop.ts`, the products, the client's prices in integer cents, the
+  pre-order window and the giving line; `/api/checkout` resolves price and
+  name from this file, never from the form.
 
 Surfaces that cannot read from these constants: `public/og.jpg` and
 `public/pitch/ruintheparty/og.jpg` (rendered images; remake with
@@ -335,14 +335,15 @@ letter before Kevin sends it (backlog C01).
       it on the site where they want it said (`site.ts` `founder`)
 - [x] Email: none shown anywhere; `CONTACT_TO` is the client's personal
       address, set only in Vercel (the client, 2026-10-03)
-- [ ] Replace the PLACEHOLDER Instagram and TikTok handles in `site.ts`
+- [x] Instagram @ruin.the.party and facebook.com/letsruintheparty (2026-10-03);
+      no TikTok given, none listed
 - [ ] Set `SMTP_*` and `CONTACT_TO` (a real, human-watched inbox) in Vercel;
       submit the form on `/contact` and `/teams`; confirm arrival
 - [ ] Set `STRIPE_SECRET_KEY` (the client's own); place a test order with
       4242 4242 4242 4242; decide stock-and-ship versus print-on-demand
-- [ ] Real prices in `shop.ts`; remove the PLACEHOLDER comments
-- [ ] Only then set `SHOP_OPEN=1` in Vercel and redeploy; that is the switch
-      that opens the store
+- [x] Prices confirmed by the client (2026-10-03, the five as listed)
+- [x] `SHOP_OPEN=1` set in Vercel (2026-10-03); the store opens on the next
+      production build
 - [ ] Register the Stripe webhook on the client's account and set
       `STRIPE_WEBHOOK_SECRET` and `ORDER_TO`; place a test order and confirm
       the email arrives
@@ -353,8 +354,7 @@ letter before Kevin sends it (backlog C01).
 - [ ] `GIVING.percent` in `shop.ts`: the client wants a share of every sale
       to go to local youth resources; the pages say "a portion" until he
       names the number
-- [ ] `PREORDER.ships` in `shop.ts` is a PLACEHOLDER window ("in 4 to 6
-      weeks"); get the real date or window from the client
+- [x] `PREORDER.ships`: 4 to 6 weeks, confirmed by the client (2026-10-03)
 - [ ] Confirm the CDC YRBS high school figure on `/what-it-means` (1 in 9,
       11.4%) against the live CDC page; it was read from the search index
 - [ ] Green Dot: `alteristic.org/services/green-dot/` 404s (2026-10-03);

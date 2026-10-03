@@ -24,9 +24,9 @@ export const site = {
      forms deliver to CONTACT_TO (and TEAMS_TO) on the server; nothing on a
      page carries an address. */
   social: {
-    /** PLACEHOLDER: handles unconfirmed. The boards show @ruintheparty. */
-    instagram: "https://www.instagram.com/ruintheparty",
-    tiktok: "https://www.tiktok.com/@ruintheparty",
+    /** The client's handles (2026-10-03). No TikTok was given, so none is listed. */
+    instagram: "https://www.instagram.com/ruin.the.party",
+    facebook: "https://www.facebook.com/letsruintheparty",
   },
   /** PLACEHOLDER: who is behind it, as they want it said. */
   founder: "",

@@ -23,9 +23,13 @@ export default function ShopPage() {
             buy button says so instead of taking a card.
           </p>
         ) : PREORDER.on ? (
-          <p className="mt-6 inline-block border border-teal/40 px-4 py-3 text-sm text-chalk">
-            First run. Everything here is a pre-order and ships {PREORDER.ships}.
-          </p>
+          <div className="mt-6 inline-block border border-teal/40 px-5 py-4">
+            <p className="kicker text-teal">Pre-orders open</p>
+            <p className="mt-1 max-w-xl text-chalk">
+              This is the first run. Order now and you are in at the start, before anyone has one. Everything ships{" "}
+              {PREORDER.ships}, and you will get an email when it does.
+            </p>
+          </div>
         ) : null}
       </PageHero>
       <section className="bg-black">
