@@ -19,9 +19,10 @@ export const site = {
   url: "https://ruintheparty.com",
   /** The pitch host, only while this is a spec build. Used for the share card. */
   pitchUrl: "https://ruintheparty.glazedweb.com",
-  /** The client's address (Kevin, 2026-10-03). Prints on the contact page
-   *  and the footer, and is the reply-to the forms point visitors at. */
-  email: "info@ruintheparty.com",
+  /* No public email address, on purpose (the client, 2026-10-03): there
+     is no mailbox at the domain and he does not want his own shown. The
+     forms deliver to CONTACT_TO (and TEAMS_TO) on the server; nothing on a
+     page carries an address. */
   social: {
     /** PLACEHOLDER: handles unconfirmed. The boards show @ruintheparty. */
     instagram: "https://www.instagram.com/ruintheparty",

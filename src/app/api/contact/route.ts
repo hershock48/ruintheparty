@@ -12,9 +12,9 @@ export const runtime = "nodejs";
  * (glaze.md, "don't rent what the site can own"). reply_to is the visitor,
  * so whoever reads the inbox just hits reply.
  *
- * When mail is not configured the visitor is told the truth and given the
- * email address, and the full payload is written to the log so nothing a
- * real person typed is lost. What this route never does is answer ok when
+ * When mail is not configured the visitor is told the truth (there is no
+ * address to give them: the client shows none on the site), and the full
+ * payload is written to the log so nothing a real person typed is lost. What this route never does is answer ok when
  * the message went nowhere.
  */
 
@@ -120,7 +120,7 @@ export async function POST(request: Request) {
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !CONTACT_TO) {
     // Unconfigured. Log everything so nothing is lost, then tell the truth.
     console.error("[contact] mail not configured; message follows\n" + text);
-    return fail(`We could not send this just now. Please email ${site.email} directly, we are sorry for the hassle.`, 503);
+    return fail("We could not send this just now. Please try again in a few minutes, we are sorry for the hassle.", 503);
   }
 
   try {
@@ -139,7 +139,7 @@ export async function POST(request: Request) {
     });
   } catch (err) {
     console.error("[contact] send failed; message follows\n" + text, err);
-    return fail(`We could not send this just now. Please email ${site.email} directly.`, 502);
+    return fail("We could not send this just now. Please try again in a few minutes.", 502);
   }
 
   return isForm ? NextResponse.redirect(new URL("/thanks", request.url), 303) : NextResponse.json({ ok: true });

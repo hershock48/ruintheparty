@@ -26,7 +26,7 @@ npm run lint
 
 Every fact is in `src/data/` and nowhere else:
 
-- `site.ts`, the name, the phrase, the tagline, the domain, the email, the
+- `site.ts`, the name, the phrase, the tagline, the domain, the
   handles, the nav, the four moves, the refrain. Anything marked PLACEHOLDER
   is unconfirmed and on the checklist below.
 - `scenarios.ts`, the eight Be the Guy situations. Adding a ninth is adding
@@ -90,13 +90,14 @@ until they have one, the studio) owns, with `replyTo` set to the visitor. See
 `.env.example`; Kevin sets real values in the Vercel dashboard. Behavior,
 verified by hand on the production build (October 1, 2026):
 
-- JS path: inline states, honest failure copy with the real email address.
+- JS path: inline states, honest failure copy (no address is shown anywhere
+  on the site, the client's call; the forms are the only way in).
 - No-JS path: the same endpoint accepts a plain form post; success redirects
   to `/thanks` (303), failure returns a small real HTML page with the message
   and a link back to the form.
-- Unconfigured: the visitor is told the truth (503) and given the email
-  address, and the full payload is written to the server log so nothing a
-  real person typed is lost. It never fakes an "ok".
+- Unconfigured: the visitor is told the truth (503), and the full payload
+  is written to the server log so nothing a real person typed is lost. It
+  never fakes an "ok".
 - Honeypot field `company` silently accepts and discards bots.
 
 `/api/checkout` is a plain form POST (works with JS off) that creates a Stripe
@@ -326,7 +327,8 @@ letter before Kevin sends it (backlog C01).
       to the apex.
 - [ ] Confirm the client's legal name and who is behind the movement, and put
       it on the site where they want it said (`site.ts` `founder`)
-- [x] Email: `info@ruintheparty.com` (Kevin, 2026-10-03)
+- [x] Email: none shown anywhere; `CONTACT_TO` is the client's personal
+      address, set only in Vercel (the client, 2026-10-03)
 - [ ] Replace the PLACEHOLDER Instagram and TikTok handles in `site.ts`
 - [ ] Set `SMTP_*` and `CONTACT_TO` (a real, human-watched inbox) in Vercel;
       submit the form on `/contact` and `/teams`; confirm arrival
