@@ -8,16 +8,15 @@ import { site } from "@/data/site";
  * page goes through pageMeta() below rather than setting title and
  * description alone.
  *
- * The image is ABSOLUTE, ON THE PITCH HOST, DELIBERATELY, for now. A relative
- * /og.jpg resolves against metadataBase (their real domain), where nothing is
- * deployed yet, so sharing the demo would show no picture. At launch this goes
- * back to plain "/og.jpg"; it is on the README checklist.
+ * The image is relative and resolves against metadataBase, the real domain.
+ * Before launch it was pinned to the pitch host so shares of the demo had
+ * a picture; since 2026-10-03 the real domain serves it.
  */
 export const baseOpenGraph = {
   type: "website",
   locale: "en_US",
   siteName: site.name,
-  images: [{ url: `${site.pitchUrl}/og.jpg`, width: 1200, height: 630, alt: `${site.hashtag}. ${site.tagline}` }],
+  images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${site.hashtag}. ${site.tagline}` }],
 } satisfies Metadata["openGraph"];
 
 /**

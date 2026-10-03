@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
+import { site } from "@/data/site";
 
 /**
- * Disallow everything. This is a spec build on a Glazed Web host; indexing it
- * would put a copy of Ruin the Party's content in competition with the real
- * site the day it launches. next.config.ts sends X-Robots-Tag on every
- * response as the second lock. Both flip together on launch day; it is on the
- * README checklist.
+ * Open since launch (2026-10-03). The copy on the pitch host is kept out
+ * of search by the host-scoped X-Robots-Tag in next.config.ts, because a
+ * robots.txt cannot tell one host from another.
  */
 export default function robots(): MetadataRoute.Robots {
-  return { rules: { userAgent: "*", disallow: "/" } };
+  return { rules: { userAgent: "*", allow: "/" }, sitemap: `${site.url}/sitemap.xml` };
 }
