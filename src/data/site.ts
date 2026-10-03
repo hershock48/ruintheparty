@@ -19,10 +19,9 @@ export const site = {
   url: "https://ruintheparty.com",
   /** The pitch host, only while this is a spec build. Used for the share card. */
   pitchUrl: "https://ruintheparty.glazedweb.com",
-  /** PLACEHOLDER: no mailbox has been confirmed. The form still works without
-   *  one (it logs and tells the visitor the truth), but this address prints
-   *  on the contact page and the footer. */
-  email: "hello@ruintheparty.com",
+  /** The client's address (Kevin, 2026-10-03). Prints on the contact page
+   *  and the footer, and is the reply-to the forms point visitors at. */
+  email: "info@ruintheparty.com",
   social: {
     /** PLACEHOLDER: handles unconfirmed. The boards show @ruintheparty. */
     instagram: "https://www.instagram.com/ruintheparty",

@@ -326,7 +326,8 @@ letter before Kevin sends it (backlog C01).
       to the apex.
 - [ ] Confirm the client's legal name and who is behind the movement, and put
       it on the site where they want it said (`site.ts` `founder`)
-- [ ] Replace the PLACEHOLDER email, Instagram and TikTok handles in `site.ts`
+- [x] Email: `info@ruintheparty.com` (Kevin, 2026-10-03)
+- [ ] Replace the PLACEHOLDER Instagram and TikTok handles in `site.ts`
 - [ ] Set `SMTP_*` and `CONTACT_TO` (a real, human-watched inbox) in Vercel;
       submit the form on `/contact` and `/teams`; confirm arrival
 - [ ] Set `STRIPE_SECRET_KEY` (the client's own); place a test order with
